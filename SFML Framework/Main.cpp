@@ -1,0 +1,39 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: Main.cpp
+// Author:   Tobias Savinainen
+// Year:     2013
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Header files
+////////////////////////////////////////////////////////////////////////////////
+#include <SFML/Graphics.hpp>
+
+////////////////////////////////////////////////////////////////////////////////
+// Entry point of application
+////////////////////////////////////////////////////////////////////////////////
+int main()
+{
+    sf::RenderWindow renderWindow(sf::VideoMode(1024, 768), "SFML Framework");
+
+    while(renderWindow.isOpen())
+    {
+        sf::Event event;
+        while(renderWindow.pollEvent(event))
+        {
+            if(event.type == sf::Event::Closed)
+                renderWindow.close();
+
+            if(event.type == sf::Event::KeyPressed)
+            {
+                if(event.key.code == sf::Keyboard::Escape)
+                    renderWindow.close();
+            }
+        }
+
+        renderWindow.clear();
+        renderWindow.display();
+    }
+
+    return 0;
+}
