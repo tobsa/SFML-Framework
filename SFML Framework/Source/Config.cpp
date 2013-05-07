@@ -12,7 +12,6 @@
 #include "FileReader.hpp"
 #include "FileWriter.hpp"
 #include "Utility.hpp"
-#include <fstream>
 
 namespace sfx
 {
@@ -233,21 +232,21 @@ std::size_t Config::findKey(SectionPtr section, const std::string& key)
 ////////////////////////////////////////////////////////////////////////////////
 void Config::save()
 {
-    std::ofstream file(m_filename);
+    sfx::FileWriter file(m_filename);
 
     // Loop trough all sections and save their information to the config file
     for(const auto& section : m_sections)
     {
-        file << "[" << section->m_key << "]" << std::endl << "\t";
+        file.write() << "[" << section->m_key << "]" << std::endl << "\t";
 
         for(const auto& i : section->m_integers)
-            file << i.m_key << " = " << i.m_value << std::endl << "\t";
+            file.write() << i.m_key << " = " << i.m_value << std::endl << "\t";
         for(const auto& i : section->m_floats)
-            file << i.m_key << " = " << i.m_value << std::endl << "\t";
+            file.write() << i.m_key << " = " << i.m_value << std::endl << "\t";
         for(const auto& i : section->m_strings)
-            file << i.m_key << " = \"" << i.m_value << "\"" << std::endl << "\t";
+            file.write() << i.m_key << " = \"" << i.m_value << "\"" << std::endl << "\t";
 
-        file << std::endl;
+        file.write()  << std::endl;
     }
 }
 
