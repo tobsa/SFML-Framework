@@ -1,0 +1,83 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: FileReader.cpp
+// Author:   Tobias Savinainen
+// Year:     2013
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Header
+////////////////////////////////////////////////////////////////////////////////
+#include "FileReader.hpp"
+#include "Log.hpp"
+
+namespace sfx
+{
+
+////////////////////////////////////////////////////////////////////////////////
+FileReader::FileReader(const std::string& filename) :
+    m_file (filename)
+{
+    if(!isOpen())
+        sfx::Log::write("Error (FileReader::FileReader()): Couldn't open " + filename);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void FileReader::open(const std::string& filename)
+{
+    if(isOpen())
+        close();
+
+    m_file.open(filename);
+
+    if(!isOpen())
+        sfx::Log::write("Error (FileReader::FileReader()): Couldn't open " + filename);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool FileReader::isOpen() const
+{
+    return m_file.is_open();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void FileReader::close()
+{
+    m_file.close();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool FileReader::available() const
+{
+    return !m_file.eof();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+std::string FileReader::getLine()
+{
+    if(!isOpen())
+    {
+        std::string error = "Error (FileReader::getLine()): FileReader isn't open";
+        sfx::Log::write(error);
+        throw error;
+    }
+
+    std::string line;
+    std::getline(m_file, line);
+
+    return line;
+}
+    
+////////////////////////////////////////////////////////////////////////////////
+char FileReader::get()
+{
+    if(!isOpen())
+    {
+        std::string error = "Error (FileReader::get()): FileReader isn't open";
+        sfx::Log::write(error);
+        throw error;
+    }
+
+    return m_file.get();
+}
+
+} // namespace sfx
