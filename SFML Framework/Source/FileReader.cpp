@@ -52,6 +52,17 @@ bool FileReader::available() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+std::string FileReader::getFile()
+{
+    std::string line;
+
+    while(available())
+        line += get();
+
+    return line;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 std::string FileReader::getLine()
 {
     if(!isOpen())
