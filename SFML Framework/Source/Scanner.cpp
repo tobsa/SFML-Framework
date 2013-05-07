@@ -14,6 +14,11 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
+Scanner::Scanner()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
 Scanner::Scanner(const std::string& str) :
     m_string (str)
 {
@@ -109,6 +114,12 @@ void Scanner::saveToken(const std::string& token)
 bool Scanner::hasToken() const
 {
     return !m_string.empty();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Scanner::setString(const std::string& str)
+{
+    m_string = str;
 }
 
 } // namespace sfx
