@@ -14,15 +14,29 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-FileReader::FileReader(const std::string& filename) :
-    m_file (filename)
+FileReader::FileReader()
 {
-    if(!isOpen())
-        sfx::Log::write("Error (FileReader::FileReader()): Couldn't open " + filename);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void FileReader::open(const std::string& filename)
+FileReader::FileReader(const std::string& filename, bool createNew) :
+    m_file (filename)
+{
+    if(!isOpen())
+    {
+        // Force create new
+        if(createNew)
+        {
+            std::ofstream file(filename);
+            open(filename);
+        }
+        else 
+            sfx::Log::write("Error (FileReader::FileReader()): Couldn't open " + filename);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void FileReader::open(const std::string& filename, bool createNew)
 {
     if(isOpen())
         close();
@@ -30,7 +44,16 @@ void FileReader::open(const std::string& filename)
     m_file.open(filename);
 
     if(!isOpen())
-        sfx::Log::write("Error (FileReader::FileReader()): Couldn't open " + filename);
+    {
+        // Force create a new file
+        if(createNew)
+        {
+            std::ofstream file(filename);
+            open(filename);
+        }
+        else 
+            sfx::Log::write("Error (FileReader::FileReader()): Couldn't open " + filename);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
