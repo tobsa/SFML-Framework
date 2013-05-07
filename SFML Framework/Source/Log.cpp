@@ -34,7 +34,7 @@ void Log::open(const std::string& logName)
     if(m_file.is_open())
         m_file.close();
 
-    m_logName     = logName;
+    m_logName = logName;
 
     m_file.open(logName);
 
@@ -55,7 +55,7 @@ void Log::write(const std::string& text)
         open(m_logName);
 
     std::cout << getTime() << " : " << text << std::endl;
-    m_file << getTime() << " : " << text << std::endl;
+    m_file    << getTime() << " : " << text << std::endl;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
