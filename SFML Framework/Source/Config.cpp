@@ -10,6 +10,7 @@
 #include "Config.hpp"
 #include "Scanner.hpp"
 #include "FileReader.hpp"
+#include "FileWriter.hpp"
 #include "Utility.hpp"
 #include <fstream>
 
@@ -20,7 +21,7 @@ namespace sfx
 Config::Config(const std::string& filename) :
     m_filename (filename)
 {
-    sfx::FileReader fileReader(filename);
+    sfx::FileReader fileReader(filename, true);
     sfx::Scanner scanner(fileReader.getFile());
 
     while(scanner.hasToken())
