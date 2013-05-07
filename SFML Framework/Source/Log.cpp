@@ -25,13 +25,15 @@ namespace sfx
 {
 
 std::ofstream Log::m_file;
-bool Log::m_initialized    = false;
 std::string Log::m_logName = "Log.txt";
 
 ////////////////////////////////////////////////////////////////////////////////
-void Log::initialize(const std::string& logName)
+void Log::open(const std::string& logName)
 {
-    m_initialized = true;
+    // If the file is already open then close it first
+    if(m_file.is_open())
+        m_file.close();
+
     m_logName     = logName;
 
     m_file.open(logName);
@@ -41,20 +43,16 @@ void Log::initialize(const std::string& logName)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Log::deinitialize()
+void Log::close()
 {
     m_file.close();
-    m_initialized = false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Log::write(const std::string& text)
 {
-    if(!m_initialized)
-    {
-        std::cout << "Logger isn't initialized (" << text << ")" << std::endl;
-        return;
-    }
+    if(!m_file.is_open())
+        open(m_logName);
 
     std::cout << getTime() << " : " << text << std::endl;
     m_file << getTime() << " : " << text << std::endl;
