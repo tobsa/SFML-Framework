@@ -59,7 +59,7 @@ std::string FileReader::getFile()
     while(available())
         line += get();
 
-    return line;
+    return line.substr(0, line.size() - 1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
