@@ -47,7 +47,7 @@ void Picture::onEvent(const sf::Event& event)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Picture::onUpdate(float dt)
+void Picture::onUpdate()
 {
     // No updates for a picture...
 }

@@ -21,10 +21,10 @@ void GuiManager::onEvent(const sf::Event& event)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void GuiManager::onUpdate(float dt)
+void GuiManager::onUpdate()
 {
     for(const auto& object : m_objects)
-        object.second->onUpdate(dt);
+        object.second->onUpdate();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -61,7 +61,7 @@ void Label::onEvent(const sf::Event& event)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Label::onUpdate(float dt)
+void Label::onUpdate()
 {
     // No updates for a label
 }
