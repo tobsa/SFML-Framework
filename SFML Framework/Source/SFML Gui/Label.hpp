@@ -30,8 +30,10 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     // Create a picture 
     ////////////////////////////////////////////////////////////////////////////////
-    Label(const std::string& text, const sf::Font& font, const sf::Vector2f& position = sf::Vector2f(0, 0), unsigned int characterSize = 18, const sf::Color& color = sf::Color::White);
-    Label(const std::string& text, const sf::Font& font, float x, float y, unsigned int characterSize = 18, const sf::Color& color = sf::Color::White);
+    Label(ResourceManager& rm, const std::string& filename, const std::string& text, float x = 0, float y = 0, unsigned int size = 18, const sf::Color& color = sf::Color::White);
+    Label(ResourceManager& rm, const std::string& filename, const std::string& text, const sf::Vector2f& position, unsigned int size = 18, const sf::Color& color = sf::Color::White);;
+    Label(const std::string& text, const sf::Font& font, const sf::Vector2f& position, unsigned int size = 18, const sf::Color& color = sf::Color::White);
+    Label(const std::string& text, const sf::Font& font, float x = 0, float y = 0, unsigned int size = 18, const sf::Color& color = sf::Color::White);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Process events

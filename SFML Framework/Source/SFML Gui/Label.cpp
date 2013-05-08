@@ -15,22 +15,42 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Label::Label(const std::string& text, const sf::Font& font, const sf::Vector2f& position, unsigned int characterSize, const sf::Color& color)
+Label::Label(ResourceManager& rm, const std::string& filename, const std::string& text, float x, float y, unsigned int size, const sf::Color& color)
 {
     m_text.setString(text);
-    m_text.setFont(font);
-    m_text.setPosition(position);
-    m_text.setCharacterSize(characterSize);
+    m_text.setFont(rm.getFont(filename));
+    m_text.setPosition(x, y);
+    m_text.setCharacterSize(size);
     m_text.setColor(color);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Label::Label(const std::string& text, const sf::Font& font, float x, float y, unsigned int characterSize, const sf::Color& color)
+Label::Label(ResourceManager& rm, const std::string& filename, const std::string& text, const sf::Vector2f& position, unsigned int size, const sf::Color& color)
+{
+    m_text.setString(text);
+    m_text.setFont(rm.getFont(filename));
+    m_text.setPosition(position);
+    m_text.setCharacterSize(size);
+    m_text.setColor(color);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Label::Label(const std::string& text, const sf::Font& font, const sf::Vector2f& position, unsigned int size, const sf::Color& color)
+{
+    m_text.setString(text);
+    m_text.setFont(font);
+    m_text.setPosition(position);
+    m_text.setCharacterSize(size);
+    m_text.setColor(color);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Label::Label(const std::string& text, const sf::Font& font, float x, float y, unsigned int size, const sf::Color& color)
 {
     m_text.setString(text);
     m_text.setFont(font);
     m_text.setPosition(x, y);
-    m_text.setCharacterSize(characterSize);
+    m_text.setCharacterSize(size);
     m_text.setColor(color);
 }
 
