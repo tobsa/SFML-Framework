@@ -14,6 +14,7 @@
 #include "FileReader.hpp"
 #include "FileWriter.hpp"
 #include "GameSettings.hpp"
+#include "SFML Gui/GuiManager.hpp"
 #include "SFML Gui/GuiObject.hpp"
 #include "SFML Gui/Label.hpp"
 #include "Log.hpp"
