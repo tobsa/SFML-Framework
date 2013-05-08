@@ -33,6 +33,8 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     Picture(ResourceManager& rm, const std::string& filename, const sf::Vector2f& position = sf::Vector2f(0, 0));
     Picture(ResourceManager& rm, const std::string& filename, float x, float y);
+    Picture(const sf::Texture& texture, const sf::Vector2f& position = sf::Vector2f(0, 0));
+    Picture(const sf::Texture& texture, float x, float y);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Process events
@@ -76,6 +78,13 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     virtual bool contains(const sf::Vector2f& position) const;
     virtual bool contains(float x, float y) const;
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Get and set new texture
+    ////////////////////////////////////////////////////////////////////////////////
+    const sf::Texture& getTexture() const;
+    void setTexture(ResourceManager& rm, const std::string& filename);
+    void setTexture(const sf::Texture& texture);
 
 private:
 

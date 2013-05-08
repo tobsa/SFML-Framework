@@ -28,6 +28,18 @@ Picture::Picture(ResourceManager& rm, const std::string& filename, float x, floa
     m_sprite.setPosition(x, y);
 }
 
+Picture::Picture(const sf::Texture& texture, const sf::Vector2f& position)
+{
+    m_sprite.setTexture(texture);
+    m_sprite.setPosition(position);
+}
+
+Picture::Picture(const sf::Texture& texture, float x, float y)
+{
+    m_sprite.setTexture(texture);
+    m_sprite.setPosition(x, y);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 void Picture::onEvent(const sf::Event& event)
 {
@@ -116,6 +128,24 @@ bool Picture::contains(const sf::Vector2f& position) const
 bool Picture::contains(float x, float y) const
 {
     return getBoundingBox().contains(x, y);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+const sf::Texture& Picture::getTexture() const
+{
+    return *m_sprite.getTexture();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Picture::setTexture(ResourceManager& rm, const std::string& filename)
+{
+    m_sprite.setTexture(rm.getTexture(filename));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Picture::setTexture(const sf::Texture& texture)
+{
+    m_sprite.setTexture(texture);
 }
 
 } // namespace sfx
