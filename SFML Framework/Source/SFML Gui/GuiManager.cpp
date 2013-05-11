@@ -14,6 +14,24 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
+GuiManager::GuiManager(ResourceManager& rm) :
+    m_resourceManager (rm)
+{
+}
+    
+////////////////////////////////////////////////////////////////////////////////
+ResourceManager& GuiManager::getResourceManager() const
+{
+    return m_resourceManager;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void GuiManager::remove(const std::string& key)
+{
+    m_objects.erase(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void GuiManager::onEvent(const sf::Event& event)
 {
     for(const auto& object : m_objects)
@@ -32,12 +50,6 @@ void GuiManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     for(const auto& object : m_objects)
         target.draw(*object.second);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void GuiManager::remove(const std::string& key)
-{
-    m_objects.erase(key);
 }
 
 } // namespace sfx

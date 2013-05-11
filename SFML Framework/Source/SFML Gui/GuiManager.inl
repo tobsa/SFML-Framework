@@ -13,18 +13,22 @@
 namespace sfx
 {
 
-////////////////////////////////////////////////////////////////////////////////
-template<typename T> T& GuiManager::create(const std::string& key, GuiObjectPtr object)
+ ////////////////////////////////////////////////////////////////////////////////
+template<typename T> T& GuiManager::create(const std::string& key)
 {
     auto it = m_objects.find(key);
 
-    // If the key already exist 
+    // If the key already exist then erase the previous value
     if(it != m_objects.end())
         m_objects.erase(key);
 
+    // Create the object
+    std::shared_ptr<T> object = std::make_shared<T>(m_resourceManager);
+
+    // Add it to the manager
     m_objects[key] = object;
 
-    return static_cast<T&>(*object.get());
+    return *object.get();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
