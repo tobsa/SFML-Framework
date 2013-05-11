@@ -31,4 +31,28 @@ sf::Vector2f GuiObject::getMousePosition(const sf::Event& event) const
     return static_cast<sf::Vector2f>(sf::Vector2i(event.mouseMove.x, event.mouseMove.y));
 }
 
+////////////////////////////////////////////////////////////////////////////////
+bool GuiObject::isHover() const
+{
+    return m_hover;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool GuiObject::isPressed() const
+{
+    return m_pressed;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void GuiObject::setHover(bool hover)
+{
+    m_hover = hover;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void GuiObject::setPressed(bool pressed)
+{
+    m_pressed = pressed;
+}
+
 } // namespace sfx
