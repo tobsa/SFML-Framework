@@ -50,7 +50,11 @@ void StateManager::setState(const std::string& key)
         throw error;
     }
 
+    if(m_currentState)
+        m_currentState->onPause();
+
     m_currentState = it->second;
+    m_currentState->onResume();
 }
 
 }
