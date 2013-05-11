@@ -33,10 +33,7 @@ void Slider::onEvent(const sf::Event& event)
         sf::FloatRect slider = sf::FloatRect(m_sprites[1].getPosition().x, m_sprites[1].getPosition().y, m_sprites[1].getLocalBounds().width, m_sprites[1].getLocalBounds().height); 
 
         // Check if the mouse is over the slider
-        if(slider.contains(mouse))
-            setHover(true);
-        else 
-            setHover(false);
+        setHover(contains(getMousePosition(event)));
 
         if(isPressed())
         {
@@ -56,10 +53,7 @@ void Slider::onEvent(const sf::Event& event)
 
     if(event.type == sf::Event::MouseButtonPressed)
     {
-        if(isHover())
-            setPressed(true);
-        else
-            setPressed(false);
+        setPressed(isHover());
     }
 
     if(event.type == sf::Event::MouseButtonReleased)
