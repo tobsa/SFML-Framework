@@ -15,29 +15,9 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Picture::Picture(ResourceManager& rm, const std::string& filename, const sf::Vector2f& position)
+Picture::Picture(ResourceManager& rm) :
+    GuiObject (rm)
 {
-    m_sprite.setTexture(rm.getTexture(filename));
-    m_sprite.setPosition(position);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-Picture::Picture(ResourceManager& rm, const std::string& filename, float x, float y)
-{
-    m_sprite.setTexture(rm.getTexture(filename));
-    m_sprite.setPosition(x, y);
-}
-
-Picture::Picture(const sf::Texture& texture, const sf::Vector2f& position)
-{
-    m_sprite.setTexture(texture);
-    m_sprite.setPosition(position);
-}
-
-Picture::Picture(const sf::Texture& texture, float x, float y)
-{
-    m_sprite.setTexture(texture);
-    m_sprite.setPosition(x, y);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -137,9 +117,9 @@ const sf::Texture& Picture::getTexture() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Picture::setTexture(ResourceManager& rm, const std::string& filename)
+void Picture::setTexture(const std::string& filename)
 {
-    m_sprite.setTexture(rm.getTexture(filename));
+    m_sprite.setTexture(m_resourceManager.getTexture(filename));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
