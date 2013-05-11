@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFML Framework", "SFML Framework\SFML Framework.vcxproj", "{DCAD0B8C-74AF-460E-A715-F9C1D3594F03}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFML Framework Library", "SFML Framework Library\SFML Framework Library.vcxproj", "{D6BFF09E-81E0-486A-9739-C98893BB377B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,8 +13,6 @@ Global
 		{DCAD0B8C-74AF-460E-A715-F9C1D3594F03}.Debug|Win32.Build.0 = Debug|Win32
 		{DCAD0B8C-74AF-460E-A715-F9C1D3594F03}.Release|Win32.ActiveCfg = Release|Win32
 		{DCAD0B8C-74AF-460E-A715-F9C1D3594F03}.Release|Win32.Build.0 = Release|Win32
-		{D6BFF09E-81E0-486A-9739-C98893BB377B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{D6BFF09E-81E0-486A-9739-C98893BB377B}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
