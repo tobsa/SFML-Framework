@@ -11,6 +11,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "BaseProperty.hpp"
 #include "SFML Gui/Button.hpp"
+#include "SFML Gui/CheckBox.hpp"
 #include "Config.hpp"
 #include "FileReader.hpp"
 #include "FileWriter.hpp"
