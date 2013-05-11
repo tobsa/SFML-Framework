@@ -15,43 +15,10 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Label::Label(ResourceManager& rm, const std::string& filename, const std::string& text, float x, float y, unsigned int size, const sf::Color& color)
+Label::Label(ResourceManager& rm) :
+    GuiObject (rm)
 {
-    m_text.setString(text);
-    m_text.setFont(rm.getFont(filename));
-    m_text.setPosition(x, y);
-    m_text.setCharacterSize(size);
-    m_text.setColor(color);
-}
 
-////////////////////////////////////////////////////////////////////////////////
-Label::Label(ResourceManager& rm, const std::string& filename, const std::string& text, const sf::Vector2f& position, unsigned int size, const sf::Color& color)
-{
-    m_text.setString(text);
-    m_text.setFont(rm.getFont(filename));
-    m_text.setPosition(position);
-    m_text.setCharacterSize(size);
-    m_text.setColor(color);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-Label::Label(const std::string& text, const sf::Font& font, const sf::Vector2f& position, unsigned int size, const sf::Color& color)
-{
-    m_text.setString(text);
-    m_text.setFont(font);
-    m_text.setPosition(position);
-    m_text.setCharacterSize(size);
-    m_text.setColor(color);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-Label::Label(const std::string& text, const sf::Font& font, float x, float y, unsigned int size, const sf::Color& color)
-{
-    m_text.setString(text);
-    m_text.setFont(font);
-    m_text.setPosition(x, y);
-    m_text.setCharacterSize(size);
-    m_text.setColor(color);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -178,6 +145,12 @@ sf::Uint32 Label::getStyle() const
 void Label::setText(const std::string& text)
 {
     m_text.setString(text);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Label::setFont(const std::string& filename)
+{
+    m_text.setFont(m_resourceManager.getFont(filename));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

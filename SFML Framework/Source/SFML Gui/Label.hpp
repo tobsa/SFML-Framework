@@ -16,24 +16,16 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-// Forward declarations
-////////////////////////////////////////////////////////////////////////////////
-class ResourceManager;
-
-////////////////////////////////////////////////////////////////////////////////
-// A simple way to display a picture
+// A simple way to create a label
 ////////////////////////////////////////////////////////////////////////////////
 class Label : public GuiObject 
 {
 public:
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Create a picture 
+    // Create a label
     ////////////////////////////////////////////////////////////////////////////////
-    Label(ResourceManager& rm, const std::string& filename, const std::string& text, float x = 0.f, float y = 0.f, unsigned int size = 18, const sf::Color& color = sf::Color::White);
-    Label(ResourceManager& rm, const std::string& filename, const std::string& text, const sf::Vector2f& position, unsigned int size = 18, const sf::Color& color = sf::Color::White);;
-    Label(const std::string& text, const sf::Font& font, const sf::Vector2f& position, unsigned int size = 18, const sf::Color& color = sf::Color::White);
-    Label(const std::string& text, const sf::Font& font, float x = 0, float y = 0, unsigned int size = 18, const sf::Color& color = sf::Color::White);
+    Label(ResourceManager& rm);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Process events
@@ -91,6 +83,7 @@ public:
     // Set the labels text, font, size, color or style
     ////////////////////////////////////////////////////////////////////////////////
     void setText(const std::string& text);
+    void setFont(const std::string& filename);
     void setFont(const sf::Font& font);
     void setCharacterSize(unsigned int size);
     void setColor(const sf::Color& color);
