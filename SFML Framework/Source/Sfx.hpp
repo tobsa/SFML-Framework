@@ -10,6 +10,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "BaseProperty.hpp"
+#include "SFML Gui/Button.hpp"
 #include "Config.hpp"
 #include "FileReader.hpp"
 #include "FileWriter.hpp"
