@@ -26,24 +26,19 @@ void Button::onEvent(const sf::Event& event)
 {
     if(event.type == sf::Event::MouseMoved)
     {
-        if(contains(getMousePosition(event)))
-            setHover(true);
-        else 
-            setHover(false);
+        setHover(contains(getMousePosition(event)));
     }
 
     if(event.type == sf::Event::MouseButtonPressed)
     {
+        setPressed(isHover());
+
         if(isHover())
         {
             // Permorm all callback functions
             for(const auto& callback : m_callbacks)
                 callback();
-
-            setPressed(true);
-        } 
-        else
-            setPressed(false);
+        }
     }
 
     if(event.type == sf::Event::MouseButtonReleased)
