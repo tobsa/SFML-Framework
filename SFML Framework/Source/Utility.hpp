@@ -43,6 +43,7 @@ namespace sfx
     ////////////////////////////////////////////////////////////////////////////////
     int getRandom(int begin, int end);
     float getRandom(float begin, float end);
+    sf::Vector2f getRandom(float begin0, float end0, float begin1, float end1);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Convert between strings and numbers

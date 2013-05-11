@@ -69,4 +69,10 @@ float getRandom(float begin, float end)
     return distribution(engine);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f getRandom(float begin0, float end0, float begin1, float end1)
+{
+    return sf::Vector2f(getRandom(begin0, end0), getRandom(begin1, end1));
+}
+
 } // namespace sfx
