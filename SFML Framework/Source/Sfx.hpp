@@ -22,6 +22,7 @@
 #include "Property.hpp"
 #include "ResourceManager.hpp"
 #include "Scanner.hpp"
+#include "SFML Gui/TextEditBox.hpp"
 #include "Timer.hpp"
 #include "Utility.hpp"
 
