@@ -12,6 +12,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
+#include <memory>
 
 namespace sfx
 {
@@ -36,9 +37,12 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
-    typedef std::map<std::string, sf::Texture>     TextureMap;
-    typedef std::map<std::string, sf::Font>        FontMap;
-    typedef std::map<std::string, sf::SoundBuffer> SoundBufferMap;
+    typedef std::shared_ptr<sf::Texture>          TexturePtr;
+    typedef std::shared_ptr<sf::Font>             FontPtr;
+    typedef std::shared_ptr<sf::SoundBuffer>      SoundBufferPtr;
+    typedef std::map<std::string, TexturePtr>     TextureMap;
+    typedef std::map<std::string, FontPtr>        FontMap;
+    typedef std::map<std::string, SoundBufferPtr> SoundBufferMap;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data

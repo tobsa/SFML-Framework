@@ -17,12 +17,11 @@ sf::Texture& ResourceManager::getTexture(const std::string& filename)
 {
     if(m_textures.find(filename) == m_textures.end())
     {
-        sf::Texture texture;
-        texture.loadFromFile(filename);
-        m_textures[filename] = texture;
+        m_textures[filename] = std::make_shared<sf::Texture>();
+        m_textures[filename]->loadFromFile(filename);
     }
 
-    return m_textures[filename];
+    return *m_textures[filename];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -30,12 +29,11 @@ sf::Font& ResourceManager::getFont(const std::string& filename)
 {
     if(m_fonts.find(filename) == m_fonts.end())
     {
-        sf::Font font;
-        font.loadFromFile(filename);
-        m_fonts[filename] = font;
+        m_fonts[filename] = std::make_shared<sf::Font>();
+        m_fonts[filename]->loadFromFile(filename);
     }
 
-    return m_fonts[filename];
+    return *m_fonts[filename];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -43,12 +41,11 @@ sf::SoundBuffer& ResourceManager::getSoundBuffer(const std::string& filename)
 {
     if(m_soundBuffers.find(filename) == m_soundBuffers.end())
     {
-        sf::SoundBuffer soundBuffer;
-        soundBuffer.loadFromFile(filename);
-        m_soundBuffers[filename] = soundBuffer;
+        m_soundBuffers[filename] = std::make_shared<sf::SoundBuffer>();
+        m_soundBuffers[filename]->loadFromFile(filename);
     }
 
-    return m_soundBuffers[filename];
+    return *m_soundBuffers[filename];
 }
 
 

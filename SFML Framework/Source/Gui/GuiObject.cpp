@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: Game.cpp
+// Filename: GuiObject.cpp
 // Author:   Tobias Savinainen
 // Year:     2013
 ////////////////////////////////////////////////////////////////////////////////
@@ -7,67 +7,52 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
-#include "Game.hpp"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Window/Event.hpp>
+#include "GuiObject.hpp"
+
+namespace sfx
+{
 
 ////////////////////////////////////////////////////////////////////////////////
-Game::Game(sf::RenderWindow& renderWindow, sfx::ResourceManager& rm, sfx::GameSettings& gs, sfx::StateManager& sm) :
-    State (renderWindow, rm, gs, sm, "Game")
+GuiObject::GuiObject(ResourceManager& rm) : 
+    m_hover           (false),
+    m_pressed         (false),
+    m_resourceManager (rm)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Game::onExecute()
-{
-    onEvent();
-    onUpdate();
-    onRender();
-
-    return m_renderWindow.isOpen();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Game::onEvent()
-{
-    sf::Event event;
-    while(m_renderWindow.pollEvent(event))
-    {
-        if(event.type == sf::Event::Closed)
-            m_renderWindow.close();
-
-        if(event.type == sf::Event::KeyPressed)
-        {
-            if(event.key.code == sf::Keyboard::Escape)
-                m_renderWindow.close();
-        }
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Game::onUpdate()
+GuiObject::~GuiObject()
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Game::onRender()
+sf::Vector2f GuiObject::getMousePosition(const sf::Event& event) const
 {
-    m_renderWindow.clear();
-    
-    m_renderWindow.display();
+    return static_cast<sf::Vector2f>(sf::Vector2i(event.mouseMove.x, event.mouseMove.y));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Game::onPause()
+bool GuiObject::isHover() const
 {
+    return m_hover;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Game::onResume()
+bool GuiObject::isPressed() const
 {
+    return m_pressed;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Game::onRestart()
+void GuiObject::setHover(bool hover)
 {
+    m_hover = hover;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+void GuiObject::setPressed(bool pressed)
+{
+    m_pressed = pressed;
+}
+
+} // namespace sfx
