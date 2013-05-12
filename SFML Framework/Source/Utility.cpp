@@ -75,4 +75,62 @@ sf::Vector2f getRandom(float begin0, float end0, float begin1, float end1)
     return sf::Vector2f(getRandom(begin0, end0), getRandom(begin1, end1));
 }
 
+////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f getMousePosition(const sf::Event& event)
+{
+    return sf::Vector2f(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool inCircle(const sf::Vector2f& position, const sf::Vector2f& center, float radius)
+{
+    return inCircle(position.x, position.y, center.x, center.y, radius);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool inCircle(float x, float y, float centerX, float centerY, float radius)
+{
+    return ((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY)) < (radius * radius);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+std::string encrypt(const std::string& key, const std::string& message)
+{
+    std::size_t index = 0;
+    std::string temp  = "";
+
+    if(key.empty())
+        return message;
+
+    for(std::size_t i = 0; i < message.size(); ++i)
+    {
+        temp += static_cast<char>(message[i] + key[index++]);
+
+        if(index >= key.size())
+            index = 0;
+    }
+
+    return temp;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+std::string decrypt(const std::string& key, const std::string& message)
+{
+    std::size_t index = 0;
+    std::string temp  = "";
+
+    if(key.empty())
+        return message;
+
+    for(std::size_t i = 0; i < message.size(); ++i)
+    {
+        temp += static_cast<char>(message[i] - key[index++]);
+
+        if(index >= key.size())
+            index = 0;
+    }
+
+    return temp;
+}
+
 } // namespace sfx
