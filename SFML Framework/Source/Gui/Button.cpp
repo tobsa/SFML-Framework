@@ -50,7 +50,8 @@ void Button::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void Button::onUpdate()
 {
-    // No updates for a button
+    if(!(sf::Mouse::isButtonPressed(sf::Mouse::Left) || sf::Mouse::isButtonPressed(sf::Mouse::Right)))
+        setPressed(false);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
