@@ -13,12 +13,9 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-State::State(sf::RenderWindow& renderWindow, ResourceManager& rm, GameSettings& gs, StateManager& sm, const std::string& name) :
-    m_renderWindow    (renderWindow),
-    m_resourceManager (rm),
-    m_gameSettings    (gs),
-    m_stateManager    (sm),
-    m_name            (name)
+State::State(Application& application, const std::string& name) :
+    m_application (application),
+    m_name        (name)
 {
 }
 

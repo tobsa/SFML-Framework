@@ -8,7 +8,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "Slider.hpp"
-#include "../ResourceManager.hpp"
+#include "../Application.hpp"
 #include "../Utility.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -16,8 +16,8 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Slider::Slider(ResourceManager& rm) :
-    GuiObject (rm),
+Slider::Slider(Application& application) :
+    GuiObject (application),
     m_minimum (0.f),
     m_maximum (100.f)
 {
@@ -156,7 +156,7 @@ const sf::Texture& Slider::getTexture(std::size_t index) const
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::setTexture(std::size_t index, const std::string& filename)
 {
-    m_sprites[sfx::clamp(index, 0U, 1U)].setTexture(m_resourceManager.getTexture(filename));
+    m_sprites[sfx::clamp(index, 0U, 1U)].setTexture(m_application.getTexture(filename));
     setPosition(getPosition());
 }
 

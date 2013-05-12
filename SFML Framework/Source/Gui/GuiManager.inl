@@ -23,7 +23,7 @@ template<typename T> T& GuiManager::create(const std::string& key)
         m_objects.erase(key);
 
     // Create the object
-    std::shared_ptr<T> object = std::make_shared<T>(m_resourceManager);
+    std::shared_ptr<T> object = std::make_shared<T>(m_application);
 
     // Add it to the manager
     m_objects[key] = object;

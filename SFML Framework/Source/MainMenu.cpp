@@ -8,12 +8,12 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "MainMenu.hpp"
-#include <SFML/Graphics/RenderWindow.hpp>
+#include "Application.hpp"
 #include <SFML/Window/Event.hpp>
 
 ////////////////////////////////////////////////////////////////////////////////
-MainMenu::MainMenu(sf::RenderWindow& renderWindow, sfx::ResourceManager& rm, sfx::GameSettings& gs, sfx::StateManager& sm) :
-    State (renderWindow, rm, gs, sm, "MainMenu")
+MainMenu::MainMenu(sfx::Application& application) :
+    State (application, "MainMenu")
 {
 }
 
@@ -24,22 +24,22 @@ bool MainMenu::onExecute()
     onUpdate();
     onRender();
 
-    return m_renderWindow.isOpen();
+    return m_application.isOpen();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void MainMenu::onEvent()
 {
     sf::Event event;
-    while(m_renderWindow.pollEvent(event))
+    while(m_application.pollEvent(event))
     {
         if(event.type == sf::Event::Closed)
-            m_renderWindow.close();
+            m_application.close();
 
         if(event.type == sf::Event::KeyPressed)
         {
             if(event.key.code == sf::Keyboard::Escape)
-                m_renderWindow.close();
+                m_application.close();
         }
     }
 }
@@ -52,9 +52,9 @@ void MainMenu::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void MainMenu::onRender()
 {
-    m_renderWindow.clear();
+    m_application.clear();
     
-    m_renderWindow.display();
+    m_application.display();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

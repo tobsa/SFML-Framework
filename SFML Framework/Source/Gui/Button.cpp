@@ -8,7 +8,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "Button.hpp"
-#include "../ResourceManager.hpp"
+#include "../Application.hpp"
 #include "../Utility.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -16,8 +16,8 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Button::Button(ResourceManager& rm) :
-    GuiObject (rm)
+Button::Button(Application& application) :
+    GuiObject (application)
 {
 }
 
@@ -148,7 +148,7 @@ const sf::Texture& Button::getTexture(std::size_t index) const
 ////////////////////////////////////////////////////////////////////////////////
 void Button::setTexture(std::size_t index, const std::string& filename)
 {
-    m_sprites[sfx::clamp(index, 0U, 2U)].setTexture(m_resourceManager.getTexture(filename));
+    m_sprites[sfx::clamp(index, 0U, 2U)].setTexture(m_application.getTexture(filename));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

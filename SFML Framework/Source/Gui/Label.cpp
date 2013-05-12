@@ -8,15 +8,15 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "Label.hpp"
-#include "../ResourceManager.hpp"
+#include "../Application.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
 namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Label::Label(ResourceManager& rm) :
-    GuiObject (rm)
+Label::Label(Application& application) :
+    GuiObject (application)
 {
 
 }
@@ -150,7 +150,7 @@ void Label::setText(const std::string& text)
 ////////////////////////////////////////////////////////////////////////////////
 void Label::setFont(const std::string& filename)
 {
-    m_text.setFont(m_resourceManager.getFont(filename));
+    m_text.setFont(m_application.getFont(filename));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

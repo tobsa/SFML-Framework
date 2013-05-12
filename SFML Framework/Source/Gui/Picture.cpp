@@ -8,15 +8,15 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "Picture.hpp"
-#include "../ResourceManager.hpp"
+#include "../Application.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
 namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Picture::Picture(ResourceManager& rm) :
-    GuiObject (rm)
+Picture::Picture(Application& application) :
+    GuiObject (application)
 {
 }
 
@@ -119,7 +119,7 @@ const sf::Texture& Picture::getTexture() const
 ////////////////////////////////////////////////////////////////////////////////
 void Picture::setTexture(const std::string& filename)
 {
-    m_sprite.setTexture(m_resourceManager.getTexture(filename));
+    m_sprite.setTexture(m_application.getTexture(filename));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

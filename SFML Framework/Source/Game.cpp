@@ -8,12 +8,12 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "Game.hpp"
-#include <SFML/Graphics/RenderWindow.hpp>
+#include "Application.hpp"
 #include <SFML/Window/Event.hpp>
 
 ////////////////////////////////////////////////////////////////////////////////
-Game::Game(sf::RenderWindow& renderWindow, sfx::ResourceManager& rm, sfx::GameSettings& gs, sfx::StateManager& sm) :
-    State (renderWindow, rm, gs, sm, "Game")
+Game::Game(sfx::Application& application) :
+    State (application, "Game")
 {
 }
 
@@ -24,22 +24,22 @@ bool Game::onExecute()
     onUpdate();
     onRender();
 
-    return m_renderWindow.isOpen();
+    return m_application.isOpen();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Game::onEvent()
 {
     sf::Event event;
-    while(m_renderWindow.pollEvent(event))
+    while(m_application.pollEvent(event))
     {
         if(event.type == sf::Event::Closed)
-            m_renderWindow.close();
+            m_application.close();
 
         if(event.type == sf::Event::KeyPressed)
         {
             if(event.key.code == sf::Keyboard::Escape)
-                m_renderWindow.close();
+                m_application.close();
         }
     }
 }
@@ -52,9 +52,9 @@ void Game::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void Game::onRender()
 {
-    m_renderWindow.clear();
+    m_application.clear();
     
-    m_renderWindow.display();
+    m_application.display();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

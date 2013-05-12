@@ -8,7 +8,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "TextEditBox.hpp"
-#include "../ResourceManager.hpp"
+#include "../Application.hpp"
 #include "../Utility.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -16,8 +16,8 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-TextEditBox::TextEditBox(ResourceManager& rm) :
-    GuiObject       (rm),
+TextEditBox::TextEditBox(Application& application) :
+    GuiObject       (application),
     m_maxCharacters (50)
 {
 }
@@ -179,7 +179,7 @@ const sf::Texture& TextEditBox::getTexture(std::size_t index) const
 ////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::setTexture(std::size_t index, const std::string& filename)
 {
-    m_sprites[sfx::clamp(index, 0U, 2U)].setTexture(m_resourceManager.getTexture(filename));
+    m_sprites[sfx::clamp(index, 0U, 2U)].setTexture(m_application.getTexture(filename));
 
     updateText();
     updateCaret();
@@ -247,7 +247,7 @@ void TextEditBox::setText(const std::string& text)
 ////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::setFont(const std::string& filename)
 {
-    m_text.setFont(m_resourceManager.getFont(filename));
+    m_text.setFont(m_application.getFont(filename));
 
     updateText();
     updateCaret();

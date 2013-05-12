@@ -14,17 +14,11 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-GuiManager::GuiManager(ResourceManager& rm) :
-    m_resourceManager (rm)
+GuiManager::GuiManager(Application& application) :
+    m_application (application)
 {
 }
     
-////////////////////////////////////////////////////////////////////////////////
-ResourceManager& GuiManager::getResourceManager() const
-{
-    return m_resourceManager;
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::remove(const std::string& key)
 {

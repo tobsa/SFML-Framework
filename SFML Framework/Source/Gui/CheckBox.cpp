@@ -8,7 +8,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "CheckBox.hpp"
-#include "../ResourceManager.hpp"
+#include "../Application.hpp"
 #include "../Utility.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -16,8 +16,8 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-CheckBox::CheckBox(ResourceManager& rm) :
-    GuiObject (rm)
+CheckBox::CheckBox(Application& application) :
+    GuiObject (application)
 {
 }
 
@@ -137,7 +137,7 @@ const sf::Texture& CheckBox::getTexture(std::size_t index) const
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::setTexture(std::size_t index, const std::string& filename)
 {
-    m_sprites[sfx::clamp(index, 0U, 3U)].setTexture(m_resourceManager.getTexture(filename));
+    m_sprites[sfx::clamp(index, 0U, 3U)].setTexture(m_application.getTexture(filename));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

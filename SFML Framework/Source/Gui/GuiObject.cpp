@@ -13,10 +13,10 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-GuiObject::GuiObject(ResourceManager& rm) : 
+GuiObject::GuiObject(Application& application) : 
     m_hover           (false),
     m_pressed         (false),
-    m_resourceManager (rm)
+    m_application     (application)
 {
 }
 
