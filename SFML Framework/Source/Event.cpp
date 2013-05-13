@@ -14,9 +14,11 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Event::Event(const std::string& name) :
+Event::Event(const std::string& name, const std::string& key, const std::string& message) :
     m_name (name)
 {
+    if(!key.empty() && !message.empty())
+        addMessage(key, message);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,6 +53,12 @@ const std::string& Event::getMessage(const std::string& key) const
 void Event::removeMessage(const std::string& key)
 {
     m_messages.erase(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Event::operator == (const Event& event)
+{
+    return m_name == event.getName();
 }
 
 } // namespace sfx
