@@ -14,6 +14,8 @@
 #include "Gui/Button.hpp"
 #include "Gui/CheckBox.hpp"
 #include "Config.hpp"
+#include "Event.hpp"
+#include "EventManager.hpp"
 #include "FileReader.hpp"
 #include "FileWriter.hpp"
 #include "GameSettings.hpp"
