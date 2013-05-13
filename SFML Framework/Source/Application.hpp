@@ -13,6 +13,7 @@
 #include "ResourceManager.hpp"
 #include "GameSettings.hpp"
 #include "StateManager.hpp"
+#include "EventManager.hpp"
 
 namespace sfx
 {
@@ -89,6 +90,17 @@ public:
     StatePtr getState(const std::string& key);
     void setState(const std::string& key);
 
+    ////////////////////////////////////////////////////////////////////////////////
+    // Methods from sfx::EventManager
+    ////////////////////////////////////////////////////////////////////////////////
+    void addEvent(const Event& event);
+    std::size_t getEventSize() const;
+    const Event& getEvent(const std::string& name);
+    const Event& getEvent(std::size_t index);
+    void removeEvent(const std::string& name);
+    void removeEvent(std::size_t index);
+    void removeLastEvent();
+
 private:
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -98,6 +110,7 @@ private:
     ResourceManager  m_resourceManager;
     GameSettings     m_gameSettings;
     StateManager     m_stateManager;
+    EventManager     m_eventManager;
 };
 
 } // namespace sfx
