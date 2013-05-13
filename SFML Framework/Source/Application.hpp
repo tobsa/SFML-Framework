@@ -63,6 +63,8 @@ public:
     void clear(const sf::Color& color = sf::Color(0, 0, 0, 255));
     void draw(const sf::Drawable& drawable, const sf::RenderStates& states = sf::RenderStates::Default);
     void draw(const sf::Vertex *vertices, unsigned int vertexCount, sf::PrimitiveType type, const sf::RenderStates& states = sf::RenderStates::Default);
+    void setMousePosition(const sf::Vector2f& position);
+    void setMousePosition(float x, float y);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Methods from sfx::ResourceManager

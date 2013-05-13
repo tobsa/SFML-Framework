@@ -163,6 +163,18 @@ void Application::draw(const sf::Vertex *vertices, unsigned int vertexCount, sf:
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+void Application::setMousePosition(const sf::Vector2f& position)
+{
+    sf::Mouse::setPosition(static_cast<sf::Vector2i>(position), m_renderWindow);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMousePosition(float x, float y)
+{
+    setMousePosition(sf::Vector2f(x, y));
+}
+
+////////////////////////////////////////////////////////////////////////////////
 sf::Texture& Application::getTexture(const std::string& filename)
 {
     return m_resourceManager.getTexture(filename);
