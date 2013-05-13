@@ -32,7 +32,16 @@ void CheckBox::onEvent(const sf::Event& event)
     if(event.type == sf::Event::MouseButtonPressed)
     {
         if(isHover())
+        {
             setPressed(!isPressed());
+            
+            // Get the checked or unchecked callback list
+            auto callbacks = isPressed() ? m_isCheckedCallbacks : m_noCheckedCallbacks;
+
+            // Perform callbacks
+            for(const auto& callback : callbacks)
+                callback();
+        }
     }
 }
 
@@ -166,6 +175,18 @@ bool CheckBox::isChecked() const
 void CheckBox::setChecked(bool checked)
 {
     setPressed(checked);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void CheckBox::addIsCheckedCallback(const std::function<void()>& callback)
+{
+    m_isCheckedCallbacks.push_back(callback);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void CheckBox::addNoCheckedCallback(const std::function<void()>& callback)
+{
+    m_noCheckedCallbacks.push_back(callback);
 }
 
 } // namespace sfx
