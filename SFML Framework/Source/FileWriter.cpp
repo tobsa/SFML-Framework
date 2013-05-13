@@ -28,9 +28,7 @@ void FileWriter::open(const std::string& filename, Mode mode)
         m_file.open(filename, std::ofstream::app);
 
     if(!m_file.is_open())
-    {
         sfx::Log::write("Error (FileWriter::FileWrite()): Couldn't open " + filename); 
-    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

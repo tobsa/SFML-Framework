@@ -89,11 +89,7 @@ std::string FileReader::getFile()
 std::string FileReader::getLine()
 {
     if(!isOpen())
-    {
-        std::string error = "Error (FileReader::getLine()): FileReader isn't open";
-        sfx::Log::write(error);
-        throw error;
-    }
+        sfx::Log::writeT("Error (FileReader::getLine()): FileReader isn't open");
 
     std::string line;
     std::getline(m_file, line);
@@ -105,11 +101,7 @@ std::string FileReader::getLine()
 char FileReader::get()
 {
     if(!isOpen())
-    {
-        std::string error = "Error (FileReader::get()): FileReader isn't open";
-        sfx::Log::write(error);
-        throw error;
-    }
+        sfx::Log::writeT("Error (FileReader::get()): FileReader isn't open");
 
     return m_file.get();
 }

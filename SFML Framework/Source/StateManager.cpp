@@ -30,11 +30,7 @@ void StateManager::add(const std::string& key, StatePtr state)
 StateManager::StatePtr StateManager::getState() const
 {
     if(!m_currentState)
-    {
-        std::string error = "Error (StateManager::getState()): m_currentState == nullptr (You must set a starting state)";
-        sfx::Log::write(error);
-        throw error;
-    }
+        sfx::Log::writeT("Error (StateManager::getState()): m_currentState == nullptr (You must set a starting state)");
 
     return m_currentState;
 }
@@ -44,11 +40,7 @@ StateManager::StatePtr StateManager::getState(const std::string& key)
 {
     auto result = m_states.find(key);
     if(result == m_states.end())
-    {
-        std::string error = "Error (StateManager::getState()): " + key + " doesn't exist";
-        sfx::Log::write(error);
-        throw error;
-    }
+        sfx::Log::writeT("Error (StateManager::getState()): " + key + " doesn't exist");
 
     return result->second;
 }
@@ -58,11 +50,7 @@ void StateManager::setState(const std::string& key)
 {
     auto it = m_states.find(key);
     if(it == m_states.end())
-    {
-        std::string error = "Error (StateManager::setState()): " + key + " doesn't exist";
-        sfx::Log::write(error);
-        throw error;
-    }
+        sfx::Log::writeT("Error (StateManager::setState()): " + key + " doesn't exist");
 
     if(m_currentState)
         m_currentState->onPause();
