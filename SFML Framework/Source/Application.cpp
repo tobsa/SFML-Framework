@@ -10,6 +10,7 @@
 #include "Application.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Window/Mouse.hpp>
 
 namespace sfx
 {
@@ -39,6 +40,18 @@ sf::Vector2f Application::getSize() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f Application::getPosition() const
+{
+    return static_cast<sf::Vector2f>(m_renderWindow.getPosition());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f Application::getMousePosition() const
+{
+    return static_cast<sf::Vector2f>(sf::Mouse::getPosition(m_renderWindow));
+}
+
+////////////////////////////////////////////////////////////////////////////////
 bool Application::isOpen() const
 {
     return m_renderWindow.isOpen();
@@ -48,12 +61,6 @@ bool Application::isOpen() const
 bool Application::pollEvent(sf::Event& event)
 {
     return m_renderWindow.pollEvent(event);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-sf::Vector2f Application::getPosition() const
-{
-    return static_cast<sf::Vector2f>(m_renderWindow.getPosition());
 }
 
 ////////////////////////////////////////////////////////////////////////////////

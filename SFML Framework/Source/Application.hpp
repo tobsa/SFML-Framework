@@ -43,9 +43,10 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     sf::Image capture() const;
     sf::Vector2f getSize() const;
+    sf::Vector2f getPosition() const;
+    sf::Vector2f getMousePosition() const;
     bool isOpen() const;
     bool pollEvent(sf::Event& event);
-    sf::Vector2f getPosition() const;
     void create(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style = sf::Style::Default);
     void create(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style = sf::Style::Default);
     void close();
