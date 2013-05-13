@@ -86,6 +86,7 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     void addState(const std::string& key, StatePtr state);
     StatePtr getState() const;
+    StatePtr getState(const std::string& key);
     void setState(const std::string& key);
 
 private:

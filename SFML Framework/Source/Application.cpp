@@ -217,6 +217,12 @@ Application::StatePtr Application::getState() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+Application::StatePtr Application::getState(const std::string& key)
+{
+    return m_stateManager.getState(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void Application::setState(const std::string& key)
 {
     return m_stateManager.setState(key);

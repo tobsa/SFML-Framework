@@ -40,6 +40,20 @@ StateManager::StatePtr StateManager::getState() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+StateManager::StatePtr StateManager::getState(const std::string& key)
+{
+    auto result = m_states.find(key);
+    if(result == m_states.end())
+    {
+        std::string error = "Error (StateManager::getState()): " + key + " doesn't exist";
+        sfx::Log::write(error);
+        throw error;
+    }
+
+    return result->second;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void StateManager::setState(const std::string& key)
 {
     auto it = m_states.find(key);
