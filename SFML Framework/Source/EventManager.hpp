@@ -43,6 +43,7 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     void remove(const std::string& name);
     void remove(std::size_t index);
+    void removeLast();
 
 private:
 

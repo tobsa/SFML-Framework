@@ -65,4 +65,10 @@ void EventManager::remove(std::size_t index)
     m_events.erase(it);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+void EventManager::removeLast()
+{
+    m_events.pop_back();
+}
+
 } // namespace sfx
