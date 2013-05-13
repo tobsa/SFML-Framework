@@ -74,6 +74,13 @@ namespace sfx
     std::string encrypt(const std::string& key, const std::string& message);
     std::string decrypt(const std::string& key, const std::string& message);
 
+    ////////////////////////////////////////////////////////////////////////////////
+    // Subtract the half width of the first with the half width of the second 
+    // position
+    ////////////////////////////////////////////////////////////////////////////////
+    sf::Vector2f subtractHalf(const sf::Vector2f& position0, const sf::Vector2f& position1);
+    sf::Vector2f subtractHalf(float x0, float y0, float x1, float y1);
+
 } // namespace sfx
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -133,4 +133,16 @@ std::string decrypt(const std::string& key, const std::string& message)
     return temp;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f subtractHalf(const sf::Vector2f& position0, const sf::Vector2f& position1)
+{
+    return subtractHalf(position0.x, position0.y, position1.x, position1.y);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f subtractHalf(float x0, float y0, float x1, float y1)
+{
+    return sf::Vector2f(x0 / 2.f - x1 / 2.f, y0 / 2.f - y1 / 2.f);
+}
+
 } // namespace sfx
