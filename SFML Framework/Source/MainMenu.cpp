@@ -10,11 +10,6 @@
 #include "MainMenu.hpp"
 #include "Application.hpp"
 #include <SFML/Window/Event.hpp>
-#include "Gui/Button.hpp"
-#include "Gui/CheckBox.hpp"
-#include "Gui/Slider.hpp"
-#include "Gui/TextEditBox.hpp"
-#include "Gui/Picture.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 MainMenu::MainMenu(sfx::Application& application) :
