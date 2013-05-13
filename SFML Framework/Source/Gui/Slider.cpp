@@ -65,6 +65,10 @@ void Slider::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::onUpdate()
 {
+    if(!contains(m_application.getMousePosition()))
+        setHover(false);
+    if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
+        setPressed(false);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

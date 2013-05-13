@@ -250,6 +250,7 @@ void TextEditBox::setFont(const std::string& filename)
     m_text.setFont(m_application.getFont(filename));
 
     updateText();
+    setCaretSize(getCharacterSize());
     updateCaret();
 }
 
@@ -259,6 +260,7 @@ void TextEditBox::setFont(const sf::Font& font)
     m_text.setFont(font);
 
     updateText();
+    setCaretSize(getCharacterSize());
     updateCaret();
 }
 

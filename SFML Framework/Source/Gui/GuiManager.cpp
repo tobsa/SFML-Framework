@@ -22,28 +22,34 @@ GuiManager::GuiManager(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::remove(const std::string& key)
 {
-    m_objects.erase(key);
+    auto result = m_objects.find(key);
+    if(result != m_objects.end())
+    {
+        auto it = std::find(m_objectsList.begin(), m_objectsList.end(), result->second);
+        m_objectsList.erase(it);
+        m_objects.erase(key);
+    }    
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::onEvent(const sf::Event& event)
 {
-    for(const auto& object : m_objects)
-        object.second->onEvent(event);
+    for(const auto& object : m_objectsList)
+        object->onEvent(event);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::onUpdate()
 {
-    for(const auto& object : m_objects)
-        object.second->onUpdate();
+    for(const auto& object : m_objectsList)
+        object->onUpdate();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for(const auto& object : m_objects)
-        target.draw(*object.second);
+    for(const auto& object : m_objectsList)
+        target.draw(*object);
 }
 
 } // namespace sfx

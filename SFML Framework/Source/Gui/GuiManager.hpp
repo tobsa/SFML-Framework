@@ -13,6 +13,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <memory>
 #include <map>
+#include <list>
 
 namespace sfx
 {
@@ -34,6 +35,7 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     typedef std::shared_ptr<GuiObject>          GuiObjectPtr;
     typedef std::map<std::string, GuiObjectPtr> GuiObjectMap;
+    typedef std::list<GuiObjectPtr>             GuiObjectList;
 
 public:
 
@@ -80,8 +82,9 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data
     ////////////////////////////////////////////////////////////////////////////////
-    Application& m_application;
-    GuiObjectMap m_objects;
+    Application&    m_application;
+    GuiObjectMap    m_objects;
+    GuiObjectList   m_objectsList;
 };
 
 } // namespace sfx
