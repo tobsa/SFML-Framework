@@ -13,7 +13,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 MainMenu::MainMenu(sfx::Application& application) :
-    State        (application, "MainMenu")
+    State (application, "MainMenu")
 {
 }
 
