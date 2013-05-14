@@ -10,6 +10,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "Application.hpp"
+#include "AudioManager.hpp"
 #include "BaseProperty.hpp"
 #include "Gui/Button.hpp"
 #include "Gui/CheckBox.hpp"
