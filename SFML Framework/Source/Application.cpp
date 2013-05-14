@@ -17,13 +17,15 @@ namespace sfx
 
 ////////////////////////////////////////////////////////////////////////////////
 Application::Application(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style) :
-    m_renderWindow (videoMode, name, style)
+    m_renderWindow (videoMode, name, style),
+    m_audioManager (*this)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 Application::Application(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style) :
-    m_renderWindow (sf::VideoMode(width, height), name, style)
+    m_renderWindow (sf::VideoMode(width, height), name, style),
+    m_audioManager (*this)
 {
 }
 
@@ -280,6 +282,228 @@ void Application::removeLastEvent()
 bool Application::findEvent(const std::string& name)
 {
     return m_eventManager.findEvent(name);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::addSound(const std::string& key, const std::string& filename, std::size_t nbChannels)
+{
+    m_audioManager.addSound(key, filename, nbChannels);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::playSound(const std::string& key)
+{
+    m_audioManager.playSound(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::pauseSound(const std::string& key)
+{
+    m_audioManager.pauseSound(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::stopSound(const std::string& key)
+{
+    m_audioManager.stopSound(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setSoundVolume(const std::string& key, float volume)
+{
+    m_audioManager.setSoundVolume(key, volume);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setSoundLoop(const std::string& key, bool loop)
+{
+    m_audioManager.setSoundLoop(key, loop);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setSoundPitch(const std::string& key, float pitch)
+{
+    m_audioManager.setSoundPitch(key, pitch);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isSoundPlaying(const std::string& key) const
+{
+    return m_audioManager.isSoundPlaying(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isSoundPaused(const std::string& key) const
+{
+    return m_audioManager.isSoundPaused(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isSoundStopped(const std::string& key) const
+{
+    return m_audioManager.isSoundStopped(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+float Application::getSoundVolume(const std::string& key) const
+{
+    return m_audioManager.getSoundVolume(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::getSoundLoop(const std::string& key) const
+{
+    return m_audioManager.getSoundLoop(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+float Application::getSoundPitch(const std::string& key) const
+{
+    return m_audioManager.getSoundPitch(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::addMusic(const std::string& key, const std::string& filename)
+{
+    m_audioManager.addMusic(key, filename);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::playMusic(const std::string& key)
+{
+    m_audioManager.playMusic(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::pauseMusic(const std::string& key)
+{
+    m_audioManager.pauseMusic(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::stopMusic(const std::string& key)
+{
+    m_audioManager.stopMusic(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMusicVolume(const std::string& key, float volume)
+{
+    m_audioManager.setMusicVolume(key, volume);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMusicLoop(const std::string& key, bool loop)
+{
+    m_audioManager.setMusicLoop(key, loop);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMusicPitch(const std::string& key, float pitch)
+{
+    m_audioManager.setMusicPitch(key, pitch);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isMusicPlaying(const std::string& key) const
+{
+    return m_audioManager.isMusicPlaying(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isMusicPaused(const std::string& key) const
+{
+    return m_audioManager.isMusicPaused(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isMusicStopped(const std::string& key) const
+{
+    return m_audioManager.isMusicStopped(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+float Application::getMusicVolume(const std::string& key) const
+{
+    return m_audioManager.getMusicVolume(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::getMusicLoop(const std::string& key) const
+{
+    return m_audioManager.getMusicLoop(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+float Application::getMusicPitch(const std::string& key) const
+{
+    return m_audioManager.getMusicPitch(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::addSoundToList(const std::string& soundList, const std::string& filename)
+{
+    m_audioManager.addSoundToList(soundList, filename);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::playSoundList(const std::string& soundList)
+{
+    m_audioManager.playSoundList(soundList);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::pauseSoundList(const std::string& soundList)
+{
+    m_audioManager.pauseSoundList(soundList);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::stopSoundList(const std::string& soundList)
+{
+    m_audioManager.stopSoundList(soundList);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setSoundListOrder(const std::string& soundList, SoundList::Order order)
+{
+    m_audioManager.setSoundListOrder(soundList, order);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::onUpdateAudio()
+{
+    m_audioManager.onUpdate();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::addMusicToList(const std::string& musicList, const std::string& filename)
+{
+    m_audioManager.addMusicToList(musicList, filename);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::playMusicList(const std::string& musicList)
+{
+    m_audioManager.playMusicList(musicList);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::pauseMusicList(const std::string& musicList)
+{
+    m_audioManager.pauseMusicList(musicList);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::stopMusicList(const std::string& musicList)
+{
+    m_audioManager.stopMusicList(musicList);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMusicListOrder(const std::string& musicList, MusicList::Order order)
+{
+    m_audioManager.setMusicListOrder(musicList, order);
 }
 
 } // namespace sfx

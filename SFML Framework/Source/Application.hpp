@@ -14,6 +14,7 @@
 #include "GameSettings.hpp"
 #include "StateManager.hpp"
 #include "EventManager.hpp"
+#include "Audio/AudioManager.hpp"
 
 namespace sfx
 {
@@ -103,6 +104,47 @@ public:
     void removeLastEvent();
     bool findEvent(const std::string& name);
 
+    ////////////////////////////////////////////////////////////////////////////////
+    // Methods from sfx::AudioManager
+    ////////////////////////////////////////////////////////////////////////////////
+    void addSound(const std::string& key, const std::string& filename, std::size_t nbChannels = 1);
+    void playSound(const std::string& key);
+    void pauseSound(const std::string& key);
+    void stopSound(const std::string& key);
+    void setSoundVolume(const std::string& key, float volume);
+    void setSoundLoop(const std::string& key, bool loop);
+    void setSoundPitch(const std::string& key, float pitch);
+    bool isSoundPlaying(const std::string& key) const;
+    bool isSoundPaused(const std::string& key) const;
+    bool isSoundStopped(const std::string& key) const;
+    float getSoundVolume(const std::string& key) const;
+    bool getSoundLoop(const std::string& key) const;
+    float getSoundPitch(const std::string& key) const;
+    void addMusic(const std::string& key, const std::string& filename);
+    void playMusic(const std::string& key);
+    void pauseMusic(const std::string& key);
+    void stopMusic(const std::string& key);
+    void setMusicVolume(const std::string& key, float volume);
+    void setMusicLoop(const std::string& key, bool loop);
+    void setMusicPitch(const std::string& key, float pitch);
+    bool isMusicPlaying(const std::string& key) const;
+    bool isMusicPaused(const std::string& key) const;
+    bool isMusicStopped(const std::string& key) const;
+    float getMusicVolume(const std::string& key) const;
+    bool getMusicLoop(const std::string& key) const;
+    float getMusicPitch(const std::string& key) const;
+    void addSoundToList(const std::string& soundList, const std::string& filename);
+    void playSoundList(const std::string& soundList);
+    void pauseSoundList(const std::string& soundList);
+    void stopSoundList(const std::string& soundList);
+    void setSoundListOrder(const std::string& soundList, SoundList::Order order);
+    void onUpdateAudio();
+    void addMusicToList(const std::string& musicList, const std::string& filename);
+    void playMusicList(const std::string& musicList);
+    void pauseMusicList(const std::string& musicList);
+    void stopMusicList(const std::string& musicList);
+    void setMusicListOrder(const std::string& musicList, MusicList::Order order);
+
 private:
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -113,6 +155,7 @@ private:
     GameSettings     m_gameSettings;
     StateManager     m_stateManager;
     EventManager     m_eventManager;
+    AudioManager     m_audioManager;
 };
 
 } // namespace sfx
