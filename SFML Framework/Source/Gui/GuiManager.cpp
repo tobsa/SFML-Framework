@@ -52,27 +52,5 @@ void GuiManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
         target.draw(*object);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-void GuiManager::enable(const std::string& group)
-{
-    auto result = m_objectGroup.find(group);
-    if(result == m_objectGroup.end())
-        sfx::Log::writeT("Error (GuiManager::enable()): " + group + " doesn't exist");
-
-    for(auto& object : result->second)
-        object.second->enable();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void GuiManager::disable(const std::string& group)
-{
-    auto result = m_objectGroup.find(group);
-    if(result == m_objectGroup.end())
-        sfx::Log::writeT("Error (GuiManager::disable()): " + group + " doesn't exist");
-
-    for(auto& object : result->second)
-        object.second->disable();
-}
-
 } // namespace sfx
 

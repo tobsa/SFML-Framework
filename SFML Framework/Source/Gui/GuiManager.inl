@@ -14,7 +14,7 @@ namespace sfx
 {
 
  ////////////////////////////////////////////////////////////////////////////////
-template<typename T> T& GuiManager::create(const std::string& key, const std::string& group)
+template<typename T> T& GuiManager::create(const std::string& key)
 {
     // If the key already exist then erase the previous value
     if(m_objects.find(key) != m_objects.end())
@@ -26,8 +26,6 @@ template<typename T> T& GuiManager::create(const std::string& key, const std::st
     // Add it to the manager
     m_objects[key] = object;
     m_objectsList.push_back(object);
-
-    m_objectGroup[group][key] = object;
 
     return *object.get();
 }

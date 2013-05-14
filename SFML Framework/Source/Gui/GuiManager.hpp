@@ -35,7 +35,6 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     typedef std::shared_ptr<GuiObject>          GuiObjectPtr;
     typedef std::map<std::string, GuiObjectPtr> GuiObjectMap;
-    typedef std::map<std::string, GuiObjectMap> GuiObjectGroup;
     typedef std::list<GuiObjectPtr>             GuiObjectList;
 
 public:
@@ -49,7 +48,7 @@ public:
     // Add a gui object to the manager. If the key already exist the previous value
     // will be overwritten.
     ////////////////////////////////////////////////////////////////////////////////
-    template<typename T> T& create(const std::string& key, const std::string& group = "");
+    template<typename T> T& create(const std::string& key);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Get a gui object specified by a key. If the key doesn't exist then an error
@@ -78,13 +77,6 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-    ////////////////////////////////////////////////////////////////////////////////
-    // Enable or disable an entire group
-    ////////////////////////////////////////////////////////////////////////////////
-    void enable(const std::string& group);
-    void disable(const std::string& group);
-    
-
 private:
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +85,6 @@ private:
     Application&    m_application;
     GuiObjectMap    m_objects;
     GuiObjectList   m_objectsList;
-    GuiObjectGroup  m_objectGroup;
 };
 
 } // namespace sfx
