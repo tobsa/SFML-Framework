@@ -45,6 +45,12 @@ const Event& EventManager::getEvent(std::size_t index)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+EventManager::Events& EventManager::getEvents()
+{
+    return m_events;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void EventManager::remove(const std::string& name)
 {
     for(auto it = m_events.begin(); it != m_events.end();)
@@ -69,6 +75,15 @@ void EventManager::remove(std::size_t index)
 void EventManager::removeLast()
 {
     m_events.pop_back();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool EventManager::findEvent(const std::string& name)
+{
+    if(std::find(m_events.begin(), m_events.end(), Event(name)) == m_events.end())
+        return false;
+
+    return true;
 }
 
 } // namespace sfx

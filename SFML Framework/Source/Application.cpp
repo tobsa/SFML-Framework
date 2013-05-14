@@ -253,6 +253,12 @@ const Event& Application::getEvent(std::size_t index)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+std::vector<Event>& Application::getEvents()
+{
+    return m_eventManager.getEvents();
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void Application::removeEvent(const std::string& name)
 {
     m_eventManager.remove(name);
@@ -268,6 +274,12 @@ void Application::removeEvent(std::size_t index)
 void Application::removeLastEvent()
 {
     m_eventManager.removeLast();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::findEvent(const std::string& name)
+{
+    return m_eventManager.findEvent(name);
 }
 
 } // namespace sfx
