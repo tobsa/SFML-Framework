@@ -8,8 +8,8 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "EventManager.hpp"
-#include "Log.hpp"
-#include "Utility.hpp"
+#include "Utility/Log.hpp"
+#include "Utility/Utility.hpp"
 #include <algorithm>
 
 namespace sfx

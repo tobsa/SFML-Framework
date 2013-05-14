@@ -8,7 +8,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "GameSettings.hpp"
-#include "Log.hpp"
+#include "Utility/Log.hpp"
 
 namespace sfx
 {

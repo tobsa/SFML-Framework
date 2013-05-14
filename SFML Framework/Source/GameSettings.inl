@@ -9,7 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "GameSettings.hpp"
 #include "Property.hpp"
-#include "Log.hpp"
+#include "Utility/Log.hpp"
 
 namespace sfx
 {

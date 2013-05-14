@@ -8,7 +8,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "GuiManager.hpp"
-#include "../Log.hpp"
+#include "../Utility/Log.hpp"
 
 namespace sfx
 {

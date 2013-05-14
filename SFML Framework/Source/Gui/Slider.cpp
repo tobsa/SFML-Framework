@@ -9,7 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "Slider.hpp"
 #include "../Application.hpp"
-#include "../Utility.hpp"
+#include "../Utility/Utility.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
 namespace sfx

@@ -8,8 +8,8 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "MusicList.hpp"
-#include "../Utility.hpp"
-#include "../Log.hpp"
+#include "../Utility/Utility.hpp"
+#include "../Utility/Log.hpp"
 
 namespace sfx
 {
