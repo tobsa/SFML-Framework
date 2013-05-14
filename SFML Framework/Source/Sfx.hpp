@@ -10,7 +10,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "Application.hpp"
-#include "AudioManager.hpp"
+#include "Audio/AudioManager.hpp"
 #include "BaseProperty.hpp"
 #include "Gui/Button.hpp"
 #include "Gui/CheckBox.hpp"
@@ -30,6 +30,7 @@
 #include "ResourceManager.hpp"
 #include "Scanner.hpp"
 #include "Gui/Slider.hpp"
+#include "Audio/SoundList.hpp"
 #include "StateManager.hpp"
 #include "Gui/TextEditBox.hpp"
 #include "Timer.hpp"
