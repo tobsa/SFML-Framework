@@ -113,6 +113,9 @@ void Slider::setPosition(const sf::Vector2f& position)
 {
     m_sprites[0].setPosition(position);
     m_sprites[1].setPosition(position.x, position.y + getSize().y / 2.f - m_sprites[1].getLocalBounds().height / 2.f);
+
+    // Update value position
+    setValue(getValue());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
