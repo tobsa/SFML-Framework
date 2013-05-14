@@ -35,6 +35,8 @@ void Picture::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void Picture::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    if(!isEnabled()) return;
+
     target.draw(m_sprite, states);
 }
 

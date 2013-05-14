@@ -36,6 +36,8 @@ void Label::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void Label::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    if(!isEnabled()) return;
+
     target.draw(m_text, states);
 }
 

@@ -26,6 +26,8 @@ Slider::Slider(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::onEvent(const sf::Event& event)
 {
+    if(!isEnabled()) return;
+
     if(event.type == sf::Event::MouseMoved)
     {
         // For easier access
@@ -65,6 +67,8 @@ void Slider::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::onUpdate()
 {
+    if(!isEnabled()) return;
+
     if(!contains(m_application.getMousePosition()))
         setHover(false);
     if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
@@ -74,6 +78,8 @@ void Slider::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    if(!isEnabled()) return;
+
     for(const auto& sprite : m_sprites)
         target.draw(sprite, states);
 }

@@ -14,12 +14,10 @@ namespace sfx
 {
 
  ////////////////////////////////////////////////////////////////////////////////
-template<typename T> T& GuiManager::create(const std::string& key)
+template<typename T> T& GuiManager::create(const std::string& key, const std::string& group)
 {
-    auto it = m_objects.find(key);
-
     // If the key already exist then erase the previous value
-    if(it != m_objects.end())
+    if(m_objects.find(key) != m_objects.end())
         remove(key);     
 
     // Create the object
@@ -27,9 +25,9 @@ template<typename T> T& GuiManager::create(const std::string& key)
 
     // Add it to the manager
     m_objects[key] = object;
-
-    // Add it to the list
     m_objectsList.push_back(object);
+
+    m_objectGroup[group][key] = object;
 
     return *object.get();
 }
@@ -40,11 +38,7 @@ template<typename T> T& GuiManager::get(const std::string& key)
     // Check if the object exist
     auto it = m_objects.find(key);
     if(it == m_objects.end())
-    {
-        std::string error = "Error (GuiManager::get()): " + key + " doesn't exist";
-        sfx::Log::write(error);
-        throw error;
-    }
+        sfx::Log::writeT("Error (GuiManager::get()): " + key + " doesn't exist");
 
     return *static_cast<T*>(it->second.get());
 }

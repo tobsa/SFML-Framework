@@ -25,6 +25,8 @@ TextEditBox::TextEditBox(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::onEvent(const sf::Event& event)
 {
+    if(!isEnabled()) return;
+
     if(event.type == sf::Event::MouseMoved)
     {
         if(contains(getMousePosition(event)))
@@ -81,6 +83,8 @@ void TextEditBox::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    if(!isEnabled()) return;
+
     if(isPressed())
         target.draw(m_sprites[2], states);
     else if(isHover())

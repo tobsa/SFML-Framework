@@ -14,9 +14,10 @@ namespace sfx
 
 ////////////////////////////////////////////////////////////////////////////////
 GuiObject::GuiObject(Application& application) : 
+    m_application     (application),
     m_hover           (false),
     m_pressed         (false),
-    m_application     (application)
+    m_enabled         (true)
 {
 }
 
@@ -25,11 +26,25 @@ GuiObject::~GuiObject()
 {
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
-sf::Vector2f GuiObject::getMousePosition(const sf::Event& event) const
+void GuiObject::enable()
 {
-    return static_cast<sf::Vector2f>(sf::Vector2i(event.mouseMove.x, event.mouseMove.y));
+    m_enabled = true;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+void GuiObject::disable()
+{
+    m_enabled = false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool GuiObject::isEnabled() const
+{
+    return m_enabled;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 bool GuiObject::isHover() const
