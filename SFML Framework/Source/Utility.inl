@@ -12,32 +12,42 @@
 
 namespace sfx
 {
-    ////////////////////////////////////////////////////////////////////////////////
-    template<class T> T convert(const std::string& str)
-    {
-        std::istringstream is(str);
-        T number;
 
-        is >> number;
+////////////////////////////////////////////////////////////////////////////////
+template<class T> T convert(const std::string& str)
+{
+    std::istringstream is(str);
+    T number;
 
-        return number;
-    }
+    is >> number;
 
-    ////////////////////////////////////////////////////////////////////////////////
-    template<class T> std::string convert(T number)
-    {
-        std::ostringstream os;
-        os << number;
-        return os.str();
-    }
+    return number;
+}
 
-    ////////////////////////////////////////////////////////////////////////////////
-    template<class T> T clamp(T value, T min, T max)
-    {
-        if(value < min) return min;
-        if(value > max) return max;
+////////////////////////////////////////////////////////////////////////////////
+template<class T> std::string convert(T number)
+{
+    std::ostringstream os;
+    os << number;
+    return os.str();
+}
 
-        return value;
-    }
+////////////////////////////////////////////////////////////////////////////////
+template<class T> T clamp(T value, T min, T max)
+{
+    if(value < min) return min;
+    if(value > max) return max;
+
+    return value;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+template<class T> T wrap(T value, T min, T max)
+{
+    if(value < min) return max;
+    if(value > max) return min;
+
+    return value;
+}
 
 } // namespace sfx
