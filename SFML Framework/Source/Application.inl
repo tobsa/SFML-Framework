@@ -12,11 +12,13 @@
 namespace sfx
 {
 
+////////////////////////////////////////////////////////////////////////////////
 template<class T> T& Application::getValue(const std::string& key)
 {
     return m_gameSettings.get<T>(key);
 }
 
+////////////////////////////////////////////////////////////////////////////////
 template<class T> void Application::setValue(const std::string& key, const T& value)
 {
     m_gameSettings.set(key, value);
