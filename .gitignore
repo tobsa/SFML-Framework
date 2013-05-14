@@ -24,3 +24,5 @@ ipch/
 *.ini
 *.ttf
 *.otf
+Data/
+Audio/
