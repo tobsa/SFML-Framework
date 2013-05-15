@@ -165,4 +165,10 @@ template<typename T> std::size_t Vector<T>::find(const T& element) const
     return -1;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+template<typename T> void Vector<T>::resize(std::size_t size)
+{
+    m_vector.resize(size);
+}
+
 } // namespace sfx
