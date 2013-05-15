@@ -98,7 +98,8 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     // Add a callback function to the button
     ////////////////////////////////////////////////////////////////////////////////
-    void addCallback(const std::function<void()>& callback);
+    void addPressedCallback(const std::function<void()>& callback);
+    void addReleasedCallback(const std::function<void()>& callback);
 
 private:
 
@@ -111,7 +112,8 @@ private:
     // Private member data
     ////////////////////////////////////////////////////////////////////////////////
     sf::Sprite m_sprites[3];
-    Callbacks  m_callbacks;
+    Callbacks  m_pressedCallbacks;
+    Callbacks  m_releasedCallbacks;
 };
 
 } // namespace sfx

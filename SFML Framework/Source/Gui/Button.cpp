@@ -37,14 +37,21 @@ void Button::onEvent(const sf::Event& event)
 
         if(isHover())
         {
-            // Permorm all callback functions
-            for(const auto& callback : m_callbacks)
+            // Permorm pressed callback functions
+            for(const auto& callback : m_pressedCallbacks)
                 callback();
         }
     }
 
-    if(event.type == sf::Event::MouseButtonReleased)
+    if(event.type == sf::Event::MouseButtonReleased || event.type == sf::Event::MouseLeft)
     {
+        if(isPressed())
+        {
+            // Permorm released callback functions
+            for(const auto& callback : m_releasedCallbacks)
+                callback();
+        }
+
         setPressed(false);
     }
 }
@@ -175,9 +182,15 @@ void Button::setTexture(const std::string& filename)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Button::addCallback(const std::function<void()>& callback)
+void Button::addPressedCallback(const std::function<void()>& callback)
 {
-    m_callbacks.push_back(callback);
+    m_pressedCallbacks.push_back(callback);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Button::addReleasedCallback(const std::function<void()>& callback)
+{
+    m_releasedCallbacks.push_back(callback);
 }
 
 } // namespace sfx

@@ -71,6 +71,9 @@ void TextEditBox::onEvent(const sf::Event& event)
             m_text.setString(text);
             m_caret.setPosition(m_text.findCharacterPos(text.size()).x + 1, getPosition().y + getSize().y / 2.f - m_caret.getSize().y / 2.f);
         }
+
+        for(const auto& callback : m_textEnterCallback)
+            callback();
     }
 }
 
@@ -341,9 +344,16 @@ void TextEditBox::updateText()
     setTextPosition(getPosition().x + 1, getPosition().y + getSize().y / 2.f - getCharacterSize() / 1.5f);
 }
 
+////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::updateCaret()
 {
     m_caret.setPosition(m_text.findCharacterPos(m_text.getString().getSize()).x, getPosition().y + getSize().y / 2.f - m_caret.getSize().y / 2.f);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void TextEditBox::addTextEnterCallback(const std::function<void()>& callback)
+{
+    m_textEnterCallback.push_back(callback);
 }
 
 }

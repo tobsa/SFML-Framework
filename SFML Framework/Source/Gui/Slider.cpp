@@ -66,7 +66,7 @@ void Slider::onEvent(const sf::Event& event)
         setPressed(isHover());
     }
 
-    if(event.type == sf::Event::MouseButtonReleased)
+    if(event.type == sf::Event::MouseButtonReleased || event.type == sf::Event::MouseLeft)
     {
         if(isPressed())
         {
