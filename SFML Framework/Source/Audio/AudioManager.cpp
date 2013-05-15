@@ -130,11 +130,11 @@ bool AudioManager::isSoundPlaying(const std::string& key) const
     // Check if all channels is playing
     for(auto& sound : result->second)
     {
-        if(sound.getStatus() != sf::Sound::Playing)
-            return false;
+        if(sound.getStatus() == sf::Sound::Playing)
+            return true;
     }
 
-    return true;
+    return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
