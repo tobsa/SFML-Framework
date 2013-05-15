@@ -64,9 +64,10 @@ namespace sfx
     template<class T> T wrap(T value, T min, T max);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Get the mouse position (must be used with sf::Event::MouseMoved event
+    // Get the mouse position
     ////////////////////////////////////////////////////////////////////////////////
-    sf::Vector2f getMousePosition(const sf::Event& event);
+    sf::Vector2f getMouseMovePosition(const sf::Event& event);
+    sf::Vector2f getMousePressedPosition(const sf::Event& event);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Check if a point is inside a circle

@@ -82,6 +82,12 @@ sf::Vector2f getMousePosition(const sf::Event& event)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f getMousePressedPosition(const sf::Event& event)
+{
+    return sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
+}
+
+////////////////////////////////////////////////////////////////////////////////
 bool inCircle(const sf::Vector2f& position, const sf::Vector2f& center, float radius)
 {
     return inCircle(position.x, position.y, center.x, center.y, radius);
