@@ -27,6 +27,8 @@
 #include "Utility/Log.hpp"
 #include "Audio/MusicList.hpp"
 #include "Gui/Picture.hpp"
+#include "Geometry/Point.hpp"
+#include "Geometry/Polygon.hpp"
 #include "Property.hpp"
 #include "ResourceManager.hpp"
 #include "Utility/Scanner.hpp"
