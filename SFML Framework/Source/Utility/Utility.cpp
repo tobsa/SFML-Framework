@@ -145,4 +145,10 @@ sf::Vector2f subtractHalf(float x0, float y0, float x1, float y1)
     return sf::Vector2f(x0 / 2.f - x1 / 2.f, y0 / 2.f - y1 / 2.f);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+sf::FloatRect getBoundingBox(const sf::Sprite& sprite)
+{
+    return sf::FloatRect(sprite.getPosition().x, sprite.getPosition().y, sprite.getLocalBounds().width, sprite.getLocalBounds().height);
+}
+
 } // namespace sfx

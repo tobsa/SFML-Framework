@@ -12,6 +12,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 #include <string>
+#include <SFML/Graphics/Sprite.hpp>
 
 namespace sfx
 {
@@ -85,6 +86,11 @@ namespace sfx
     ////////////////////////////////////////////////////////////////////////////////
     sf::Vector2f subtractHalf(const sf::Vector2f& position0, const sf::Vector2f& position1);
     sf::Vector2f subtractHalf(float x0, float y0, float x1, float y1);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Get the bounding box of a sprite
+    ////////////////////////////////////////////////////////////////////////////////
+    sf::FloatRect getBoundingBox(const sf::Sprite& sprite);
 
 } // namespace sfx
 
