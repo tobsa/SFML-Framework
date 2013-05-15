@@ -12,6 +12,8 @@
 #include "GuiObject.hpp"
 #include <SFML/Graphics/Sprite.hpp>
 #include <string>
+#include <functional>
+#include <vector>
 
 namespace sfx
 {
@@ -106,15 +108,30 @@ public:
     void setMaximum(float max);
     void setValue(float value);
 
+    ////////////////////////////////////////////////////////////////////////////////
+    // Add callbacks when the slider is either pressed, moved or released
+    ////////////////////////////////////////////////////////////////////////////////
+    void addPressedCallback(const std::function<void()>& callback);
+    void addMovedCallback(const std::function<void()>& callback);
+    void addReleasedCallback(const std::function<void()>& callback);
+
 private:
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Private typedefs
+    ////////////////////////////////////////////////////////////////////////////////
+    typedef std::vector<std::function<void()>> Callbacks;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data
     ////////////////////////////////////////////////////////////////////////////////
-    sf::Sprite m_sprites[2]; // [0] = Bar, [1] = Slider
+    sf::Sprite m_sprites[2];
     float      m_minimum;
     float      m_maximum;
     float      m_value;
+    Callbacks  m_pressedCallbacks;
+    Callbacks  m_movedCallbacks;
+    Callbacks  m_releasedCallbacks;
 };
 
 } // namespace sfx

@@ -30,12 +30,9 @@ void Slider::onEvent(const sf::Event& event)
 
     if(event.type == sf::Event::MouseMoved)
     {
-        // For easier access
-        sf::Vector2f  mouse  = getMousePosition(event);
-        sf::FloatRect slider = sf::FloatRect(m_sprites[1].getPosition().x, m_sprites[1].getPosition().y, m_sprites[1].getLocalBounds().width, m_sprites[1].getLocalBounds().height); 
+        const sf::Vector2f mouse = getMousePosition(event);
 
-        // Check if the mouse is over the slider
-        setHover(contains(getMousePosition(event)));
+        setHover(contains(mouse) || sfx::getBoundingBox(m_sprites[1]).contains(mouse));
 
         if(isPressed())
         {
@@ -50,16 +47,34 @@ void Slider::onEvent(const sf::Event& event)
 
             // Calculate the current value
             m_value = (m_maximum - m_minimum) * ((x1 + w1 / 2.f) - x0) / (x0 + w0 - x0) + m_minimum;
+
+            // Perform moved callback
+            for(const auto& callback : m_movedCallbacks)
+                callback();
         }
     }
 
     if(event.type == sf::Event::MouseButtonPressed)
     {
+        if(isHover())
+        {
+            // Perform pressed callbacks
+            for(const auto& callback : m_pressedCallbacks)
+                callback();
+        }
+
         setPressed(isHover());
     }
 
     if(event.type == sf::Event::MouseButtonReleased)
     {
+        if(isPressed())
+        {
+            // Perform released callbacks
+            for(const auto& callback : m_releasedCallbacks)
+                callback();
+        }
+
         setPressed(false);
     }
 }
@@ -69,7 +84,7 @@ void Slider::onUpdate()
 {
     if(!isEnabled()) return;
 
-    if(!contains(m_application.getMousePosition()))
+    if(!contains(m_application.getMousePosition()) && !sfx::getBoundingBox(m_sprites[1]).contains(m_application.getMousePosition()))
         setHover(false);
     if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
         setPressed(false);
@@ -229,6 +244,24 @@ void Slider::setValue(float value)
 
     // Set the slider position
     m_sprites[1].setPosition(position - m_sprites[1].getLocalBounds().width / 2.f, m_sprites[1].getPosition().y);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Slider::addPressedCallback(const std::function<void()>& callback)
+{
+    m_pressedCallbacks.push_back(callback);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Slider::addMovedCallback(const std::function<void()>& callback)
+{
+    m_movedCallbacks.push_back(callback);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Slider::addReleasedCallback(const std::function<void()>& callback)
+{
+    m_releasedCallbacks.push_back(callback);
 }
 
 } // namespace sfx
