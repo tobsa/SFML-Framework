@@ -68,6 +68,7 @@ namespace sfx
     ////////////////////////////////////////////////////////////////////////////////
     sf::Vector2f getMouseMovedPosition(const sf::Event& event);
     sf::Vector2f getMousePressedPosition(const sf::Event& event);
+    sf::Vector2f getMouseReleasedPosition(const sf::Event& event);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Check if a point is inside a circle
