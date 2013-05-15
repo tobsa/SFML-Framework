@@ -36,5 +36,6 @@
 #include "Gui/TextEditBox.hpp"
 #include "Timer.hpp"
 #include "Utility/Utility.hpp"
+#include "Containers/Vector.hpp"
 
 #endif
