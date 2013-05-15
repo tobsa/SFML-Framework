@@ -29,7 +29,7 @@ void TextEditBox::onEvent(const sf::Event& event)
 
     if(event.type == sf::Event::MouseMoved)
     {
-        if(contains(getMousePosition(event)))
+        if(contains(getMouseMovedPosition(event)))
             setHover(true);
         else  
             setHover(false);

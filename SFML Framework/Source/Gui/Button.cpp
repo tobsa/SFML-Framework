@@ -28,7 +28,7 @@ void Button::onEvent(const sf::Event& event)
 
     if(event.type == sf::Event::MouseMoved)
     {
-        setHover(contains(getMousePosition(event)));
+        setHover(contains(getMouseMovedPosition(event)));
     }
 
     if(event.type == sf::Event::MouseButtonPressed)

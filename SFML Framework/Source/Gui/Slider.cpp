@@ -30,7 +30,7 @@ void Slider::onEvent(const sf::Event& event)
 
     if(event.type == sf::Event::MouseMoved)
     {
-        const sf::Vector2f mouse = getMousePosition(event);
+        const sf::Vector2f mouse = getMouseMovedPosition(event);
 
         setHover(contains(mouse) || sfx::getBoundingBox(m_sprites[1]).contains(mouse));
 
