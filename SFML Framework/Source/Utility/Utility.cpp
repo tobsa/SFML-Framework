@@ -76,7 +76,7 @@ sf::Vector2f getRandom(float begin0, float end0, float begin1, float end1)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-sf::Vector2f getMousePosition(const sf::Event& event)
+sf::Vector2f getMouseMovedPosition(const sf::Event& event)
 {
     return sf::Vector2f(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 }
