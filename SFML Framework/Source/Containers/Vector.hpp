@@ -30,9 +30,9 @@ public:
     // Get an element specified by an index
     ////////////////////////////////////////////////////////////////////////////////
     T& get(std::size_t index);
-    T& get(std::size_t index) const;
+    const T& get(std::size_t index) const;
     T& operator [] (std::size_t index);
-    T& operator [] (std::size_t index) const;
+    const T& operator [] (std::size_t index) const;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Get the size of the vector
@@ -49,9 +49,9 @@ public:
     // Get iterator from the underlying vector
     ////////////////////////////////////////////////////////////////////////////////
     typename std::vector<T>::iterator begin();
-    typename std::vector<T>::iterator begin() const;
+    typename std::vector<T>::const_iterator begin() const;
     typename std::vector<T>::iterator end();
-    typename std::vector<T>::iterator end() const;
+    typename std::vector<T>::const_iterator end() const;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Check if there's elements in the vector

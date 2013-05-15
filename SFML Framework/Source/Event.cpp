@@ -56,9 +56,9 @@ void Event::removeMessage(const std::string& key)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Event::operator == (const Event& event)
+bool Event::operator == (const Event& event) const
 {
-    return m_name == event.getName();
+    return m_name == event.m_name;
 }
 
 } // namespace sfx

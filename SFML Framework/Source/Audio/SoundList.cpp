@@ -25,7 +25,7 @@ SoundList::SoundList(Order order) :
 ////////////////////////////////////////////////////////////////////////////////
 void SoundList::addSound(const sf::Sound& sound)
 {
-    m_sounds.push_back(sound);
+    m_sounds.addBack(sound);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ void SoundList::setSoundList(const Sounds& sounds)
 ////////////////////////////////////////////////////////////////////////////////
 void SoundList::play()
 {
-    if(m_sounds.empty())
+    if(m_sounds.isEmpty())
         sfx::Log::writeT("Error (SoundList::play()) : m_sounds is empty");
 
     m_playing = true;
@@ -46,7 +46,7 @@ void SoundList::play()
 ////////////////////////////////////////////////////////////////////////////////
 void SoundList::pause()
 {
-    if(m_sounds.empty())
+    if(m_sounds.isEmpty())
         sfx::Log::writeT("Error (SoundList::pause()) : m_sounds is empty");
 
     m_sounds[m_index].pause();
@@ -56,7 +56,7 @@ void SoundList::pause()
 ////////////////////////////////////////////////////////////////////////////////
 void SoundList::stop()
 {
-    if(m_sounds.empty())
+    if(m_sounds.isEmpty())
         sfx::Log::writeT("Error (SoundList::stop()) : m_sounds is empty");
 
     m_sounds[m_index].stop();
@@ -72,9 +72,9 @@ void SoundList::onUpdate()
     if(m_sounds[m_index].getStatus() != sf::Sound::Playing)
     {
         if(m_order == Linear)
-            m_index = sfx::wrap(m_index + 1U, 0U, m_sounds.size() - 1U);
+            m_index = sfx::wrap(m_index + 1U, 0U, m_sounds.getSize() - 1U);
         else
-            m_index = sfx::getRandom(0, m_sounds.size() - 1);
+            m_index = sfx::getRandom(0, m_sounds.getSize() - 1);
 
         m_sounds[m_index].play();
     }

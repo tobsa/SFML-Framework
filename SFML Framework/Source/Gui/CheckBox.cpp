@@ -186,13 +186,13 @@ void CheckBox::setChecked(bool checked)
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::addIsCheckedCallback(const std::function<void()>& callback)
 {
-    m_isCheckedCallbacks.push_back(callback);
+    m_isCheckedCallbacks.addBack(callback);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::addNoCheckedCallback(const std::function<void()>& callback)
 {
-    m_noCheckedCallbacks.push_back(callback);
+    m_noCheckedCallbacks.addBack(callback);
 }
 
 } // namespace sfx

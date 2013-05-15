@@ -25,9 +25,9 @@ AudioManager::AudioManager(Application& application) :
 void AudioManager::addSound(const std::string& key, const std::string& filename, std::size_t nbChannels)
 {
     // Create sounds depending on channel size
-    std::vector<sf::Sound> sounds;
+    Sounds sounds;
     for(std::size_t i = 0; i < nbChannels; ++i)
-        sounds.push_back(sf::Sound(m_application.getSoundBuffer(filename)));
+        sounds.addBack(sf::Sound(m_application.getSoundBuffer(filename)));
 
     // Add them to the list
     m_sounds[key] = sounds;

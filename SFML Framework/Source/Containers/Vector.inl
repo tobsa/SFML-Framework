@@ -28,19 +28,19 @@ template<typename T> T& Vector<T>::get(std::size_t index)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+template<typename T> const T& Vector<T>::get(std::size_t index) const
+{
+    return m_vector[index];
+}
+
+////////////////////////////////////////////////////////////////////////////////
 template<typename T> T& Vector<T>::operator [] (std::size_t index)
 {
     return m_vector[index];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-template<typename T> T& Vector<T>::operator [] (std::size_t index) const
-{
-    return m_vector[index];
-}
-
-////////////////////////////////////////////////////////////////////////////////
-template<typename T> T& Vector<T>::get(std::size_t index) const
+template<typename T> const T& Vector<T>::operator [] (std::size_t index) const
 {
     return m_vector[index];
 }
@@ -70,7 +70,7 @@ template<typename T> typename std::vector<T>::iterator Vector<T>::begin()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-template<typename T> typename std::vector<T>::iterator Vector<T>::begin() const
+template<typename T> typename std::vector<T>::const_iterator Vector<T>::begin() const
 {
     return m_vector.begin();
 }
@@ -82,7 +82,7 @@ template<typename T> typename std::vector<T>::iterator Vector<T>::end()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-template<typename T> typename std::vector<T>::iterator Vector<T>::end() const
+template<typename T> typename std::vector<T>::const_iterator Vector<T>::end() const
 {
     return m_vector.end();
 }

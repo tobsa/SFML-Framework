@@ -255,7 +255,7 @@ const Event& Application::getEvent(std::size_t index)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-std::vector<Event>& Application::getEvents()
+sfx::Vector<Event>& Application::getEvents()
 {
     return m_eventManager.getEvents();
 }

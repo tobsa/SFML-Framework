@@ -184,13 +184,13 @@ void Button::setTexture(const std::string& filename)
 ////////////////////////////////////////////////////////////////////////////////
 void Button::addPressedCallback(const std::function<void()>& callback)
 {
-    m_pressedCallbacks.push_back(callback);
+    m_pressedCallbacks.addBack(callback);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Button::addReleasedCallback(const std::function<void()>& callback)
 {
-    m_releasedCallbacks.push_back(callback);
+    m_releasedCallbacks.addBack(callback);
 }
 
 } // namespace sfx

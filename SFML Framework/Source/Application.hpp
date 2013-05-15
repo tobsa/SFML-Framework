@@ -10,6 +10,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "Containers/Vector.hpp"
 #include "ResourceManager.hpp"
 #include "GameSettings.hpp"
 #include "StateManager.hpp"
@@ -98,7 +99,7 @@ public:
     std::size_t getEventSize() const;
     const Event& getEvent(const std::string& name);
     const Event& getEvent(std::size_t index);
-    std::vector<Event>& getEvents();
+    sfx::Vector<Event>& getEvents();
     void removeEvent(const std::string& name);
     void removeEvent(std::size_t index);
     void removeLastEvent();

@@ -10,10 +10,10 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "GuiObject.hpp"
+#include "../Containers/Vector.hpp"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <vector>
 #include <functional>
 
 namespace sfx
@@ -156,7 +156,7 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
-    typedef std::vector<std::function<void()>> Callbacks;
+    typedef sfx::Vector<std::function<void()>> Callbacks;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data

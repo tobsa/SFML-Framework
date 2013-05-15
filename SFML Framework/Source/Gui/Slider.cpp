@@ -249,19 +249,19 @@ void Slider::setValue(float value)
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::addPressedCallback(const std::function<void()>& callback)
 {
-    m_pressedCallbacks.push_back(callback);
+    m_pressedCallbacks.addBack(callback);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::addMovedCallback(const std::function<void()>& callback)
 {
-    m_movedCallbacks.push_back(callback);
+    m_movedCallbacks.addBack(callback);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::addReleasedCallback(const std::function<void()>& callback)
 {
-    m_releasedCallbacks.push_back(callback);
+    m_releasedCallbacks.addBack(callback);
 }
 
 } // namespace sfx

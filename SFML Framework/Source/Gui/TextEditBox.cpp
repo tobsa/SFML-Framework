@@ -353,7 +353,7 @@ void TextEditBox::updateCaret()
 ////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::addTextEnterCallback(const std::function<void()>& callback)
 {
-    m_textEnterCallback.push_back(callback);
+    m_textEnterCallback.addBack(callback);
 }
 
 }

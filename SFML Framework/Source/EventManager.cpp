@@ -18,13 +18,13 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 void EventManager::addEvent(const Event& event)
 {
-    m_events.push_back(event);
+    m_events.addBack(event);
 }
     
 ////////////////////////////////////////////////////////////////////////////////
 std::size_t EventManager::getSize() const
 {
-    return m_events.size();
+    return m_events.getSize();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ const Event& EventManager::getEvent(const std::string& name)
 ////////////////////////////////////////////////////////////////////////////////
 const Event& EventManager::getEvent(std::size_t index)
 {
-    return m_events[sfx::clamp(index, static_cast<std::size_t>(0), m_events.size() - 1)];
+    return m_events[sfx::clamp(index, static_cast<std::size_t>(0), m_events.getSize() - 1)];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,34 +53,25 @@ EventManager::Events& EventManager::getEvents()
 ////////////////////////////////////////////////////////////////////////////////
 void EventManager::remove(const std::string& name)
 {
-    for(auto it = m_events.begin(); it != m_events.end();)
-    {
-        if(it->getName() == name)
-            it = m_events.erase(it);
-        else 
-            ++it;
-    }
+    m_events.removeValue(name);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void EventManager::remove(std::size_t index)
 {
-    auto it = m_events.begin();
-    std::advance(it, index);
-
-    m_events.erase(it);
+    m_events.remove(index);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void EventManager::removeLast()
 {
-    m_events.pop_back();
+    m_events.removeBack();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 bool EventManager::findEvent(const std::string& name)
 {
-    if(std::find(m_events.begin(), m_events.end(), Event(name)) == m_events.end())
+    if(m_events.find(Event(name)) == -1)
         return false;
 
     return true;

@@ -28,13 +28,13 @@ void MusicList::addMusic(const std::string& filename)
     MusicPtr music = std::make_shared<sf::Music>();
     music->openFromFile(filename);
 
-    m_musics.push_back(music);
+    m_musics.addBack(music);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void MusicList::play()
 {
-    if(m_musics.empty())
+    if(m_musics.isEmpty())
         sfx::Log::writeT("Error (MusicList::play()) : m_musics is empty");
 
     m_playing = true;
@@ -43,7 +43,7 @@ void MusicList::play()
 ////////////////////////////////////////////////////////////////////////////////
 void MusicList::pause()
 {
-    if(m_musics.empty())
+    if(m_musics.isEmpty())
         sfx::Log::writeT("Error (MusicList::pause()) : m_musics is empty");
 
     m_musics[m_index]->pause();
@@ -53,7 +53,7 @@ void MusicList::pause()
 ////////////////////////////////////////////////////////////////////////////////
 void MusicList::stop()
 {
-    if(m_musics.empty())
+    if(m_musics.isEmpty())
         sfx::Log::writeT("Error (MusicList::stop()) : m_musics is empty");
 
     m_musics[m_index]->stop();
@@ -68,9 +68,9 @@ void MusicList::onUpdate()
     if(m_musics[m_index]->getStatus() != sf::Music::Playing)
     {
         if(m_order == Linear)
-            m_index = sfx::wrap(m_index + 1U, 0U, m_musics.size() - 1U);
+            m_index = sfx::wrap(m_index + 1U, 0U, m_musics.getSize() - 1U);
         else
-            m_index = sfx::getRandom(0, m_musics.size() - 1);
+            m_index = sfx::getRandom(0, m_musics.getSize() - 1);
 
         m_musics[m_index]->play();
     }

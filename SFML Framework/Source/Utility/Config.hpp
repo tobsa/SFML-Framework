@@ -9,8 +9,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
+#include "../Containers/Vector.hpp"
 #include <string>
-#include <vector>
 #include <memory>
 
 namespace sfx
@@ -65,7 +65,7 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     struct Section;
     typedef std::shared_ptr<Section>  SectionPtr;
-    typedef std::vector<SectionPtr>   Sections;
+    typedef sfx::Vector<SectionPtr>   Sections;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Represent a pair of key and value
@@ -100,9 +100,9 @@ private:
         }
 
         std::string                        m_key;
-        std::vector<KeyValue<int>>         m_integers;
-        std::vector<KeyValue<float>>       m_floats;
-        std::vector<KeyValue<std::string>> m_strings;
+        sfx::Vector<KeyValue<int>>         m_integers;
+        sfx::Vector<KeyValue<float>>       m_floats;
+        sfx::Vector<KeyValue<std::string>> m_strings;
     };
 
 private:

@@ -48,22 +48,22 @@ Config::Config(const std::string& filename) :
             {
                 value += scanner.getToken();
                 value += scanner.getToken();
-                section->m_floats.push_back(KeyValue<float>(key, sfx::convert<float>(value)));
+                section->m_floats.addBack(KeyValue<float>(key, sfx::convert<float>(value)));
             }
             else if(value == "\"") // Handle string type
             {
                 value = scanner.getToken();
                 scanner.getToken();
-                section->m_strings.push_back(KeyValue<std::string>(key, value));
+                section->m_strings.addBack(KeyValue<std::string>(key, value));
             }
             else // Handle integer
-                section->m_integers.push_back(KeyValue<int>(key, sfx::convert<int>(value)));
+                section->m_integers.addBack(KeyValue<int>(key, sfx::convert<int>(value)));
 
             if(scanner.peekToken() == "[" || scanner.peekToken() == "")
                 break;
         }
 
-        m_sections.push_back(section);
+        m_sections.addBack(section);
     }
 }
 
@@ -122,16 +122,16 @@ void Config::setInteger(const std::string& sectionName, const std::string& key, 
     if(!section)
     {
         section = std::make_shared<Section>(sectionName);
-        section->m_integers.push_back(KeyValue<int>(key, value));
+        section->m_integers.addBack(KeyValue<int>(key, value));
 
-        m_sections.push_back(section);
+        m_sections.addBack(section);
     }
     else
     {
         // Add the key to the section if it doens't exist
         std::size_t index = findKey(section, key);
         if(index == -1)
-            section->m_integers.push_back(KeyValue<int>(key, value));
+            section->m_integers.addBack(KeyValue<int>(key, value));
         else 
             // If it exist then simply update the value
             section->m_integers[index].m_value = value;
@@ -147,16 +147,16 @@ void Config::setFloat(const std::string& sectionName, const std::string& key, fl
     if(!section)
     {
         section = std::make_shared<Section>(sectionName);
-        section->m_floats.push_back(KeyValue<float>(key, value));
+        section->m_floats.addBack(KeyValue<float>(key, value));
 
-        m_sections.push_back(section);
+        m_sections.addBack(section);
     }
     else
     {
         // Add the key to the section if it doens't exist
         std::size_t index = findKey(section, key);
         if(index == -1)
-            section->m_floats.push_back(KeyValue<float>(key, value));
+            section->m_floats.addBack(KeyValue<float>(key, value));
         else 
             // If it exist then simply update the value
             section->m_floats[index].m_value = value;
@@ -172,16 +172,16 @@ void Config::setString(const std::string& sectionName, const std::string& key, c
     if(!section)
     {
         section = std::make_shared<Section>(sectionName);
-        section->m_strings.push_back(KeyValue<std::string>(key, value));
+        section->m_strings.addBack(KeyValue<std::string>(key, value));
 
-        m_sections.push_back(section);
+        m_sections.addBack(section);
     }
     else
     {
         // Add the key to the section if it doens't exist
         std::size_t index = findKey(section, key);
         if(index == -1)
-            section->m_strings.push_back(KeyValue<std::string>(key, value));
+            section->m_strings.addBack(KeyValue<std::string>(key, value));
         else 
             // If it exist then simply update the value
             section->m_strings[index].m_value = value;
@@ -206,21 +206,21 @@ Config::SectionPtr Config::findSection(const std::string& sectionName)
 std::size_t Config::findKey(SectionPtr section, const std::string& key)
 {
     // Check against integers
-    for(std::size_t i = 0; i < section->m_integers.size(); ++i)
+    for(std::size_t i = 0; i < section->m_integers.getSize(); ++i)
     {
         if(section->m_integers[i].m_key == key)
             return i;
     }
 
     // Check against floats
-    for(std::size_t i = 0; i < section->m_floats.size(); ++i)
+    for(std::size_t i = 0; i < section->m_floats.getSize(); ++i)
     {
         if(section->m_floats[i].m_key == key)
             return i;
     }
 
     // Check against strings
-    for(std::size_t i = 0; i < section->m_strings.size(); ++i)
+    for(std::size_t i = 0; i < section->m_strings.getSize(); ++i)
     {
         if(section->m_strings[i].m_key == key)
             return i;

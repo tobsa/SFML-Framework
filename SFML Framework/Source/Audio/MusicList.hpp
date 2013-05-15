@@ -10,7 +10,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include <SFML/Audio/Music.hpp>
-#include <vector>
+#include "../Containers/Vector.hpp"
 #include <map>
 #include <memory>
 
@@ -28,7 +28,7 @@ private:
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
     typedef std::shared_ptr<sf::Music> MusicPtr;
-    typedef std::vector<MusicPtr>      Musics;
+    typedef sfx::Vector<MusicPtr>      Musics;
 
 public:
 
