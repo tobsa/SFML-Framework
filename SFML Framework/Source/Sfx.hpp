@@ -24,6 +24,7 @@
 #include "Gui/GuiManager.hpp"
 #include "Gui/GuiObject.hpp"
 #include "Gui/Label.hpp"
+#include "Geometry/Line.hpp"
 #include "Utility/Log.hpp"
 #include "Audio/MusicList.hpp"
 #include "Gui/Picture.hpp"
