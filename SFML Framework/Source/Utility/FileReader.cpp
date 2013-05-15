@@ -96,6 +96,18 @@ std::string FileReader::getLine()
 
     return line;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+std::string FileReader::getToken()
+{
+    if(!isOpen())
+        sfx::Log::writeT("Error (FileReader::getLine()): FileReader isn't open");
+
+    std::string line;
+    m_file >> line;
+
+    return line;
+}
     
 ////////////////////////////////////////////////////////////////////////////////
 char FileReader::get()
