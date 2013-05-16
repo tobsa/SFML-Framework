@@ -8,6 +8,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "Map.hpp"
+#include "../Utility/Log.hpp"
 
 namespace sfx
 {
@@ -17,7 +18,6 @@ template<typename Type, typename Value> void Map<Type, Value>::insert(const Type
 {
     m_map[type] = value;
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 template<typename Type, typename Value> Value& Map<Type, Value>::get(const Type& key)
@@ -30,7 +30,6 @@ template<typename Type, typename Value> const Value& Map<Type, Value>::get(const
 {
     return m_map[key];   
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 template<typename Type, typename Value>  Value& Map<Type, Value>::operator [] (const Type& key)
@@ -105,9 +104,30 @@ template<typename Type, typename Value> typename Map<Type, Value>::iterator Map<
 	return m_map.find(type);
 }
 
+////////////////////////////////////////////////////////////////////////////////
 template<typename Type, typename Value> typename Map<Type, Value>::const_iterator Map<Type, Value>::find(const Type& type) const
 {
 	return m_map.find(type);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+template<typename Type, typename Value> typename Map<Type, Value>::iterator Map<Type, Value>::findWithErrorCheck(const Type& type, const std::string& errorMessage)
+{
+    const auto& result = m_map.find(type);
+    if(result == m_map.end())
+        sfx::Log::writeT(errorMessage);
+
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+template<typename Type, typename Value> typename Map<Type, Value>::const_iterator Map<Type, Value>::findWithErrorCheck(const Type& type, const std::string& errorMessage) const
+{
+    const auto& result = m_map.find(type);
+    if(result == m_map.end())
+        sfx::Log::writeT(errorMessage);
+
+    return result;
 }
 
 } // namespace sfx
