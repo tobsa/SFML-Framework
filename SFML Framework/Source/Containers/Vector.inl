@@ -75,25 +75,25 @@ template<typename T> const T& Vector<T>::back() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-template<typename T> typename std::vector<T>::iterator Vector<T>::begin()
+template<typename T> typename Vector<T>::iterator Vector<T>::begin()
 {
     return m_vector.begin();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-template<typename T> typename std::vector<T>::const_iterator Vector<T>::begin() const
+template<typename T> typename Vector<T>::const_iterator Vector<T>::begin() const
 {
     return m_vector.begin();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-template<typename T> typename std::vector<T>::iterator Vector<T>::end()
+template<typename T> typename Vector<T>::iterator Vector<T>::end()
 {
     return m_vector.end();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-template<typename T> typename std::vector<T>::const_iterator Vector<T>::end() const
+template<typename T> typename Vector<T>::const_iterator Vector<T>::end() const
 {
     return m_vector.end();
 }
