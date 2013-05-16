@@ -11,6 +11,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include <map>
 #include <string>
+#include "../Utility/Log.hpp"
 
 namespace sfx
 {
@@ -77,6 +78,8 @@ public:
 	////////////////////////////////////////////////////////////////////////////////
 	iterator find(const Type& type);
 	const_iterator find(const Type& type) const;
+    iterator findWithErrorCheck(const Type& type, const std::string& errorMessage);
+    const_iterator findWithErrorCheck(const Type& type, const std::string& errorMessage) const;
 
 private:
 

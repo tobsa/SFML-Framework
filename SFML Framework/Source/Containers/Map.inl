@@ -105,9 +105,30 @@ template<typename Type, typename Value> typename Map<Type, Value>::iterator Map<
 	return m_map.find(type);
 }
 
+////////////////////////////////////////////////////////////////////////////////
 template<typename Type, typename Value> typename Map<Type, Value>::const_iterator Map<Type, Value>::find(const Type& type) const
 {
 	return m_map.find(type);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+template<typename Type, typename Value> typename Map<Type, Value>::iterator Map<Type, Value>::findWithErrorCheck(const Type& type, const std::string& errorMessage)
+{
+    const auto& result = m_map.find(type);
+    if(result == m_map.end())
+        sfx::Log::writeT(errorMessage);
+
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+template<typename Type, typename Value> typename Map<Type, Value>::const_iterator Map<Type, Value>::findWithErrorCheck(const Type& type, const std::string& errorMessage) const
+{
+    const auto& result = m_map.find(type);
+    if(result == m_map.end())
+        sfx::Log::writeT(errorMessage);
+
+    return result;
 }
 
 } // namespace sfx
