@@ -16,6 +16,17 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
+template<typename T> Vector<T>::Vector()
+{
+}
+
+template<typename T> Vector<T>::Vector(std::size_t size, const T& element)
+{
+    for(std::size_t i = 0; i < size; ++i)
+        m_vector.push_back(element);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 template<typename T> void Vector<T>::addBack(const T& element)
 {
     m_vector.push_back(element);
