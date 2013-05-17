@@ -11,9 +11,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "GuiObject.hpp"
 #include "../Containers/Map.hpp"
+#include "../Containers/List.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <memory>
-#include <list>
 
 namespace sfx
 {
@@ -35,7 +35,7 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     typedef std::shared_ptr<GuiObject>     GuiObjectPtr;
     typedef Map<std::string, GuiObjectPtr> GuiObjectMap;
-    typedef std::list<GuiObjectPtr>        GuiObjectList;
+    typedef List<GuiObjectPtr>             GuiObjectList;
 
 public:
 

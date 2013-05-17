@@ -24,7 +24,7 @@ template<typename T> T& GuiManager::create(const std::string& key)
 
     // Add it to the manager
     m_objects[key] = object;
-    m_objectsList.push_back(object);
+    m_objectsList.addBack(object);
 
     return *object.get();
 }

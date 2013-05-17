@@ -22,13 +22,12 @@ GuiManager::GuiManager(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::remove(const std::string& key)
 {
-    auto result = m_objects.find(key);
+    const auto& result = m_objects.find(key);
     if(result != m_objects.end())
     {
-        auto it = std::find(m_objectsList.begin(), m_objectsList.end(), result->second);
-        m_objectsList.erase(it);
+        m_objectsList.remove(result->second);
         m_objects.remove(key);
-    }    
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
