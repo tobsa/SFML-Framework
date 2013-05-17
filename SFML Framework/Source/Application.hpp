@@ -37,8 +37,8 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     // Create an application
     ////////////////////////////////////////////////////////////////////////////////
-    Application(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style = sf::Style::Default);
-    Application(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style = sf::Style::Default);
+    Application(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style = sf::Style::Default, unsigned int antialiasing = 0);
+    Application(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style = sf::Style::Default, unsigned int antialiasing = 0);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Methods from sf::RenderWindow
@@ -49,8 +49,8 @@ public:
     sf::Vector2f getMousePosition() const;
     bool isOpen() const;
     bool pollEvent(sf::Event& event);
-    void create(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style = sf::Style::Default);
-    void create(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style = sf::Style::Default);
+    void create(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style = sf::Style::Default, unsigned int antialiasing = 0);
+    void create(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style = sf::Style::Default, unsigned int antialiasing = 0);
     void close();
     void setPosition(const sf::Vector2f& position);
     void setPosition(float x, float y);

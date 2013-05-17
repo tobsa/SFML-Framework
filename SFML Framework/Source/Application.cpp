@@ -16,15 +16,15 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Application::Application(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style) :
-    m_renderWindow (videoMode, name, style),
+Application::Application(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style, unsigned int antialiasing) :
+    m_renderWindow (videoMode, name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U)),
     m_audioManager (*this)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Application::Application(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style) :
-    m_renderWindow (sf::VideoMode(width, height), name, style),
+Application::Application(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style, unsigned int antialiasing) :
+    m_renderWindow (sf::VideoMode(width, height), name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U)),
     m_audioManager (*this)
 {
 }
@@ -66,15 +66,15 @@ bool Application::pollEvent(sf::Event& event)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::create(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style)
+void Application::create(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style, unsigned int antialiasing)
 {
-    m_renderWindow.create(videoMode, name, style);
+    m_renderWindow.create(videoMode, name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::create(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style)
+void Application::create(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style, unsigned int antialiasing)
 {
-    m_renderWindow.create(sf::VideoMode(width, height), name, style);
+    m_renderWindow.create(sf::VideoMode(width, height), name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
