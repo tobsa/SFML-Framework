@@ -10,7 +10,6 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Containers/Vector.hpp"
 #include "ResourceManager.hpp"
 #include "GameSettings.hpp"
 #include "StateManager.hpp"
@@ -108,43 +107,53 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     // Methods from sfx::AudioManager
     ////////////////////////////////////////////////////////////////////////////////
-    void addSound(const std::string& key, const std::string& filename, std::size_t nbChannels = 1);
+    void setSound(const std::string& key, const std::string& filename, std::size_t channels = 1);
+    void setMusic(const std::string& key, const std::string& filename);
     void playSound(const std::string& key);
     void pauseSound(const std::string& key);
     void stopSound(const std::string& key);
-    void setSoundVolume(const std::string& key, float volume);
-    void setSoundLoop(const std::string& key, bool loop);
-    void setSoundPitch(const std::string& key, float pitch);
-    bool isSoundPlaying(const std::string& key) const;
-    bool isSoundPaused(const std::string& key) const;
-    bool isSoundStopped(const std::string& key) const;
-    float getSoundVolume(const std::string& key) const;
-    bool getSoundLoop(const std::string& key) const;
-    float getSoundPitch(const std::string& key) const;
-    void addMusic(const std::string& key, const std::string& filename);
     void playMusic(const std::string& key);
     void pauseMusic(const std::string& key);
     void stopMusic(const std::string& key);
-    void setMusicVolume(const std::string& key, float volume);
-    void setMusicLoop(const std::string& key, bool loop);
-    void setMusicPitch(const std::string& key, float pitch);
+    bool isSoundPlaying(const std::string& key) const;
+    bool isSoundPaused(const std::string& key) const;
+    bool isSoundStopped(const std::string& key) const;
     bool isMusicPlaying(const std::string& key) const;
     bool isMusicPaused(const std::string& key) const;
     bool isMusicStopped(const std::string& key) const;
+    void setSoundVolume(const std::string& key, float volume);
+    float getSoundVolume(const std::string& key) const;
+    void setMusicVolume(const std::string& key, float volume);
     float getMusicVolume(const std::string& key) const;
-    bool getMusicLoop(const std::string& key) const;
-    float getMusicPitch(const std::string& key) const;
-    void addSoundToList(const std::string& soundList, const std::string& filename);
-    void playSoundList(const std::string& soundList);
-    void pauseSoundList(const std::string& soundList);
-    void stopSoundList(const std::string& soundList);
-    void setSoundListOrder(const std::string& soundList, SoundList::Order order);
-    void onUpdateAudio();
-    void addMusicToList(const std::string& musicList, const std::string& filename);
-    void playMusicList(const std::string& musicList);
-    void pauseMusicList(const std::string& musicList);
-    void stopMusicList(const std::string& musicList);
-    void setMusicListOrder(const std::string& musicList, MusicList::Order order);
+    void removeSound(const std::string& key);
+    void removeMusic(const std::string& key);
+    void createSoundGroup(const std::string& group);
+    void createMusicGroup(const std::string& group);
+    void addSoundToGroup(const std::string& group, const std::string& key);
+    void addMusicToGroup(const std::string& group, const std::string& key);
+    void playSoundGroup(const std::string& group);
+    void stopSoundGroup(const std::string& group);
+    void playMusicGroup(const std::string& group);
+    void pauseMusicGroup(const std::string& group);
+    void stopMusicGroup(const std::string& group);
+    bool isSoundGroupPlaying(const std::string& group) const;
+    bool isSoundGroupStopped(const std::string& group) const;
+    bool isMusicGroupPlaying(const std::string& group) const;
+    bool isMusicGroupPaused(const std::string& group) const;
+    bool isMusicGroupStopped(const std::string& group) const;
+    void removeSoundFromGroup(const std::string& group, const std::string& key);
+    void removeSoundGroup(const std::string& group);
+    void removeMusicFromGroup(const std::string& group, const std::string& key);
+    void removeMusicGroup(const std::string& group);
+    void setSoundGroupVolume(const std::string& group, float volume);
+    void setSoundGroupOrder(const std::string& group, SoundGroup::Order order);
+    void setMusicGroupVolume(const std::string& group, float volume);
+    void setMusicGroupOrder(const std::string& group, MusicGroup::Order order);
+    float getSoundGroupVolume(const std::string& group) const;
+    SoundGroup::Order getSoundGroupOrder(const std::string& group) const;
+    float getMusicGroupVolume(const std::string& group) const;
+    MusicGroup::Order getMusicGroupOrder(const std::string& group) const;
+    void onUpdate();
 
 private:
 

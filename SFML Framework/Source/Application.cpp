@@ -285,9 +285,15 @@ bool Application::findEvent(const std::string& name)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::addSound(const std::string& key, const std::string& filename, std::size_t nbChannels)
+void Application::setSound(const std::string& key, const std::string& filename, std::size_t channels)
 {
-    m_audioManager.addSound(key, filename, nbChannels);
+    m_audioManager.setSound(key, filename, channels);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMusic(const std::string& key, const std::string& filename)
+{
+    m_audioManager.setMusic(key, filename);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -309,21 +315,21 @@ void Application::stopSound(const std::string& key)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::setSoundVolume(const std::string& key, float volume)
+void Application::playMusic(const std::string& key)
 {
-    m_audioManager.setSoundVolume(key, volume);
+    m_audioManager.playMusic(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::setSoundLoop(const std::string& key, bool loop)
+void Application::pauseMusic(const std::string& key)
 {
-    m_audioManager.setSoundLoop(key, loop);
+    m_audioManager.pauseMusic(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::setSoundPitch(const std::string& key, float pitch)
+void Application::stopMusic(const std::string& key)
 {
-    m_audioManager.setSoundPitch(key, pitch);
+    m_audioManager.stopMusic(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -345,66 +351,6 @@ bool Application::isSoundStopped(const std::string& key) const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-float Application::getSoundVolume(const std::string& key) const
-{
-    return m_audioManager.getSoundVolume(key);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-bool Application::getSoundLoop(const std::string& key) const
-{
-    return m_audioManager.getSoundLoop(key);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-float Application::getSoundPitch(const std::string& key) const
-{
-    return m_audioManager.getSoundPitch(key);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::addMusic(const std::string& key, const std::string& filename)
-{
-    m_audioManager.addMusic(key, filename);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::playMusic(const std::string& key)
-{
-    m_audioManager.playMusic(key);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::pauseMusic(const std::string& key)
-{
-    m_audioManager.pauseMusic(key);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::stopMusic(const std::string& key)
-{
-    m_audioManager.stopMusic(key);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::setMusicVolume(const std::string& key, float volume)
-{
-    m_audioManager.setMusicVolume(key, volume);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::setMusicLoop(const std::string& key, bool loop)
-{
-    m_audioManager.setMusicLoop(key, loop);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::setMusicPitch(const std::string& key, float pitch)
-{
-    m_audioManager.setMusicPitch(key, pitch);
-}
-
-////////////////////////////////////////////////////////////////////////////////
 bool Application::isMusicPlaying(const std::string& key) const
 {
     return m_audioManager.isMusicPlaying(key);
@@ -423,87 +369,201 @@ bool Application::isMusicStopped(const std::string& key) const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+void Application::setSoundVolume(const std::string& key, float volume)
+{
+    m_audioManager.setSoundVolume(key, volume);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+float Application::getSoundVolume(const std::string& key) const
+{
+    return m_audioManager.getSoundVolume(key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMusicVolume(const std::string& key, float volume)
+{
+    m_audioManager.setMusicVolume(key, volume);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 float Application::getMusicVolume(const std::string& key) const
 {
     return m_audioManager.getMusicVolume(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Application::getMusicLoop(const std::string& key) const
+void Application::removeSound(const std::string& key)
 {
-    return m_audioManager.getMusicLoop(key);
+    m_audioManager.removeSound(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-float Application::getMusicPitch(const std::string& key) const
+void Application::removeMusic(const std::string& key)
 {
-    return m_audioManager.getMusicPitch(key);
+    m_audioManager.removeMusic(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::addSoundToList(const std::string& soundList, const std::string& filename)
+void Application::createSoundGroup(const std::string& group)
 {
-    m_audioManager.addSoundToList(soundList, filename);
+    m_audioManager.createSoundGroup(group);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::playSoundList(const std::string& soundList)
+void Application::createMusicGroup(const std::string& group)
 {
-    m_audioManager.playSoundList(soundList);
+    m_audioManager.createMusicGroup(group);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::pauseSoundList(const std::string& soundList)
+void Application::addSoundToGroup(const std::string& group, const std::string& key)
 {
-    m_audioManager.pauseSoundList(soundList);
+    m_audioManager.addSoundToGroup(group, key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::stopSoundList(const std::string& soundList)
+void Application::addMusicToGroup(const std::string& group, const std::string& key)
 {
-    m_audioManager.stopSoundList(soundList);
+    m_audioManager.addMusicToGroup(group, key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::setSoundListOrder(const std::string& soundList, SoundList::Order order)
+void Application::playSoundGroup(const std::string& group)
 {
-    m_audioManager.setSoundListOrder(soundList, order);
+    m_audioManager.playSoundGroup(group);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Application::onUpdateAudio()
+void Application::stopSoundGroup(const std::string& group)
+{
+    m_audioManager.stopSoundGroup(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::playMusicGroup(const std::string& group)
+{
+    m_audioManager.playMusicGroup(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::pauseMusicGroup(const std::string& group)
+{
+    m_audioManager.pauseMusicGroup(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::stopMusicGroup(const std::string& group)
+{
+    m_audioManager.stopMusicGroup(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isSoundGroupPlaying(const std::string& group) const
+{
+    return m_audioManager.isSoundGroupPlaying(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isSoundGroupStopped(const std::string& group) const
+{
+    return m_audioManager.isSoundGroupStopped(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isMusicGroupPlaying(const std::string& group) const
+{
+    return m_audioManager.isMusicGroupPlaying(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isMusicGroupPaused(const std::string& group) const
+{
+    return m_audioManager.isMusicGroupPaused(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Application::isMusicGroupStopped(const std::string& group) const
+{
+    return m_audioManager.isMusicGroupStopped(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::removeSoundFromGroup(const std::string& group, const std::string& key)
+{
+    m_audioManager.removeSoundFromGroup(group, key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::removeSoundGroup(const std::string& group)
+{
+    m_audioManager.removeSoundGroup(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::removeMusicFromGroup(const std::string& group, const std::string& key)
+{
+    m_audioManager.removeMusicFromGroup(group, key);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::removeMusicGroup(const std::string& group)
+{
+    m_audioManager.removeMusicGroup(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setSoundGroupVolume(const std::string& group, float volume)
+{
+    m_audioManager.setSoundGroupVolume(group, volume);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setSoundGroupOrder(const std::string& group, SoundGroup::Order order)
+{
+    m_audioManager.setSoundGroupOrder(group, order);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMusicGroupVolume(const std::string& group, float volume)
+{
+    m_audioManager.setMusicGroupVolume(group, volume);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setMusicGroupOrder(const std::string& group, MusicGroup::Order order)
+{
+    m_audioManager.setMusicGroupOrder(group, order);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+float Application::getSoundGroupVolume(const std::string& group) const
+{
+    return m_audioManager.getSoundGroupVolume(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+SoundGroup::Order Application::getSoundGroupOrder(const std::string& group) const
+{
+    return m_audioManager.getSoundGroupOrder(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+float Application::getMusicGroupVolume(const std::string& group) const
+{
+    return m_audioManager.getMusicGroupVolume(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+MusicGroup::Order Application::getMusicGroupOrder(const std::string& group) const
+{
+    return m_audioManager.getMusicGroupOrder(group);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::onUpdate()
 {
     m_audioManager.onUpdate();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::addMusicToList(const std::string& musicList, const std::string& filename)
-{
-    m_audioManager.addMusicToList(musicList, filename);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::playMusicList(const std::string& musicList)
-{
-    m_audioManager.playMusicList(musicList);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::pauseMusicList(const std::string& musicList)
-{
-    m_audioManager.pauseMusicList(musicList);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::stopMusicList(const std::string& musicList)
-{
-    m_audioManager.stopMusicList(musicList);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::setMusicListOrder(const std::string& musicList, MusicList::Order order)
-{
-    m_audioManager.setMusicListOrder(musicList, order);
 }
 
 } // namespace sfx
