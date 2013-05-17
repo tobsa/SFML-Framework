@@ -50,4 +50,11 @@ template<class T> T wrap(T value, T min, T max)
     return value;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+template<typename T> T advance(T& iterator, std::size_t offset)
+{
+    std::advance(iterator, offset);
+    return iterator;
+}
+
 } // namespace sfx
