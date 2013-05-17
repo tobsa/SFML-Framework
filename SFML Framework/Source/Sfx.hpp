@@ -9,34 +9,57 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
-#include "Application.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+// Audio classes
+////////////////////////////////////////////////////////////////////////////////
 #include "Audio/AudioManager.hpp"
-#include "BaseProperty.hpp"
+#include "Audio/Music.hpp"
+#include "Audio/MusicGroup.hpp"
+#include "Audio/Sound.hpp"
+#include "Audio/SoundGroup.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+// Container classes
+////////////////////////////////////////////////////////////////////////////////
+#include "Containers/Vector.hpp"
+#include "Containers/Map.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+// Gui classes
+////////////////////////////////////////////////////////////////////////////////
 #include "Gui/Button.hpp"
 #include "Gui/CheckBox.hpp"
-#include "Utility/Config.hpp"
-#include "Entity.hpp"
-#include "Event.hpp"
-#include "EventManager.hpp"
-#include "Utility/FileReader.hpp"
-#include "Utility/FileWriter.hpp"
-#include "GameSettings.hpp"
 #include "Gui/GuiManager.hpp"
 #include "Gui/GuiObject.hpp"
 #include "Gui/Label.hpp"
-#include "Utility/Log.hpp"
-#include "Containers/Map.hpp"
-#include "Audio/MusicList.hpp"
 #include "Gui/Picture.hpp"
+#include "Gui/Slider.hpp"
+#include "Gui/TextEditBox.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+// Utility classes
+////////////////////////////////////////////////////////////////////////////////
+#include "Utility/Config.hpp"
+#include "Utility/FileReader.hpp"
+#include "Utility/FileWriter.hpp"
+#include "Utility/Log.hpp"
+#include "Utility/Scanner.hpp"
+#include "Utility/Utility.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+// Other classes
+////////////////////////////////////////////////////////////////////////////////
+#include "Application.hpp"
+#include "BaseProperty.hpp"
+#include "Entity.hpp"
+#include "Event.hpp"
+#include "EventManager.hpp"
+#include "GameSettings.hpp"
 #include "Property.hpp"
 #include "ResourceManager.hpp"
-#include "Utility/Scanner.hpp"
-#include "Gui/Slider.hpp"
-#include "Audio/SoundList.hpp"
+#include "State.hpp"
 #include "StateManager.hpp"
-#include "Gui/TextEditBox.hpp"
 #include "Timer.hpp"
-#include "Utility/Utility.hpp"
-#include "Containers/Vector.hpp"
 
 #endif
