@@ -10,8 +10,8 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "BaseProperty.hpp"
+#include "Containers/Map.hpp"
 #include <memory>
-#include <map>
 
 namespace sfx
 {
@@ -26,8 +26,8 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
-    typedef std::shared_ptr<BaseProperty>      PropertyPtr;
-    typedef std::map<std::string, PropertyPtr> PropertyMap;
+    typedef std::shared_ptr<BaseProperty> PropertyPtr;
+    typedef Map<std::string, PropertyPtr> PropertyMap;
 
 public:
 

@@ -27,7 +27,7 @@ void GuiManager::remove(const std::string& key)
     {
         auto it = std::find(m_objectsList.begin(), m_objectsList.end(), result->second);
         m_objectsList.erase(it);
-        m_objects.erase(key);
+        m_objects.remove(key);
     }    
 }
 

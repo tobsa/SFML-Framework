@@ -8,7 +8,6 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "GameSettings.hpp"
-#include "Utility/Log.hpp"
 
 namespace sfx
 {
@@ -16,20 +15,13 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 std::string GameSettings::getType(const std::string& key)
 {
-    auto it = m_properties.find(key);
-    if(it == m_properties.end())
-        sfx::Log::writeT("Error (GameSettings::getType()): " + key + " doesn't exist");
-
-    return it->second->getType();
+    return m_properties.findWithErrorCheck(key, "Error (GameSettings::getType()): " + key + " doesn't exist")->second->getType();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void GameSettings::remove(const std::string& key)
 {
-    if(m_properties.find(key) == m_properties.end())
-        sfx::Log::writeT("Error (GameSettings::remove()): " + key + " doesn't exist");
-
-    m_properties.erase(key);
+    m_properties.remove(key);
 }
 
 } // namespace sfx

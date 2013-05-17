@@ -42,17 +42,13 @@ void Event::addMessage(const std::string& key, const std::string& message)
 ////////////////////////////////////////////////////////////////////////////////
 const std::string& Event::getMessage(const std::string& key) const
 {
-    auto result = m_messages.find(key);
-    if(result == m_messages.end())
-        sfx::Log::writeT("Error (Event::getMessage(): " + key + " doesn't exist");
-
-    return result->second;
+    return m_messages.findWithErrorCheck(key, "Error (Event::getMessage(): " + key + " doesn't exist")->second;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Event::removeMessage(const std::string& key)
 {
-    m_messages.erase(key);
+    m_messages.remove(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -9,6 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
+#include "Containers/Map.hpp"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
@@ -37,12 +38,12 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
-    typedef std::shared_ptr<sf::Texture>          TexturePtr;
-    typedef std::shared_ptr<sf::Font>             FontPtr;
-    typedef std::shared_ptr<sf::SoundBuffer>      SoundBufferPtr;
-    typedef std::map<std::string, TexturePtr>     TextureMap;
-    typedef std::map<std::string, FontPtr>        FontMap;
-    typedef std::map<std::string, SoundBufferPtr> SoundBufferMap;
+    typedef std::shared_ptr<sf::Texture>     TexturePtr;
+    typedef std::shared_ptr<sf::Font>        FontPtr;
+    typedef std::shared_ptr<sf::SoundBuffer> SoundBufferPtr;
+    typedef Map<std::string, TexturePtr>     TextureMap;
+    typedef Map<std::string, FontPtr>        FontMap;
+    typedef Map<std::string, SoundBufferPtr> SoundBufferMap;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data

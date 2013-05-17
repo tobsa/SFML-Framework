@@ -17,15 +17,9 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 template<class T> T& GameSettings::get(const std::string& key)
 {
-    auto it = m_properties.find(key);
-    if(it == m_properties.end())
-    {
-        std::string error = "Error (GameSettings::get()): " + key + " doesn't exist";
-        sfx::Log::write(error);
-        throw error;
-    }
+    const auto& result = m_properties.findWithErrorCheck(key, "Error (GameSettings::get()): " + key + " doesn't exist");
 
-    return const_cast<T&>(static_cast<Property<T>*>(it->second.get())->getValue());
+    return const_cast<T&>(static_cast<Property<T>*>(result->second.get())->getValue());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +29,7 @@ template<class T> void GameSettings::set(const std::string& key, const T& value)
 
     // If the key already exist then erase the previous value
     if(it != m_properties.end())
-        m_properties.erase(key);
+        m_properties.remove(key);
    
     m_properties[key] = std::make_shared<Property<T>>(value);
     m_properties[key]->setType(typeid(T).name());

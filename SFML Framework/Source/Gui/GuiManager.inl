@@ -8,7 +8,6 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "GuiManager.hpp"
-#include "../Utility/Log.hpp"
 
 namespace sfx
 {
@@ -33,12 +32,9 @@ template<typename T> T& GuiManager::create(const std::string& key)
 ////////////////////////////////////////////////////////////////////////////////
 template<typename T> T& GuiManager::get(const std::string& key)
 {
-    // Check if the object exist
-    auto it = m_objects.find(key);
-    if(it == m_objects.end())
-        sfx::Log::writeT("Error (GuiManager::get()): " + key + " doesn't exist");
+    const auto& result = m_objects.findWithErrorCheck(key, "Error (GuiManager::get()): " + key + " doesn't exist");
 
-    return *static_cast<T*>(it->second.get());
+    return *static_cast<T*>(result->second.get());
 }
 
 } // namespace sfx
