@@ -175,7 +175,7 @@ void SoundGroup::setVolume(float volume)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-SoundGroup::Order SoundGroup::getOrder()
+SoundGroup::Order SoundGroup::getOrder() const
 {
     return m_order;
 }
