@@ -139,7 +139,7 @@ template<typename T> size_t Vector<T>::remove(std::size_t index)
 
     m_vector.erase(it);
 
-    return index - 1;
+    return index == 0 ? 0 : index - 1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
