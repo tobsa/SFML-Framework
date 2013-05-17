@@ -22,435 +22,148 @@ AudioManager::AudioManager(Application& application) :
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::addSound(const std::string& key, const std::string& filename, std::size_t nbChannels)
+void AudioManager::setSound(const std::string& key, const std::string& filename, std::size_t channels)
 {
-    // Create sounds depending on channel size
-    Sounds sounds;
-    for(std::size_t i = 0; i < nbChannels; ++i)
-        sounds.addBack(sf::Sound(m_application.getSoundBuffer(filename)));
-
-    // Add them to the list
-    m_sounds[key] = sounds;
+    m_sounds.insert(key, Sound(key, m_application.getSoundBuffer(filename), channels));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void AudioManager::playSound(const std::string& key)
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::playSound()): " + key + " doesn't exist");
-
-    // Play a sound from a free channel
-    for(auto& sound : result->second)
-    {
-        if(sound.getStatus() != sf::Sound::Playing)
-        {
-            sound.play();
-            break;
-        }
-    }
+     m_sounds.findWithErrorCheck(key, "Error (AudioManager::playSound()): " + key + " doesn't exist")->second.play();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void AudioManager::pauseSound(const std::string& key)
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::pauseSound()): " + key + " doesn't exist");
-
-    // Pause the sounds
-    for(auto& sound : result->second)
-        sound.pause();
+     m_sounds.findWithErrorCheck(key, "Error (AudioManager::pauseSound()): " + key + " doesn't exist")->second.pause();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void AudioManager::stopSound(const std::string& key)
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::stopSound()): " + key + " doesn't exist");
-
-    // Stop the sounds
-    for(auto& sound : result->second)
-        sound.stop();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setSoundVolume(const std::string& key, float volume)
-{
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::setVolume()): " + key + " doesn't exist");
-
-    volume = sfx::clamp(volume, 0.f, 100.f);
-
-    // Set sound volume
-    for(auto& sound : result->second)
-        sound.setVolume(volume);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setSoundLoop(const std::string& key, bool loop)
-{
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::setLoop()): " + key + " doesn't exist");
-
-    // Set loop
-    for(auto& sound : result->second)
-        sound.setLoop(loop);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setSoundPitch(const std::string& key, float pitch)
-{
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::setPitch()): " + key + " doesn't exist");
-
-    // Set pitch
-    for(auto& sound : result->second)
-        sound.setPitch(pitch);
+     m_sounds.findWithErrorCheck(key, "Error (AudioManager::stopSound()): " + key + " doesn't exist")->second.stop();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 bool AudioManager::isSoundPlaying(const std::string& key) const
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::isPlaying()): " + key + " doesn't exist");
-
-    // Check if all channels is playing
-    for(auto& sound : result->second)
-    {
-        if(sound.getStatus() == sf::Sound::Playing)
-            return true;
-    }
-
-    return false;
+    return m_sounds.findWithErrorCheck(key, "Error (AudioManager::isPlaying()): " + key + " doesn't exist")->second.isPlaying();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 bool AudioManager::isSoundPaused(const std::string& key) const
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::isPaused()): " + key + " doesn't exist");
-
-    // Check if all channels is paused
-    for(auto& sound : result->second)
-    {
-        if(sound.getStatus() != sf::Sound::Paused)
-            return false;
-    }
-
-    return true;
+    return m_sounds.findWithErrorCheck(key, "Error (AudioManager::isPaused()): " + key + " doesn't exist")->second.isPaused();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 bool AudioManager::isSoundStopped(const std::string& key) const
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::isStopped()): " + key + " doesn't exist");
+    return m_sounds.findWithErrorCheck(key, "Error (AudioManager::isStopped()): " + key + " doesn't exist")->second.isStopped();
+}
 
-    // Check if all channels is stopped
-    for(auto& sound : result->second)
-    {
-        if(sound.getStatus() != sf::Sound::Stopped)
-            return false;
-    }
-
-    return true;
+////////////////////////////////////////////////////////////////////////////////
+void AudioManager::setSoundVolume(const std::string& key, float volume)
+{
+    m_sounds.findWithErrorCheck(key, "Error (AudioManager::setSoundVolume()): " + key + " doesn't exist")->second.setVolume(volume);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 float AudioManager::getSoundVolume(const std::string& key) const
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::getVolume()): " + key + " doesn't exist");
-
-    return result->second[0].getVolume();
+    return m_sounds.findWithErrorCheck(key, "Error (AudioManager::getSoundVolume()): " + key + " doesn't exist")->second.getVolume();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool AudioManager::getSoundLoop(const std::string& key) const
+void AudioManager::removeSound(const std::string& key)
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::getLoop()): " + key + " doesn't exist");
-
-    return result->second[0].getLoop();
+    m_sounds.remove(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-float AudioManager::getSoundPitch(const std::string& key) const
+void AudioManager::createGroup(const std::string& group)
 {
-    // Make sure the key exist
-    auto result = m_sounds.find(key);
-    if(result == m_sounds.end())
-        sfx::Log::writeT("Error (AudioManager::getPitch()): " + key + " doesn't exist");
-
-    return result->second[0].getPitch();
+    m_soundGroups.insert(group, SoundGroup());    
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::addMusic(const std::string& key, const std::string& filename)
+void AudioManager::addSoundToGroup(const std::string& group, const std::string& key)
 {
-    auto object = std::make_shared<sf::Music>();
-    object->openFromFile(filename);
+    const auto& groupCheck = m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::addSoundToGroup()): " + group + " doesn't exist");
+    const auto& keyCheck   = m_sounds.findWithErrorCheck(key,        "Error (AudioManager::addSoundToGroup()): " + key   + " doesn't exist");
 
-    m_musics[key] = object;
+    groupCheck->second.addSound(keyCheck->second);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::playMusic(const std::string& key)
+void AudioManager::playSoundGroup(const std::string& group)
 {
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::playMusic()): " + key + " doesn't exist");
-
-    result->second->play();
+    m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::addSoundToGroup()): " + group + " doesn't exist")->second.play();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::pauseMusic(const std::string& key)
+void AudioManager::stopSoundGroup(const std::string& group)
 {
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::pauseMusic()): " + key + " doesn't exist");
-
-    result->second->pause();
+    m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::stopSoundGroup()): " + group + " doesn't exist")->second.stop();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::stopMusic(const std::string& key)
+bool AudioManager::isSoundGroupPlaying(const std::string& group) const
 {
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::stopMusic()): " + key + " doesn't exist");
-
-    result->second->stop();
+    return m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::isSoundGroupPlaying()): " + group + " doesn't exist")->second.isPlaying();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setMusicVolume(const std::string& key, float volume)
+bool AudioManager::isSoundGroupStopped(const std::string& group) const
 {
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::setMusicVolume()): " + key + " doesn't exist");
-
-    volume = sfx::clamp(volume, 0.f, 100.f);
-
-    result->second->setVolume(volume);
+    return m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::isSoundGroupStopped()): " + group + " doesn't exist")->second.isStopped();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setMusicLoop(const std::string& key, bool loop)
+void AudioManager::removeSoundFromGroup(const std::string& group, const std::string& key)
 {
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::setMusicLoop()): " + key + " doesn't exist");
+    const auto& groupCheck = m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::removeSoundFromGroup()): " + group + " doesn't exist");
+    const auto& keyCheck   = m_sounds.findWithErrorCheck(key,        "Error (AudioManager::removeSoundFromGroup()): " + key   + " doesn't exist");
 
-    result->second->setLoop(loop);
+    groupCheck->second.removeSound(keyCheck->second);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setMusicPitch(const std::string& key, float pitch)
+void AudioManager::removeGroup(const std::string& group)
 {
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::setMusicPitch()): " + key + " doesn't exist");
-
-    result->second->setPitch(pitch);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-bool AudioManager::isMusicPlaying(const std::string& key) const
-{
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::isMusicPlaying()): " + key + " doesn't exist");
-
-    return result->second->getStatus() == sf::Music::Playing;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-bool AudioManager::isMusicPaused(const std::string& key) const
-{
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::isMusicPaused()): " + key + " doesn't exist");
-
-    return result->second->getStatus() == sf::Music::Paused;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-bool AudioManager::isMusicStopped(const std::string& key) const
-{
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::isMusicStopped()): " + key + " doesn't exist");
-
-    return result->second->getStatus() == sf::Music::Stopped;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-float AudioManager::getMusicVolume(const std::string& key) const
-{
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::getMusicVolume()): " + key + " doesn't exist");
-
-    return result->second->getVolume();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-bool AudioManager::getMusicLoop(const std::string& key) const
-{
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::getMusicLoop()): " + key + " doesn't exist");
-
-    return result->second->getLoop();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-float AudioManager::getMusicPitch(const std::string& key) const
-{
-    // Make sure the key exist
-    auto result = m_musics.find(key);
-    if(result == m_musics.end())
-        sfx::Log::writeT("Error (AudioManager::getMusicPitch()): " + key + " doesn't exist");
-
-    return result->second->getPitch();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::addSoundToList(const std::string& soundList, const std::string& filename)
-{
-    if(m_soundList.find(soundList) == m_soundList.end())
-    {
-        m_soundList[soundList] = sfx::SoundList();
-    }
-
-    m_soundList[soundList].addSound(sf::Sound(m_application.getSoundBuffer(filename)));
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::playSoundList(const std::string& soundList)
-{
-    if(m_soundList.find(soundList) == m_soundList.end())
-        sfx::Log::writeT("Error (AudioManager::playSoundList()): " + soundList + " doesn't exist");
-
-    m_soundList[soundList].play();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::pauseSoundList(const std::string& soundList)
-{
-    if(m_soundList.find(soundList) == m_soundList.end())
-        sfx::Log::writeT("Error (AudioManager::pauseSoundList()): " + soundList + " doesn't exist");
-
-    m_soundList[soundList].pause();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::stopSoundList(const std::string& soundList)
-{
-    if(m_soundList.find(soundList) == m_soundList.end())
-        sfx::Log::writeT("Error (AudioManager::stopSoundList()): " + soundList + " doesn't exist");
-
-    m_soundList[soundList].stop();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setSoundListOrder(const std::string& soundList, sfx::SoundList::Order order)
-{
-    if(m_soundList.find(soundList) == m_soundList.end())
-        sfx::Log::writeT("Error (AudioManager::setSoundListOrder()): " + soundList + " doesn't exist");
-
-    m_soundList[soundList].setOrder(order);
+    m_soundGroups.remove(group);    
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void AudioManager::onUpdate()
 {
-    for(auto& soundList : m_soundList)
-        soundList.second.onUpdate();
-
-    for(auto& musicList : m_musicList)
-        musicList.second.onUpdate();
+    for(auto& soundGroup : m_soundGroups)
+        soundGroup.second.onUpdate();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::addMusicToList(const std::string& musicList, const std::string& filename)
+void AudioManager::setSoundGroupVolume(const std::string& group, float volume)
 {
-    if(m_musicList.find(musicList) == m_musicList.end())
-    {
-        m_musicList[musicList] = sfx::MusicList();
-    }
-
-    m_musicList[musicList].addMusic(filename);
+    m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::setSoundGroupVolume()): " + group + " doesn't exist")->second.setVolume(volume);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::playMusicList(const std::string& musicList)
+void AudioManager::setSoundGroupOrder(const std::string& group, SoundGroup::Order order)
 {
-    if(m_musicList.find(musicList) == m_musicList.end())
-        sfx::Log::writeT("Error (AudioManager::playMusicList()): " + musicList + " doesn't exist");
-
-    m_musicList[musicList].play();
+    m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::setSoundGroupOrder()): " + group + " doesn't exist")->second.setOrder(order);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::pauseMusicList(const std::string& musicList)
+float AudioManager::getSoundGroupVolume(const std::string& group) const
 {
-    if(m_musicList.find(musicList) == m_musicList.end())
-        sfx::Log::writeT("Error (AudioManager::pauseMusicList()): " + musicList + " doesn't exist");
-
-    m_musicList[musicList].pause();
+    return m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::getSoundGroupVolume()): " + group + " doesn't exist")->second.getVolume();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::stopMusicList(const std::string& musicList)
+SoundGroup::Order AudioManager::getSoundGroupOrder(const std::string& group) const
 {
-    if(m_musicList.find(musicList) == m_musicList.end())
-        sfx::Log::writeT("Error (AudioManager::stopMusicList()): " + musicList + " doesn't exist");
-
-    m_musicList[musicList].stop();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setMusicListOrder(const std::string& musicList, sfx::MusicList::Order order)
-{
-    if(m_musicList.find(musicList) == m_musicList.end())
-        sfx::Log::writeT("Error (AudioManager::setMusicListOrder()): " + musicList + " doesn't exist");
-
-    m_musicList[musicList].setOrder(order);
+    return m_soundGroups.findWithErrorCheck(group, "Error (AudioManager::getSoundGroupOrder()): " + group + " doesn't exist")->second.getOrder();
 }
 
 } // namespace sfx

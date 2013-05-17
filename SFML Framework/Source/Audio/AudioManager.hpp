@@ -9,9 +9,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
-#include "SoundList.hpp"
-#include "MusicList.hpp"
-#include "../Containers/Vector.hpp"
+#include "SoundGroup.hpp"
+#include "../Containers/Map.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Forward declarations
@@ -34,106 +33,91 @@ public:
     AudioManager(Application& application);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Add, play, pause and stop sounds
+    // Add a sound to the manager. If the key already exist the previous value will
+    // be overwritten.
     ////////////////////////////////////////////////////////////////////////////////
-    void addSound(const std::string& key, const std::string& filename, std::size_t nbChannels = 1);
+    void setSound(const std::string& key, const std::string& filename, std::size_t channels = 1);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Play, pause and stop sound
+    ////////////////////////////////////////////////////////////////////////////////
     void playSound(const std::string& key);
     void pauseSound(const std::string& key);
     void stopSound(const std::string& key);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Set volume, loop and pitch
-    ////////////////////////////////////////////////////////////////////////////////
-    void setSoundVolume(const std::string& key, float volume);
-    void setSoundLoop(const std::string& key, bool loop);
-    void setSoundPitch(const std::string& key, float pitch);
-
-    ////////////////////////////////////////////////////////////////////////////////
-    // Check if a sound is playing, is paused or stopped
+    // Is the sound playing, paused or stopped?
     ////////////////////////////////////////////////////////////////////////////////
     bool isSoundPlaying(const std::string& key) const;
     bool isSoundPaused(const std::string& key) const;
     bool isSoundStopped(const std::string& key) const;
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Get the volume, loop and pitch of a sound
+    // Get and set volume
     ////////////////////////////////////////////////////////////////////////////////
+    void setSoundVolume(const std::string& key, float volume);
     float getSoundVolume(const std::string& key) const;
-    bool getSoundLoop(const std::string& key) const;
-    float getSoundPitch(const std::string& key) const;
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Add, play, pause and stop music
+    // Remove a sound from the manager
     ////////////////////////////////////////////////////////////////////////////////
-    void addMusic(const std::string& key, const std::string& filename);
-    void playMusic(const std::string& key);
-    void pauseMusic(const std::string& key);
-    void stopMusic(const std::string& key);
+    void removeSound(const std::string& key);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Set music volume, loop and pitch
+    // Create and add sound to a group
     ////////////////////////////////////////////////////////////////////////////////
-    void setMusicVolume(const std::string& key, float volume);
-    void setMusicLoop(const std::string& key, bool loop);
-    void setMusicPitch(const std::string& key, float pitch);
+    void createGroup(const std::string& group);
+    void addSoundToGroup(const std::string& group, const std::string& key);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Check if the music is either playing, paused or stopped
+    // Play and stop a sound group
     ////////////////////////////////////////////////////////////////////////////////
-    bool isMusicPlaying(const std::string& key) const;
-    bool isMusicPaused(const std::string& key) const;
-    bool isMusicStopped(const std::string& key) const;
+    void playSoundGroup(const std::string& group);
+    void stopSoundGroup(const std::string& group);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Get the volume, loop and pitch of a music
+    // Is a sound group playing or stopped?
     ////////////////////////////////////////////////////////////////////////////////
-    float getMusicVolume(const std::string& key) const;
-    bool getMusicLoop(const std::string& key) const;
-    float getMusicPitch(const std::string& key) const;
+    bool isSoundGroupPlaying(const std::string& group) const;
+    bool isSoundGroupStopped(const std::string& group) const;
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Add a sound to a sound list, play, pause and stop sound list
+    // Remove a sound from a group
     ////////////////////////////////////////////////////////////////////////////////
-    void addSoundToList(const std::string& soundList, const std::string& filename);
-    void playSoundList(const std::string& soundList);
-    void pauseSoundList(const std::string& soundList);
-    void stopSoundList(const std::string& soundList);
-    void setSoundListOrder(const std::string& soundList, SoundList::Order order);
+    void removeSoundFromGroup(const std::string& group, const std::string& key);
+    void removeGroup(const std::string& group);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Update the audio manager (needed for playlists)
+    // Update audio manager
     ////////////////////////////////////////////////////////////////////////////////
     void onUpdate();
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Add music to the music list, play, pause and stop music
+    // Set sound group volume and order
     ////////////////////////////////////////////////////////////////////////////////
-    void addMusicToList(const std::string& musicList, const std::string& filename);
-    void playMusicList(const std::string& musicList);
-    void pauseMusicList(const std::string& musicList);
-    void stopMusicList(const std::string& musicList);
-    void setMusicListOrder(const std::string& musicList, MusicList::Order order);
+    void setSoundGroupVolume(const std::string& group, float volume);
+    void setSoundGroupOrder(const std::string& group, SoundGroup::Order order);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Get sound group volume and order
+    ////////////////////////////////////////////////////////////////////////////////
+    float getSoundGroupVolume(const std::string& group) const;
+    SoundGroup::Order getSoundGroupOrder(const std::string& group) const;
 
 private:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
-    typedef sfx::Vector<sf::Sound>           Sounds;
-    typedef std::map<std::string, Sounds>    SoundMap;
-    typedef std::shared_ptr<sf::Music>       MusicPtr;
-    typedef std::map<std::string, MusicPtr>  MusicMap;
-    typedef std::map<std::string, SoundList> SoundList;
-    typedef std::map<std::string, MusicList> MusicList;
+    typedef Map<std::string, Sound>      SoundMap;
+    typedef Map<std::string, SoundGroup> SoundGroupMap;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data
     ////////////////////////////////////////////////////////////////////////////////
-    Application& m_application;
-    SoundMap     m_sounds;
-    MusicMap     m_musics;
-    SoundList    m_soundList;
-    MusicList    m_musicList;
+    Application&  m_application;
+    SoundMap      m_sounds;
+    SoundGroupMap m_soundGroups;
 };
 
 } // namespace sfx
