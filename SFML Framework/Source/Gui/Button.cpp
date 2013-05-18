@@ -12,8 +12,6 @@
 #include "../Utility/Utility.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
-#include <iostream>
-
 namespace sfx
 {
 
