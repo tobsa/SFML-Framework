@@ -71,6 +71,7 @@ public:
     const sf::View& getView() const;
     const sf::View& getDefaultView() const;
     sf::Vector2f mapPixelToCoord(const sf::Vector2f& position) const;
+    sf::Vector2f mapPixelToCoord(const sf::Vector2f& position, const sf::View& view) const;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Methods from sfx::ResourceManager

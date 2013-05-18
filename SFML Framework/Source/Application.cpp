@@ -201,6 +201,12 @@ sf::Vector2f Application::mapPixelToCoord(const sf::Vector2f& position) const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f Application::mapPixelToCoord(const sf::Vector2f& position, const sf::View& view) const
+{
+    return m_renderWindow.mapPixelToCoords(static_cast<sf::Vector2i>(position), view); 
+}
+
+////////////////////////////////////////////////////////////////////////////////
 sf::Texture& Application::getTexture(const std::string& filename)
 {
     return m_resourceManager.getTexture(filename);
