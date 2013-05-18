@@ -26,6 +26,8 @@ Slider::Slider(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::onEvent(const sf::Event& event)
 {
+    if(isDisabled()) return;
+
     if(event.type == sf::Event::MouseButtonPressed)
     {
         if(isHover())
@@ -54,6 +56,8 @@ void Slider::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::onUpdate()
 {
+    if(isDisabled()) return;
+
     const sf::Vector2f mouse = m_application.mapPixelToCoord(m_application.getMousePosition());
 
     setHover(contains(mouse) || sfx::getBoundingBox(m_sprites[1]).contains(mouse));
@@ -84,6 +88,8 @@ void Slider::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    if(isDisabled()) return;
+
     for(const auto& sprite : m_sprites)
         target.draw(sprite, states);
 }

@@ -49,4 +49,27 @@ void GuiObject::setPressed(bool pressed)
     m_pressed = pressed;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+void GuiObject::enable()
+{
+    m_enabled = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void GuiObject::disable()
+{
+    m_enabled = false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool GuiObject::isEnabled() const
+{
+    return m_enabled;
+}
+
+bool GuiObject::isDisabled() const
+{
+    return !m_enabled;
+}
+
 } // namespace sfx

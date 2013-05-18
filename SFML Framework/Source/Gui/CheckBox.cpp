@@ -24,6 +24,8 @@ CheckBox::CheckBox(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::onEvent(const sf::Event& event)
 {
+    if(isDisabled()) return;
+
     if(event.type == sf::Event::MouseButtonPressed)
     {
         if(isHover())
@@ -43,12 +45,16 @@ void CheckBox::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::onUpdate()
 {
+    if(isDisabled()) return;
+
     setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    if(isDisabled()) return;
+
     if(isPressed() && isHover())
         target.draw(m_sprites[3], states);
     else if(isPressed())

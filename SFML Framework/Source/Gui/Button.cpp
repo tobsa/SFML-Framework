@@ -24,6 +24,8 @@ Button::Button(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void Button::onEvent(const sf::Event& event)
 {
+    if(isDisabled()) return;
+
     if(event.type == sf::Event::MouseButtonPressed)
     {
         setPressed(isHover());
@@ -52,6 +54,8 @@ void Button::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void Button::onUpdate()
 {
+    if(isDisabled()) return;
+
     setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
 
     if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
@@ -61,6 +65,8 @@ void Button::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    if(isDisabled()) return;
+
     if(isPressed())
         target.draw(m_sprites[2], states);
     else if(isHover())
