@@ -67,6 +67,10 @@ public:
     void draw(const sf::Vertex *vertices, unsigned int vertexCount, sf::PrimitiveType type, const sf::RenderStates& states = sf::RenderStates::Default);
     void setMousePosition(const sf::Vector2f& position);
     void setMousePosition(float x, float y);
+    void setView(const sf::View& view);
+    const sf::View& getView() const;
+    const sf::View& getDefaultView() const;
+    sf::Vector2f mapPixelToCoord(const sf::Vector2f& position) const;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Methods from sfx::ResourceManager

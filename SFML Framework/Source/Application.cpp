@@ -177,6 +177,30 @@ void Application::setMousePosition(float x, float y)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+void Application::setView(const sf::View& view)
+{
+    m_renderWindow.setView(view);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+const sf::View& Application::getView() const
+{
+    return m_renderWindow.getView();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+const sf::View& Application::getDefaultView() const
+{
+    return m_renderWindow.getDefaultView();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f Application::mapPixelToCoord(const sf::Vector2f& position) const
+{
+    return m_renderWindow.mapPixelToCoords(static_cast<sf::Vector2i>(position));
+}
+
+////////////////////////////////////////////////////////////////////////////////
 sf::Texture& Application::getTexture(const std::string& filename)
 {
     return m_resourceManager.getTexture(filename);
