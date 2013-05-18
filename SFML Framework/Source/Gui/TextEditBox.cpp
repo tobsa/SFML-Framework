@@ -25,22 +25,9 @@ TextEditBox::TextEditBox(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::onEvent(const sf::Event& event)
 {
-    if(!isEnabled()) return;
-
-    if(event.type == sf::Event::MouseMoved)
-    {
-        if(contains(getMouseMovedPosition(event)))
-            setHover(true);
-        else  
-            setHover(false);
-    }
-
     if(event.type == sf::Event::MouseButtonPressed)
     {
-        if(isHover())
-            setPressed(true);
-        else 
-            setPressed(false);
+        setPressed(isHover());
     }
 
     if(event.type == sf::Event::TextEntered)
@@ -80,14 +67,12 @@ void TextEditBox::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::onUpdate()
 {
-    // No updates for a text edit box
+    setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void TextEditBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    if(!isEnabled()) return;
-
     if(isPressed())
         target.draw(m_sprites[2], states);
     else if(isHover())

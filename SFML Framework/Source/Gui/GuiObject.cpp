@@ -16,8 +16,7 @@ namespace sfx
 GuiObject::GuiObject(Application& application) : 
     m_application     (application),
     m_hover           (false),
-    m_pressed         (false),
-    m_enabled         (true)
+    m_pressed         (false)
 {
 }
 
@@ -25,26 +24,6 @@ GuiObject::GuiObject(Application& application) :
 GuiObject::~GuiObject()
 {
 }
-
-
-////////////////////////////////////////////////////////////////////////////////
-void GuiObject::enable()
-{
-    m_enabled = true;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void GuiObject::disable()
-{
-    m_enabled = false;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-bool GuiObject::isEnabled() const
-{
-    return m_enabled;
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////
 bool GuiObject::isHover() const

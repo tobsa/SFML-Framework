@@ -24,13 +24,6 @@ CheckBox::CheckBox(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::onEvent(const sf::Event& event)
 {
-    if(!isEnabled()) return;
-
-    if(event.type == sf::Event::MouseMoved)
-    {
-        setHover(contains(getMouseMovedPosition(event)));
-    }
-
     if(event.type == sf::Event::MouseButtonPressed)
     {
         if(isHover())
@@ -38,7 +31,7 @@ void CheckBox::onEvent(const sf::Event& event)
             setPressed(!isPressed());
             
             // Get the checked or unchecked callback list
-            auto callbacks = isPressed() ? m_isCheckedCallbacks : m_noCheckedCallbacks;
+            const auto& callbacks = isPressed() ? m_isCheckedCallbacks : m_noCheckedCallbacks;
 
             // Perform callbacks
             for(const auto& callback : callbacks)
@@ -50,17 +43,12 @@ void CheckBox::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::onUpdate()
 {
-    if(!isEnabled()) return;
-
-    if(!contains(m_application.getMousePosition()))
-        setHover(false);
+    setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void CheckBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    if(!isEnabled()) return;
-
     if(isPressed() && isHover())
         target.draw(m_sprites[3], states);
     else if(isPressed())

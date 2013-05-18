@@ -26,34 +26,6 @@ Slider::Slider(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::onEvent(const sf::Event& event)
 {
-    if(!isEnabled()) return;
-
-    if(event.type == sf::Event::MouseMoved)
-    {
-        const sf::Vector2f mouse = getMouseMovedPosition(event);
-
-        setHover(contains(mouse) || sfx::getBoundingBox(m_sprites[1]).contains(mouse));
-
-        if(isPressed())
-        {
-            // For easier access
-            float x0 = m_sprites[0].getPosition().x;
-            float x1 = m_sprites[1].getPosition().x;
-            float w0 = m_sprites[0].getLocalBounds().width;
-            float w1 = m_sprites[1].getLocalBounds().width;
-
-            //Set the position of the slider
-            m_sprites[1].setPosition(sfx::clamp(mouse.x, x0, x0 + w0) - w1 / 2.f, m_sprites[1].getPosition().y);
-
-            // Calculate the current value
-            m_value = (m_maximum - m_minimum) * ((x1 + w1 / 2.f) - x0) / (x0 + w0 - x0) + m_minimum;
-
-            // Perform moved callback
-            for(const auto& callback : m_movedCallbacks)
-                callback();
-        }
-    }
-
     if(event.type == sf::Event::MouseButtonPressed)
     {
         if(isHover())
@@ -82,10 +54,29 @@ void Slider::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::onUpdate()
 {
-    if(!isEnabled()) return;
+    const sf::Vector2f mouse = m_application.mapPixelToCoord(m_application.getMousePosition());
 
-    if(!contains(m_application.getMousePosition()) && !sfx::getBoundingBox(m_sprites[1]).contains(m_application.getMousePosition()))
-        setHover(false);
+    setHover(contains(mouse) || sfx::getBoundingBox(m_sprites[1]).contains(mouse));
+
+    if(isPressed())
+    {
+        // For easier access
+        float x0 = m_sprites[0].getPosition().x;
+        float x1 = m_sprites[1].getPosition().x;
+        float w0 = m_sprites[0].getLocalBounds().width;
+        float w1 = m_sprites[1].getLocalBounds().width;
+
+        //Set the position of the slider
+        m_sprites[1].setPosition(sfx::clamp(mouse.x, x0, x0 + w0) - w1 / 2.f, m_sprites[1].getPosition().y);
+
+        // Calculate the current value
+        m_value = (m_maximum - m_minimum) * ((x1 + w1 / 2.f) - x0) / (x0 + w0 - x0) + m_minimum;
+
+        // Perform moved callback
+        for(const auto& callback : m_movedCallbacks)
+            callback();
+    }
+
     if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
         setPressed(false);
 }
@@ -93,8 +84,6 @@ void Slider::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void Slider::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    if(!isEnabled()) return;
-
     for(const auto& sprite : m_sprites)
         target.draw(sprite, states);
 }

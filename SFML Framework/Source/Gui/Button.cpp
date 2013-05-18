@@ -12,6 +12,8 @@
 #include "../Utility/Utility.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
+#include <iostream>
+
 namespace sfx
 {
 
@@ -24,13 +26,6 @@ Button::Button(Application& application) :
 ////////////////////////////////////////////////////////////////////////////////
 void Button::onEvent(const sf::Event& event)
 {
-    if(!isEnabled()) return;
-
-    if(event.type == sf::Event::MouseMoved)
-    {
-        setHover(contains(getMouseMovedPosition(event)));
-    }
-
     if(event.type == sf::Event::MouseButtonPressed)
     {
         setPressed(isHover());
@@ -59,10 +54,7 @@ void Button::onEvent(const sf::Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 void Button::onUpdate()
 {
-    if(!isEnabled()) return;
-
-    if(!contains(m_application.getMousePosition()))
-        setHover(false);
+    setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
 
     if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
         setPressed(false);
@@ -71,8 +63,6 @@ void Button::onUpdate()
 ////////////////////////////////////////////////////////////////////////////////
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    if(!isEnabled()) return;
-
     if(isPressed())
         target.draw(m_sprites[2], states);
     else if(isHover())
