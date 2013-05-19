@@ -148,7 +148,6 @@ bool Button::contains(float x, float y) const
     return getBoundingBox().contains(x, y);
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 const sf::Texture& Button::getTexture(std::size_t index) const
 {
