@@ -36,6 +36,7 @@
 #include "Gui/GuiObject.hpp"
 #include "Gui/Label.hpp"
 #include "Gui/Picture.hpp"
+#include "Gui/RadioButton.hpp"
 #include "Gui/Slider.hpp"
 #include "Gui/TextEditBox.hpp"
 
