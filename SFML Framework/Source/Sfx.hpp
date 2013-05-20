@@ -54,7 +54,9 @@
 // Other classes
 ////////////////////////////////////////////////////////////////////////////////
 #include "Application.hpp"
+#include "BaseEntityManager.hpp"
 #include "BaseProperty.hpp"
+#include "Component.hpp"
 #include "Entity.hpp"
 #include "Event.hpp"
 #include "EventManager.hpp"
