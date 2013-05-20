@@ -7,46 +7,51 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
-#include "Entity.hpp"
 #include "Application.hpp"
+#include "Entity.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
 namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-Entity::Entity(Application& application) :
-    m_application (application)
+Entity::Entity(sfx::Application& application) :
+    m_application (application),
+    m_isEnabled   (true)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Entity::Entity(Application& application, const std::string& filename, const sf::Vector2f& position) :
-    m_application (application)
+Entity::Entity(sfx::Application& application, const std::string& filename, const sf::Vector2f& position) :
+    m_application (application),
+    m_isEnabled   (true)
 {
     m_sprite.setTexture(application.getTexture(filename));
     m_sprite.setPosition(position);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Entity::Entity(Application& application, const std::string& filename, float x, float y) :
-    m_application (application)
+Entity::Entity(sfx::Application& application, const std::string& filename, float x, float y) :
+    m_application (application),
+    m_isEnabled   (true)
 {
     m_sprite.setTexture(application.getTexture(filename));
     m_sprite.setPosition(x, y);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Entity::Entity(Application& application, const sf::Texture& texture, const sf::Vector2f& position) :
-    m_application (application)
+Entity::Entity(sfx::Application& application, const sf::Texture& texture, const sf::Vector2f& position) :
+    m_application (application),
+    m_isEnabled   (true)
 {
     m_sprite.setTexture(texture);
     m_sprite.setPosition(position);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Entity::Entity(Application& application, const sf::Texture& texture, float x, float y) :
-    m_application (application)
+Entity::Entity(sfx::Application& application, const sf::Texture& texture, float x, float y) :
+    m_application (application),
+    m_isEnabled   (true)
 {
     m_sprite.setTexture(texture);
     m_sprite.setPosition(x, y);
@@ -56,21 +61,34 @@ Entity::Entity(Application& application, const sf::Texture& texture, float x, fl
 Entity::~Entity()
 {
 }
-
-////////////////////////////////////////////////////////////////////////////////
-void Entity::onEvent(const sf::Event& event)
-{
-}
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 void Entity::onUpdate(float dt)
 {
+    if(isDisabled()) return;
+
+    for(const auto& component : m_components)
+        component->onUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Entity::draw(sf::RenderTarget& renderTarget, sf::RenderStates states) const
 {
-    target.draw(m_sprite, states);
+    if(isDisabled()) return;
+
+    renderTarget.draw(m_sprite, states);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Entity::addComponent(ComponentPtr component)
+{
+    m_components.addBack(component);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Entity::removeComponent(ComponentPtr component)
+{
+    m_components.removeValue(component);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +112,7 @@ sf::Vector2f Entity::getCenter() const
 ////////////////////////////////////////////////////////////////////////////////
 sf::FloatRect Entity::getBoundingBox() const
 {
-    return sf::FloatRect(getPosition().x, getPosition().y, getSize().x, getSize().y);
+    return sf::FloatRect(getPosition().x - getOrigin().x, getPosition().y - getOrigin().y, getSize().x, getSize().y);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -238,19 +256,43 @@ void Entity::move(float offsetX, float offsetY)
 ////////////////////////////////////////////////////////////////////////////////
 void Entity::setTexture(const sf::Texture& texture)
 {
-    m_sprite.setTexture(texture);
+    m_sprite.setTexture(texture, true);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Entity::setTexture(const std::string& filename)
 {
-    m_sprite.setTexture(m_application.getTexture(filename));
+    m_sprite.setTexture(m_application.getTexture(filename), true);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 const sf::Texture& Entity::getTexture() const
 {
     return *m_sprite.getTexture();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Entity::enable()
+{
+    m_isEnabled = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Entity::disable()
+{
+    m_isEnabled = false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Entity::isEnabled() const
+{
+    return m_isEnabled;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Entity::isDisabled() const
+{
+    return !m_isEnabled;
 }
 
 } // namespace sfx
