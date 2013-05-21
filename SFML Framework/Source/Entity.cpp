@@ -65,8 +65,6 @@ Entity::~Entity()
 ////////////////////////////////////////////////////////////////////////////////
 void Entity::onUpdate(float dt)
 {
-    if(isDisabled()) return;
-
     for(const auto& component : m_components)
         component->onUpdate(dt);
 }
@@ -293,6 +291,18 @@ bool Entity::isEnabled() const
 bool Entity::isDisabled() const
 {
     return !m_isEnabled;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Entity::setSize(const sf::Vector2f& size)
+{
+    setSize(size.x, size.y);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Entity::setSize(float w, float h)
+{
+    m_sprite.setScale(w / getSize().x, h / getSize().y);
 }
 
 } // namespace sfx
