@@ -163,4 +163,16 @@ sf::FloatRect getBoundingBox(const sf::Sprite& sprite)
     return sf::FloatRect(sprite.getPosition().x, sprite.getPosition().y, sprite.getLocalBounds().width, sprite.getLocalBounds().height);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+float dotProduct(const sf::Vector2f& v0, const sf::Vector2f& v1)
+{
+    return dotProduct(v0.x, v0.y, v1.x, v1.y);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+float dotProduct(float vx0, float vy0, float vx1, float vy1)
+{
+    return vx0 * vx1 + vy0 * vy1;
+}
+
 } // namespace sfx
