@@ -9,19 +9,26 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
-#include "GuiObject.hpp"
 #include "../Containers/Map.hpp"
 #include "../Containers/List.hpp"
+#include "GuiObject.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <memory>
-
-namespace sfx
-{
 
 ////////////////////////////////////////////////////////////////////////////////
 // Forward declarations
 ////////////////////////////////////////////////////////////////////////////////
-class Application;
+namespace sfx { class Application;  }
+namespace sfx { class Button;       }
+namespace sfx { class CheckBox;     }
+namespace sfx { class Label;        }
+namespace sfx { class Picture;      }
+namespace sfx { class RadioButton;  }
+namespace sfx { class Slider;       }
+namespace sfx { class TextEditBox;  }
+
+namespace sfx
+{
 
 ////////////////////////////////////////////////////////////////////////////////
 // A gui manager that can create, load and store gui objects
@@ -76,6 +83,48 @@ public:
     // Draw all the gui objects in the manager
     ////////////////////////////////////////////////////////////////////////////////
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Create a button
+    ////////////////////////////////////////////////////////////////////////////////
+    sfx::Button& createButton(const std::string& key, const std::string& filename, const sf::Vector2f& position);
+    sfx::Button& createButton(const std::string& key, const std::string& filename, float x = 0, float y = 0);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Create a check box
+    ////////////////////////////////////////////////////////////////////////////////
+    sfx::CheckBox& createCheckBox(const std::string& key, const std::string& filename, const sf::Vector2f& position);
+    sfx::CheckBox& createCheckBox(const std::string& key, const std::string& filename, float x = 0, float y = 0);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Create a label
+    ////////////////////////////////////////////////////////////////////////////////
+    sfx::Label& createLabel(const std::string& key, const std::string& text, const std::string& font, const sf::Vector2f& position, unsigned int characterSize);
+    sfx::Label& createLabel(const std::string& key, const std::string& text, const std::string& font, float x = 0, float y = 0, unsigned int characterSize = 20);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Create a picture
+    ////////////////////////////////////////////////////////////////////////////////
+    sfx::Picture& createPicture(const std::string& key, const std::string& filename, const sf::Vector2f& position);
+    sfx::Picture& createPicture(const std::string& key, const std::string& filename, float x = 0, float y = 0);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Create a radio button
+    ////////////////////////////////////////////////////////////////////////////////
+    sfx::RadioButton& createRadioButton(const std::string& key, const std::string& filename, const std::string& group, const sf::Vector2f& position);
+    sfx::RadioButton& createRadioButton(const std::string& key, const std::string& filename, const std::string& group, float x = 0, float y = 0);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Create a slider
+    ////////////////////////////////////////////////////////////////////////////////
+    sfx::Slider& createSlider(const std::string& key, const std::string& filename, const sf::Vector2f& position, float minimum, float maximum, float current);
+    sfx::Slider& createSlider(const std::string& key, const std::string& filename, float x = 0, float y = 0, float minimum = 0.f, float maximum = 100.f, float current = 0.f);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Create a text  edit box
+    ////////////////////////////////////////////////////////////////////////////////
+    sfx::TextEditBox& createTextEditBox(const std::string& key, const std::string& filename, const std::string& font, const sf::Vector2f& position, unsigned int characterSize);
+    sfx::TextEditBox& createTextEditBox(const std::string& key, const std::string& filename, const std::string& font, float x = 0, float y = 0, unsigned int characterSize = 20);
 
 private:
 
