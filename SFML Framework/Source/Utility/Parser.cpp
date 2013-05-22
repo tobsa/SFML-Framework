@@ -1,0 +1,101 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: Parser.cpp
+// Author:   Tobias Savinainen
+// Year:     2013
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Header files
+////////////////////////////////////////////////////////////////////////////////
+#include "Parser.hpp"
+
+#include <iostream>
+
+namespace sfx
+{
+
+////////////////////////////////////////////////////////////////////////////////
+Parser::Parser(const std::string& str, const std::string& seperators) :
+    m_string     (str),
+    m_seperators (seperators)
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+std::string Parser::getToken()
+{
+    std::size_t found = m_string.find_first_of(m_seperators);
+
+    // Erase any seperators if it's found at the beginning
+    while(found == 0)
+    {
+        m_string.erase(m_string.begin());
+        found = m_string.find_first_of(m_seperators);
+    }
+
+    // If we're at the last token
+    if(found == std::string::npos)
+    {
+        std::string token = m_string;
+        m_string = "";
+        return token;
+    }
+
+    // Extract and return the next token
+    std::string token = m_string.substr(0, found);
+    m_string = m_string.substr(found, m_string.size());
+
+    return token;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+std::string Parser::peekToken()
+{
+    std::string token = getToken();
+    saveToken(token);
+    return token;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+const std::string& Parser::getString() const
+{
+    return m_string;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+const std::string& Parser::getSeperators() const
+{
+    return m_seperators;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Parser::saveToken(const std::string& token)
+{
+    m_string.insert(0, token);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Parser::setString(const std::string& str)
+{
+    m_string = str;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Parser::setSeperators(const std::string& seperators)
+{
+    m_seperators = seperators;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Parser::addSeperator(const std::string& seperator)
+{
+    m_seperators += seperator;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Parser::hasToken() const
+{
+    return !m_string.empty();
+}
+
+} // namespace sfx
