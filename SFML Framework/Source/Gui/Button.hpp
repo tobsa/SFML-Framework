@@ -9,7 +9,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
-#include "../Containers/Vector.hpp"
 #include "GuiObject.hpp"
 #include <SFML/Graphics/Sprite.hpp>
 #include <string>
@@ -29,7 +28,6 @@ private:
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
     typedef std::function<void()> Function;
-    typedef Vector<Function>      CallbackVector;
 
 public:
 
@@ -104,10 +102,12 @@ public:
     void setTexture(const std::string& filename);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Add a callback function to the button
+    // Set callback function
+    // Index 0 : On hover
+    // Index 1 : On pressed
+    // Index 2 : On released
     ////////////////////////////////////////////////////////////////////////////////
-    void addPressedCallback(const std::function<void()>& callback);
-    void addReleasedCallback(const std::function<void()>& callback);
+    void callback(std::size_t index, const Function& callback);
 
 private:
 
@@ -115,8 +115,9 @@ private:
     // Private member data
     ////////////////////////////////////////////////////////////////////////////////
     sf::Sprite     m_sprites[3];
-    CallbackVector m_pressedCallbacks;
-    CallbackVector m_releasedCallbacks;
+    Function       m_callbackHover;
+    Function       m_callbackPressed;
+    Function       m_callbackReleased;
 };
 
 } // namespace sfx

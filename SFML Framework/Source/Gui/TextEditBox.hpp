@@ -10,7 +10,6 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "GuiObject.hpp"
-#include "../Containers/Vector.hpp"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -24,6 +23,13 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 class TextEditBox : public GuiObject
 {
+private:
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Private typedefs
+    ////////////////////////////////////////////////////////////////////////////////
+    typedef std::function<void()> Function;
+
 public:
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -139,9 +145,13 @@ public:
     void setMaxCharacters(std::size_t maxCharacters);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Add a callback when the text is being entered into the text edit box
+    // Add a callback to the text edit box
+    // Index 0: On hover
+    // Index 1: On pressed
+    // Index 2: On released
+    // Index 3: On text entered
     ////////////////////////////////////////////////////////////////////////////////
-    void addTextEnterCallback(const std::function<void()>& callback);
+    void callback(std::size_t index, const Function& callback);
 
 private:
 
@@ -154,18 +164,16 @@ private:
 private:
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Private typedefs
-    ////////////////////////////////////////////////////////////////////////////////
-    typedef Vector<std::function<void()>> Callbacks;
-
-    ////////////////////////////////////////////////////////////////////////////////
     // Private member data
     ////////////////////////////////////////////////////////////////////////////////
     sf::Sprite         m_sprites[3];
     sf::Text           m_text;
     std::size_t        m_maxCharacters;
     sf::RectangleShape m_caret;
-    Callbacks          m_textEnterCallback;
+    Function           m_callbackHover;
+    Function           m_callbackPressed;
+    Function           m_callbackReleased;
+    Function           m_callbackTextEntered;
 };
 
 }

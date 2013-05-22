@@ -30,24 +30,16 @@ void Slider::onEvent(const sf::Event& event)
 
     if(event.type == sf::Event::MouseButtonPressed)
     {
-        if(isHover())
-        {
-            // Perform pressed callbacks
-            for(const auto& callback : m_pressedCallbacks)
-                callback();
-        }
+        if(isHover() && m_callbackPressed)
+            m_callbackPressed();
 
         setPressed(isHover());
     }
 
     if(event.type == sf::Event::MouseButtonReleased || event.type == sf::Event::MouseLeft)
     {
-        if(isPressed())
-        {
-            // Perform released callbacks
-            for(const auto& callback : m_releasedCallbacks)
-                callback();
-        }
+        if(isPressed() && m_callbackReleased)
+            m_callbackReleased();
 
         setPressed(false);
     }
@@ -76,9 +68,8 @@ void Slider::onUpdate()
         // Calculate the current value
         m_value = (m_maximum - m_minimum) * ((x1 + w1 / 2.f) - x0) / (x0 + w0 - x0) + m_minimum;
 
-        // Perform moved callback
-        for(const auto& callback : m_movedCallbacks)
-            callback();
+        if(m_callbackMoved)
+            m_callbackMoved();
     }
 
     if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
@@ -242,21 +233,14 @@ void Slider::setValue(float value)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Slider::addPressedCallback(const std::function<void()>& callback)
+void Slider::callback(std::size_t index, const Function& callback)
 {
-    m_pressedCallbacks.addBack(callback);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Slider::addMovedCallback(const std::function<void()>& callback)
-{
-    m_movedCallbacks.addBack(callback);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Slider::addReleasedCallback(const std::function<void()>& callback)
-{
-    m_releasedCallbacks.addBack(callback);
+    switch(index)
+    {
+        case 0: m_callbackPressed  = callback; break;
+        case 1: m_callbackMoved    = callback; break;
+        case 2: m_callbackReleased = callback; break;
+    }
 }
 
 } // namespace sfx

@@ -30,6 +30,12 @@ void TextEditBox::onEvent(const sf::Event& event)
     if(event.type == sf::Event::MouseButtonPressed)
     {
         setPressed(isHover());
+
+        Function callback = isPressed() ? m_callbackPressed : m_callbackReleased;
+
+        if(callback)
+            callback();
+        
     }
 
     if(event.type == sf::Event::TextEntered)
@@ -61,8 +67,8 @@ void TextEditBox::onEvent(const sf::Event& event)
             m_caret.setPosition(m_text.findCharacterPos(text.size()).x + 1, getPosition().y + getSize().y / 2.f - m_caret.getSize().y / 2.f);
         }
 
-        for(const auto& callback : m_textEnterCallback)
-            callback();
+        if(m_callbackTextEntered)
+            m_callbackTextEntered();
     }
 }
 
@@ -71,7 +77,11 @@ void TextEditBox::onUpdate()
 {
     if(isDisabled()) return;
 
-    setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
+    bool hover = contains(m_application.mapPixelToCoord(m_application.getMousePosition()));
+    setHover(hover);
+
+    if(hover && m_callbackHover)
+        m_callbackHover();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -342,9 +352,15 @@ void TextEditBox::updateCaret()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void TextEditBox::addTextEnterCallback(const std::function<void()>& callback)
+void TextEditBox::callback(std::size_t index, const Function& callback)
 {
-    m_textEnterCallback.addBack(callback);
+    switch(index)
+    {
+        case 0: m_callbackHover       = callback; break;
+        case 1: m_callbackPressed     = callback; break;
+        case 2: m_callbackReleased    = callback; break;
+        case 3: m_callbackTextEntered = callback; break;
+    }
 }
 
-}
+} // namespace sfx

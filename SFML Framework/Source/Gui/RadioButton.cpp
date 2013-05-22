@@ -42,7 +42,11 @@ void RadioButton::onUpdate()
 {
     if(isDisabled()) return;
 
-    setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
+    bool hover = contains(m_application.mapPixelToCoord(m_application.getMousePosition()));
+    setHover(hover);
+
+    if(hover && m_callbackHover)
+        m_callbackHover();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -170,15 +174,14 @@ const std::string& RadioButton::getGroup() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RadioButton::addPressedCallback(const Function& callback)
+void RadioButton::callback(std::size_t index, const Function& callback)
 {
-    m_pressedCallbacks.addBack(callback);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void RadioButton::addReleasedCallback(const Function& callback)
-{
-    m_releasedCallbacks.addBack(callback);
+    switch(index)
+    {
+        case 0: m_callbackHover    = callback; break;
+        case 1: m_callbackPressed  = callback; break;
+        case 2: m_callbackReleased = callback; break;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -186,8 +189,8 @@ void RadioButton::press()
 {
     setPressed(true);
 
-    for(const auto& callback : m_pressedCallbacks)
-        callback();
+    if(m_callbackPressed)
+        m_callbackPressed();
 
     // Unpress all other buttons in the same group as this button
     for(auto& button : m_radioButtons)
@@ -196,8 +199,8 @@ void RadioButton::press()
         {
             button->setPressed(false);
             
-            for(auto& callback : button->m_releasedCallbacks)
-                callback();
+            if(m_callbackReleased)
+                m_callbackReleased();
         }
     }
 }

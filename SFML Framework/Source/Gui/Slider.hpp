@@ -10,7 +10,6 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "GuiObject.hpp"
-#include "../Containers/Vector.hpp"
 #include <SFML/Graphics/Sprite.hpp>
 #include <string>
 #include <functional>
@@ -23,6 +22,13 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 class Slider : public GuiObject 
 {
+private:
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Private typedefs
+    ////////////////////////////////////////////////////////////////////////////////
+    typedef std::function<void()> Function;
+
 public:
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -110,17 +116,13 @@ public:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Add callbacks when the slider is either pressed, moved or released
+    // Index 0: On pressed
+    // Index 1: On moved
+    // Index 2: On released
     ////////////////////////////////////////////////////////////////////////////////
-    void addPressedCallback(const std::function<void()>& callback);
-    void addMovedCallback(const std::function<void()>& callback);
-    void addReleasedCallback(const std::function<void()>& callback);
+    void callback(std::size_t index, const Function& callback);
 
 private:
-
-    ////////////////////////////////////////////////////////////////////////////////
-    // Private typedefs
-    ////////////////////////////////////////////////////////////////////////////////
-    typedef Vector<std::function<void()>> Callbacks;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data
@@ -129,9 +131,9 @@ private:
     float      m_minimum;
     float      m_maximum;
     float      m_value;
-    Callbacks  m_pressedCallbacks;
-    Callbacks  m_movedCallbacks;
-    Callbacks  m_releasedCallbacks;
+    Function   m_callbackPressed;
+    Function   m_callbackMoved;
+    Function   m_callbackReleased;
 };
 
 } // namespace sfx

@@ -30,22 +30,14 @@ void Button::onEvent(const sf::Event& event)
     {
         setPressed(isHover());
 
-        if(isHover())
-        {
-            // Permorm pressed callback functions
-            for(const auto& callback : m_pressedCallbacks)
-                callback();
-        }
+        if(isHover() && m_callbackPressed)
+            m_callbackPressed();
     }
 
     if(event.type == sf::Event::MouseButtonReleased || event.type == sf::Event::MouseLeft)
     {
-        if(isPressed())
-        {
-            // Permorm released callback functions
-            for(const auto& callback : m_releasedCallbacks)
-                callback();
-        }
+        if(isPressed() && m_callbackReleased)
+            m_callbackReleased();
 
         setPressed(false);
     }
@@ -56,7 +48,12 @@ void Button::onUpdate()
 {
     if(isDisabled()) return;
 
-    setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
+    bool hover = contains(m_application.mapPixelToCoord(m_application.getMousePosition()));
+    setHover(hover);
+
+    if(hover && m_callbackHover)
+        m_callbackHover();
+        
 
     if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
         setPressed(false);
@@ -175,15 +172,14 @@ void Button::setTexture(const std::string& filename)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Button::addPressedCallback(const std::function<void()>& callback)
+void Button::callback(std::size_t index, const Function& callback)
 {
-    m_pressedCallbacks.addBack(callback);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Button::addReleasedCallback(const std::function<void()>& callback)
-{
-    m_releasedCallbacks.addBack(callback);
+    switch(index)
+    {
+        case 0: m_callbackHover    = callback; break;
+        case 1: m_callbackPressed  = callback; break;
+        case 2: m_callbackReleased = callback; break;
+    }
 }
 
 } // namespace sfx

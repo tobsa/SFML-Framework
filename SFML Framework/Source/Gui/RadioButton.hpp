@@ -31,7 +31,6 @@ private:
     typedef RadioButton*           RadioButtonPtr;
     typedef Vector<RadioButtonPtr> RadioButtonVector;
     typedef std::function<void()>  Function;
-    typedef Vector<Function>       Callbacks;
 
 public:
 
@@ -117,9 +116,11 @@ public:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Add a callback function to the button
+    // Index 0: On hover
+    // Index 1: On pressed
+    // Index 2: On released
     ////////////////////////////////////////////////////////////////////////////////
-    void addPressedCallback(const Function& callback);
-    void addReleasedCallback(const Function& callback);
+    void callback(std::size_t index, const Function& callback);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Press a radio button
@@ -133,8 +134,9 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     sf::Sprite  m_sprites[3];
     std::string m_group;
-    Callbacks   m_pressedCallbacks;
-    Callbacks   m_releasedCallbacks;
+    Function    m_callbackHover;
+    Function    m_callbackPressed;
+    Function    m_callbackReleased;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Static private data
