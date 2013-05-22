@@ -47,6 +47,7 @@
 #include "Utility/FileReader.hpp"
 #include "Utility/FileWriter.hpp"
 #include "Utility/Log.hpp"
+#include "Utility/Parser.hpp"
 #include "Utility/Scanner.hpp"
 #include "Utility/Utility.hpp"
 
