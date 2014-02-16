@@ -15,13 +15,15 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 template<class T> T& Application::getValue(const std::string& key)
 {
-    return m_gameSettings.get<T>(key);
+    return m_gameSettings.getSetting<T>(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 template<class T> void Application::setValue(const std::string& key, const T& value)
 {
-    m_gameSettings.set(key, value);
+    m_gameSettings.setSetting(key, value);
 }
+
+} // namespace sfx
 
 } // namespace sfx

@@ -8,7 +8,6 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "AudioManager.hpp"
-#include "../Application.hpp"
 #include "../Utility/Log.hpp"
 #include "../Utility/Utility.hpp"
 
@@ -16,15 +15,14 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-AudioManager::AudioManager(Application& application) :
-    m_application (application)
+AudioManager::AudioManager()
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void AudioManager::setSound(const std::string& key, const std::string& filename, std::size_t channels)
+void AudioManager::setSound(const std::string& key, const sf::SoundBuffer& buffer, std::size_t channels)
 {
-    m_sounds.insert(key, Sound(key, m_application.getSoundBuffer(filename), channels));
+    m_sounds.insert(key, Sound(key, buffer, channels));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -144,13 +142,13 @@ void AudioManager::removeMusic(const std::string& key)
 ////////////////////////////////////////////////////////////////////////////////
 void AudioManager::createSoundGroup(const std::string& group)
 {
-    m_soundGroups.insert(group, SoundGroup());    
+    m_soundGroups.insert(group, SoundGroup());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void AudioManager::createMusicGroup(const std::string& group)
 {
-    m_musicGroups.insert(group, MusicGroup());    
+    m_musicGroups.insert(group, MusicGroup());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -243,7 +241,7 @@ void AudioManager::removeSoundFromGroup(const std::string& group, const std::str
 ////////////////////////////////////////////////////////////////////////////////
 void AudioManager::removeSoundGroup(const std::string& group)
 {
-    m_soundGroups.remove(group);    
+    m_soundGroups.remove(group);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -258,7 +256,7 @@ void AudioManager::removeMusicFromGroup(const std::string& group, const std::str
 ////////////////////////////////////////////////////////////////////////////////
 void AudioManager::removeMusicGroup(const std::string& group)
 {
-    m_musicGroups.remove(group);    
+    m_musicGroups.remove(group);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

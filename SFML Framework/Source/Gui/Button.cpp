@@ -53,7 +53,7 @@ void Button::onUpdate()
 
     if(hover && m_callbackHover)
         m_callbackHover();
-        
+
 
     if(!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right))
         setPressed(false);
@@ -68,7 +68,7 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
         target.draw(m_sprites[2], states);
     else if(isHover())
         target.draw(m_sprites[1], states);
-    else 
+    else
         target.draw(m_sprites[0], states);
 }
 

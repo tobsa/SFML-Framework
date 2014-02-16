@@ -20,9 +20,9 @@ void EventManager::addEvent(const Event& event)
 {
     m_events.addBack(event);
 }
-    
+
 ////////////////////////////////////////////////////////////////////////////////
-std::size_t EventManager::getSize() const
+std::size_t EventManager::getEventsAmount() const
 {
     return m_events.getSize();
 }
@@ -31,7 +31,7 @@ std::size_t EventManager::getSize() const
 const Event& EventManager::getEvent(const std::string& name)
 {
     auto result = std::find(m_events.begin(), m_events.end(), Event(name));
-    
+
     if(result == m_events.end())
         sfx::Log::writeT("Error (EventManager::getEvent()): " + name + " doesn't exist");
 
@@ -51,19 +51,19 @@ EventManager::Events& EventManager::getEvents()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventManager::remove(const std::string& name)
+void EventManager::removeEvent(const std::string& name)
 {
     m_events.removeValue(name);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventManager::remove(std::size_t index)
+void EventManager::removeEvent(std::size_t index)
 {
     m_events.remove(index);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventManager::removeLast()
+void EventManager::removeLastEvent()
 {
     m_events.removeBack();
 }
@@ -71,7 +71,7 @@ void EventManager::removeLast()
 ////////////////////////////////////////////////////////////////////////////////
 bool EventManager::findEvent(const std::string& name)
 {
-    if(m_events.find(Event(name)) == -1)
+    if(static_cast<int>(m_events.find(Event(name))) == -1)
         return false;
 
     return true;

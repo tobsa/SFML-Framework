@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: Application.cpp
-// Author:   Tobias Savinainen
-// Year:     2013
+// Author: Tobias Savinainen
+// Year: 2013
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -11,22 +11,23 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include "Utility/Utility.hpp"
 
 namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 Application::Application(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style, unsigned int antialiasing) :
-    m_renderWindow (videoMode, name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U)),
-    m_audioManager (*this)
+    m_renderWindow (videoMode, name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U))
 {
+    initRandomGenerator();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 Application::Application(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style, unsigned int antialiasing) :
-    m_renderWindow (sf::VideoMode(width, height), name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U)),
-    m_audioManager (*this)
+    m_renderWindow (sf::VideoMode(width, height), name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U))
 {
+    initRandomGenerator();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -203,7 +204,19 @@ sf::Vector2f Application::mapPixelToCoord(const sf::Vector2f& position) const
 ////////////////////////////////////////////////////////////////////////////////
 sf::Vector2f Application::mapPixelToCoord(const sf::Vector2f& position, const sf::View& view) const
 {
-    return m_renderWindow.mapPixelToCoords(static_cast<sf::Vector2i>(position), view); 
+    return m_renderWindow.mapPixelToCoords(static_cast<sf::Vector2i>(position), view);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+sf::Vector2f Application::getMousePixelToCoord() const
+{
+    return mapPixelToCoord(getMousePosition());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Application::setDefaultView()
+{
+    setView(getDefaultView());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -227,19 +240,19 @@ sf::SoundBuffer& Application::getSoundBuffer(const std::string& filename)
 ////////////////////////////////////////////////////////////////////////////////
 std::string Application::getValueType(const std::string& key)
 {
-    return m_gameSettings.getType(key);
+    return m_gameSettings.getValueType(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Application::removeValue(const std::string& key)
 {
-    m_gameSettings.remove(key);
+    m_gameSettings.removeSettingValue(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Application::addState(const std::string& key, StatePtr state)
 {
-    m_stateManager.add(key, state);
+    m_stateManager.addState(key, state);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -269,7 +282,7 @@ void Application::addEvent(const Event& event)
 ////////////////////////////////////////////////////////////////////////////////
 std::size_t Application::getEventSize() const
 {
-    return m_eventManager.getSize();
+    return m_eventManager.getEventsAmount();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -293,19 +306,19 @@ sfx::Vector<Event>& Application::getEvents()
 ////////////////////////////////////////////////////////////////////////////////
 void Application::removeEvent(const std::string& name)
 {
-    m_eventManager.remove(name);
+    m_eventManager.removeEvent(name);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Application::removeEvent(std::size_t index)
 {
-    m_eventManager.remove(index);
+    m_eventManager.removeEvent(index);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Application::removeLastEvent()
 {
-    m_eventManager.removeLast();
+    m_eventManager.removeLastEvent();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -317,7 +330,7 @@ bool Application::findEvent(const std::string& name)
 ////////////////////////////////////////////////////////////////////////////////
 void Application::setSound(const std::string& key, const std::string& filename, std::size_t channels)
 {
-    m_audioManager.setSound(key, filename, channels);
+    m_audioManager.setSound(key, getSoundBuffer(filename), channels);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

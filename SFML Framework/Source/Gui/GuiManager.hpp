@@ -3,17 +3,17 @@
 // Author:   Tobias Savinainen
 // Year:     2013
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef GUI_MANAGER_HPP
-#define GUI_MANAGER_HPP
+#ifndef SFX_GUI_MANAGER_HPP
+#define SFX_GUI_MANAGER_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "../Containers/Map.hpp"
-#include "../Containers/List.hpp"
 #include "GuiObject.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <memory>
+#include <list>
 
 ////////////////////////////////////////////////////////////////////////////////
 // Forward declarations
@@ -42,7 +42,7 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     typedef std::shared_ptr<GuiObject>     GuiObjectPtr;
     typedef Map<std::string, GuiObjectPtr> GuiObjectMap;
-    typedef List<GuiObjectPtr>             GuiObjectList;
+    typedef std::list<GuiObjectPtr>        GuiObjectList;
 
 public:
 
@@ -50,7 +50,7 @@ public:
     // Create a gui manager
     ////////////////////////////////////////////////////////////////////////////////
     GuiManager(Application& application);
-    
+
     ////////////////////////////////////////////////////////////////////////////////
     // Add a gui object to the manager. If the key already exist the previous value
     // will be overwritten.

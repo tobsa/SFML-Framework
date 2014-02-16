@@ -20,7 +20,7 @@ StateManager::StateManager() :
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StateManager::add(const std::string& key, StatePtr state)
+void StateManager::addState(const std::string& key, StatePtr state)
 {
     if(m_states.find(key) == m_states.end())
         m_states[key] = state;
