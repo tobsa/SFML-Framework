@@ -3,8 +3,8 @@
 // Author:   Tobias Savinainen
 // Year:     2013
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef AUDIO_MANAGER_HPP
-#define AUDIO_MANAGER_HPP
+#ifndef SFX_AUDIO_MANAGER_HPP
+#define SFX_AUDIO_MANAGER_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
@@ -13,31 +13,26 @@
 #include "MusicGroup.hpp"
 #include "../Containers/Map.hpp"
 
-////////////////////////////////////////////////////////////////////////////////
-// Forward declarations
-////////////////////////////////////////////////////////////////////////////////
-namespace sfx { class Application; }
-
 namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 // A basic audio player that can play music and sounds
 ////////////////////////////////////////////////////////////////////////////////
-class AudioManager 
+class AudioManager
 {
 public:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Create an audio manager
     ////////////////////////////////////////////////////////////////////////////////
-    AudioManager(Application& application);
+    AudioManager();
 
     ////////////////////////////////////////////////////////////////////////////////
     // Add a sound/music to the manager. If the key already exist the previous value will
     // be overwritten.
     ////////////////////////////////////////////////////////////////////////////////
-    void setSound(const std::string& key, const std::string& filename, std::size_t channels = 1);
+    void setSound(const std::string& key, const sf::SoundBuffer& buffer, std::size_t channels = 1);
     void setMusic(const std::string& key, const std::string& filename);
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -129,21 +124,20 @@ public:
     float getMusicGroupVolume(const std::string& group) const;
     MusicGroup::Order getMusicGroupOrder(const std::string& group) const;
 
-private:
+protected:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
-    typedef Map<std::string, Sound>      SoundMap;
-    typedef Map<std::string, SoundGroup> SoundGroupMap;
-    typedef std::shared_ptr<Music>       MusicPtr;
-    typedef Map<std::string, MusicPtr>   MusicMap;
-    typedef Map<std::string, MusicGroup> MusicGroupMap;
+    typedef Map<std::string, Sound>        SoundMap;
+    typedef Map<std::string, SoundGroup>   SoundGroupMap;
+    typedef std::shared_ptr<Music>              MusicPtr;
+    typedef Map<std::string, MusicPtr>     MusicMap;
+    typedef Map<std::string, MusicGroup>   MusicGroupMap;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data
     ////////////////////////////////////////////////////////////////////////////////
-    Application&  m_application;
     SoundMap      m_sounds;
     SoundGroupMap m_soundGroups;
     MusicMap      m_musics;

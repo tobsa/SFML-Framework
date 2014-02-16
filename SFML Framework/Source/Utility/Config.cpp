@@ -28,8 +28,8 @@ Config::Config(const std::string& filename) :
         std::string token = scanner.getToken();
 
         // Keep reading tokens until we encountered a section
-        if(token != "[") 
-            continue; 
+        if(token != "[")
+            continue;
 
         token = scanner.getToken(); // Read section name
         scanner.getToken();         // Discard "]"
@@ -130,9 +130,9 @@ void Config::setInteger(const std::string& sectionName, const std::string& key, 
     {
         // Add the key to the section if it doens't exist
         std::size_t index = findKey(section, key);
-        if(index == -1)
+        if(static_cast<int>(index) == -1)
             section->m_integers.addBack(KeyValue<int>(key, value));
-        else 
+        else
             // If it exist then simply update the value
             section->m_integers[index].m_value = value;
     }
@@ -155,9 +155,9 @@ void Config::setFloat(const std::string& sectionName, const std::string& key, fl
     {
         // Add the key to the section if it doens't exist
         std::size_t index = findKey(section, key);
-        if(index == -1)
+        if(static_cast<int>(index) == -1)
             section->m_floats.addBack(KeyValue<float>(key, value));
-        else 
+        else
             // If it exist then simply update the value
             section->m_floats[index].m_value = value;
     }
@@ -180,9 +180,9 @@ void Config::setString(const std::string& sectionName, const std::string& key, c
     {
         // Add the key to the section if it doens't exist
         std::size_t index = findKey(section, key);
-        if(index == -1)
+        if(static_cast<int>(index) == -1)
             section->m_strings.addBack(KeyValue<std::string>(key, value));
-        else 
+        else
             // If it exist then simply update the value
             section->m_strings[index].m_value = value;
     }
@@ -198,7 +198,7 @@ Config::SectionPtr Config::findSection(const std::string& sectionName)
         if(section->m_key == sectionName)
             return section;
     }
-    
+
     return nullptr;
 }
 

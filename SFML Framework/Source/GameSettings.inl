@@ -15,7 +15,7 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-template<class T> T& GameSettings::get(const std::string& key)
+template<class T> T& GameSettings::getSetting(const std::string& key)
 {
     const auto& result = m_properties.findWithErrorCheck(key, "Error (GameSettings::get()): " + key + " doesn't exist");
 
@@ -23,7 +23,7 @@ template<class T> T& GameSettings::get(const std::string& key)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-template<class T> void GameSettings::set(const std::string& key, const T& value)
+template<class T> void GameSettings::setSetting(const std::string& key, const T& value)
 {
     auto it = m_properties.find(key);
 

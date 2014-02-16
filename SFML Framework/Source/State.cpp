@@ -13,8 +13,7 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-State::State(Application& application, const std::string& name) :
-    m_application (application),
+State::State(const std::string& name) :
     m_name        (name)
 {
 }

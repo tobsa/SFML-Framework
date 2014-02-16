@@ -17,14 +17,14 @@ template<typename T> T& GuiManager::create(const std::string& key)
 {
     // If the key already exist then erase the previous value
     if(m_objects.find(key) != m_objects.end())
-        remove(key);     
+        remove(key);
 
     // Create the object
     std::shared_ptr<T> object = std::make_shared<T>(m_application);
 
     // Add it to the manager
     m_objects[key] = object;
-    m_objectsList.addBack(object);
+    m_objectsList.push_back(object);
 
     return *object.get();
 }

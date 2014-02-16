@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: Application.hpp
-// Author:   Tobias Savinainen
-// Year:     2013
+// Author: Tobias Savinainen
+// Year: 2013
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef APPLICATION_HPP
-#define APPLICATION_HPP
+#ifndef SFX_APPLICATION_HPP
+#define SFX_APPLICATION_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
@@ -22,14 +22,14 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 // The main application class
 ////////////////////////////////////////////////////////////////////////////////
-class Application 
+class Application
 {
 private:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs
     ////////////////////////////////////////////////////////////////////////////////
-    typedef std::shared_ptr<State>          StatePtr;
+    typedef std::shared_ptr<State> StatePtr;
     typedef std::map<std::string, StatePtr> StateMap;
 
 public:
@@ -72,6 +72,9 @@ public:
     const sf::View& getDefaultView() const;
     sf::Vector2f mapPixelToCoord(const sf::Vector2f& position) const;
     sf::Vector2f mapPixelToCoord(const sf::Vector2f& position, const sf::View& view) const;
+
+	sf::Vector2f getMousePixelToCoord() const;
+	void setDefaultView();
 
     ////////////////////////////////////////////////////////////////////////////////
     // Methods from sfx::ResourceManager
@@ -166,18 +169,15 @@ private:
     // Private member data
     ////////////////////////////////////////////////////////////////////////////////
     sf::RenderWindow m_renderWindow;
-    ResourceManager  m_resourceManager;
-    GameSettings     m_gameSettings;
-    StateManager     m_stateManager;
-    EventManager     m_eventManager;
-    AudioManager     m_audioManager;
+    ResourceManager m_resourceManager;
+    GameSettings m_gameSettings;
+    StateManager m_stateManager;
+    EventManager m_eventManager;
+    AudioManager m_audioManager;
 };
 
 } // namespace sfx
 
-////////////////////////////////////////////////////////////////////////////////
-// Inline files
-////////////////////////////////////////////////////////////////////////////////
 #include "Application.inl"
 
 #endif

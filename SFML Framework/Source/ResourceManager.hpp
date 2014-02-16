@@ -3,8 +3,8 @@
 // Author:   Tobias Savinainen
 // Year:     2013
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef RESOURCE_MANAGER_HPP
-#define RESOURCE_MANAGER_HPP
+#ifndef SFX_RESOURCE_MANAGER_HPP
+#define SFX_RESOURCE_MANAGER_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
 // Header files
@@ -33,7 +33,7 @@ public:
     sf::Font& getFont(const std::string& filename);
     sf::SoundBuffer& getSoundBuffer(const std::string& filename);
 
-private:
+protected:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs

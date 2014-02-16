@@ -14,6 +14,25 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
+template<class T> T toNum(const std::string& str)
+{
+    std::istringstream is(str);
+    T number;
+
+    is >> number;
+
+    return number;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+template<class T> std::string toStr(T number)
+{
+    std::ostringstream os;
+    os << number;
+    return os.str();
+}
+
+////////////////////////////////////////////////////////////////////////////////
 template<class T> T convert(const std::string& str)
 {
     std::istringstream is(str);
