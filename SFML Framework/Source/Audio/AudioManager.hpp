@@ -21,6 +21,17 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 class AudioManager
 {
+private:
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Private typedefs
+    ////////////////////////////////////////////////////////////////////////////////
+    typedef Map<std::string, Sound>        SoundMap;
+    typedef Map<std::string, SoundGroup>   SoundGroupMap;
+    typedef std::shared_ptr<Music>         MusicPtr;
+    typedef Map<std::string, MusicPtr>     MusicMap;
+    typedef Map<std::string, MusicGroup>   MusicGroupMap;
+
 public:
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -124,16 +135,7 @@ public:
     float getMusicGroupVolume(const std::string& group) const;
     MusicGroup::Order getMusicGroupOrder(const std::string& group) const;
 
-protected:
-
-    ////////////////////////////////////////////////////////////////////////////////
-    // Private typedefs
-    ////////////////////////////////////////////////////////////////////////////////
-    typedef Map<std::string, Sound>        SoundMap;
-    typedef Map<std::string, SoundGroup>   SoundGroupMap;
-    typedef std::shared_ptr<Music>              MusicPtr;
-    typedef Map<std::string, MusicPtr>     MusicMap;
-    typedef Map<std::string, MusicGroup>   MusicGroupMap;
+private:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data

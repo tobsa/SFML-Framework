@@ -14,7 +14,7 @@ namespace sfx
 
 ////////////////////////////////////////////////////////////////////////////////
 State::State(Application& application, const std::string& name) :
-    m_application(application),
+    m_application (application),
     m_name        (name)
 {
 }

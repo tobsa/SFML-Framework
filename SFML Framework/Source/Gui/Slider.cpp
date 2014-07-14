@@ -50,7 +50,7 @@ void Slider::onUpdate()
 {
     if(isDisabled()) return;
 
-    const sf::Vector2f mouse = m_application.mapPixelToCoord(m_application.getMousePosition());
+    const sf::Vector2f mouse = m_application.mapPixelToCoords(static_cast<sf::Vector2i>(m_application.getMousePosition()));
 
     setHover(contains(mouse) || sfx::getBoundingBox(m_sprites[1]).contains(mouse));
 

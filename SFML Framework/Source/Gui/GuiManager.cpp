@@ -22,15 +22,15 @@ namespace sfx
 
 ////////////////////////////////////////////////////////////////////////////////
 GuiManager::GuiManager(Application& application) :
-    m_application (application)
+    m_application(application)
 {
 }
-    
+
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::remove(const std::string& key)
 {
     const auto& result = m_objects.find(key);
-    if(result != m_objects.end())
+    if (result != m_objects.end())
     {
         m_objectsList.remove(result->second);
         m_objects.remove(key);
@@ -40,21 +40,21 @@ void GuiManager::remove(const std::string& key)
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::onEvent(const sf::Event& event)
 {
-    for(const auto& object : m_objectsList)
+    for (const auto& object : m_objectsList)
         object->onEvent(event);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::onUpdate()
 {
-    for(const auto& object : m_objectsList)
+    for (const auto& object : m_objectsList)
         object->onUpdate();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void GuiManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for(const auto& object : m_objectsList)
+    for (const auto& object : m_objectsList)
         target.draw(*object);
 }
 
@@ -215,4 +215,3 @@ sfx::TextEditBox& GuiManager::createTextEditBox(const std::string& key, const st
 }
 
 } // namespace sfx
-

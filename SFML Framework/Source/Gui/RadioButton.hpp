@@ -12,8 +12,9 @@
 #include "../Containers/Vector.hpp"
 #include "GuiObject.hpp"
 #include <SFML/Graphics/Sprite.hpp>
-#include <string>
 #include <functional>
+#include <string>
+
 
 namespace sfx
 {

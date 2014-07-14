@@ -10,22 +10,22 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////
 #include "../Containers/Map.hpp"
+#include "../Containers/List.hpp"
 #include "GuiObject.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <memory>
-#include <list>
 
 ////////////////////////////////////////////////////////////////////////////////
 // Forward declarations
 ////////////////////////////////////////////////////////////////////////////////
-namespace sfx { class Application;  }
-namespace sfx { class Button;       }
-namespace sfx { class CheckBox;     }
-namespace sfx { class Label;        }
-namespace sfx { class Picture;      }
-namespace sfx { class RadioButton;  }
-namespace sfx { class Slider;       }
-namespace sfx { class TextEditBox;  }
+namespace sfx { class Application; }
+namespace sfx { class Button; }
+namespace sfx { class CheckBox; }
+namespace sfx { class Label; }
+namespace sfx { class Picture; }
+namespace sfx { class RadioButton; }
+namespace sfx { class Slider; }
+namespace sfx { class TextEditBox; }
 
 namespace sfx
 {
@@ -42,7 +42,7 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     typedef std::shared_ptr<GuiObject>     GuiObjectPtr;
     typedef Map<std::string, GuiObjectPtr> GuiObjectMap;
-    typedef std::list<GuiObjectPtr>        GuiObjectList;
+    typedef List<GuiObjectPtr>             GuiObjectList;
 
 public:
 

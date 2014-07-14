@@ -77,7 +77,7 @@ void TextEditBox::onUpdate()
 {
     if(isDisabled()) return;
 
-    bool hover = contains(m_application.mapPixelToCoord(m_application.getMousePosition()));
+    bool hover = contains(m_application.mapPixelToCoords(static_cast<sf::Vector2i>(m_application.getMousePosition())));
     setHover(hover);
 
     if(hover && m_callbackHover)

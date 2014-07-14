@@ -24,16 +24,7 @@ namespace sfx
 ////////////////////////////////////////////////////////////////////////////////
 class ResourceManager
 {
-public:
-
-    ////////////////////////////////////////////////////////////////////////////////
-    // Retriev texture, font or sound buffer
-    ////////////////////////////////////////////////////////////////////////////////
-    sf::Texture& getTexture(const std::string& filename);
-    sf::Font& getFont(const std::string& filename);
-    sf::SoundBuffer& getSoundBuffer(const std::string& filename);
-
-protected:
+private:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private typedefs
@@ -44,6 +35,17 @@ protected:
     typedef Map<std::string, TexturePtr>     TextureMap;
     typedef Map<std::string, FontPtr>        FontMap;
     typedef Map<std::string, SoundBufferPtr> SoundBufferMap;
+
+public:
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Retriev texture, font or sound buffer
+    ////////////////////////////////////////////////////////////////////////////////
+    sf::Texture& getTexture(const std::string& filename);
+    sf::Font& getFont(const std::string& filename);
+    sf::SoundBuffer& getSoundBuffer(const std::string& filename);
+
+private:
 
     ////////////////////////////////////////////////////////////////////////////////
     // Private member data

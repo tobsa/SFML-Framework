@@ -45,7 +45,7 @@ void CheckBox::onUpdate()
 {
     if(isDisabled()) return;
 
-    setHover(contains(m_application.mapPixelToCoord(m_application.getMousePosition())));
+    setHover(contains(m_application.mapPixelToCoords(static_cast<sf::Vector2i>(m_application.getMousePosition()))));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
