@@ -13,7 +13,6 @@
 #include "ResourceManager.hpp"
 #include "GameSettings.hpp"
 #include "StateManager.hpp"
-#include "EventManager.hpp"
 #include "Audio/AudioManager.hpp"
 
 namespace sfx
@@ -100,19 +99,6 @@ public:
     void setState(const std::string& key);
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Methods from sfx::EventManager
-    ////////////////////////////////////////////////////////////////////////////////
-    void addEvent(const Event& event);
-    std::size_t getEventSize() const;
-    const Event& getEvent(const std::string& name);
-    const Event& getEvent(std::size_t index);
-    sfx::Vector<Event>& getEvents();
-    void removeEvent(const std::string& name);
-    void removeEvent(std::size_t index);
-    void removeLastEvent();
-    bool findEvent(const std::string& name);
-
-    ////////////////////////////////////////////////////////////////////////////////
     // Methods from sfx::AudioManager
     ////////////////////////////////////////////////////////////////////////////////
     void setSound(const std::string& key, const std::string& filename, std::size_t channels = 1);
@@ -172,7 +158,6 @@ private:
     ResourceManager m_resourceManager;
     GameSettings m_gameSettings;
     StateManager m_stateManager;
-    EventManager m_eventManager;
     AudioManager m_audioManager;
 };
 

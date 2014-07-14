@@ -23,7 +23,6 @@
 // Container classes
 ////////////////////////////////////////////////////////////////////////////////
 #include "Containers/Map.hpp"
-#include "Containers/MultiVector.hpp"
 #include "Containers/Vector.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,19 +46,13 @@
 #include "Utility/FileWriter.hpp"
 #include "Utility/Log.hpp"
 #include "Utility/Parser.hpp"
-#include "Utility/Scanner.hpp"
 #include "Utility/Utility.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Other classes
 ////////////////////////////////////////////////////////////////////////////////
 #include "Application.hpp"
-#include "BaseEntityManager.hpp"
 #include "BaseProperty.hpp"
-#include "Component.hpp"
-#include "Entity.hpp"
-#include "Event.hpp"
-#include "EventManager.hpp"
 #include "GameSettings.hpp"
 #include "Property.hpp"
 #include "ResourceManager.hpp"

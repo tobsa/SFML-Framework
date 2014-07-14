@@ -35,24 +35,24 @@ public:
     // Get a value associated with the specified key. If the key doesn't exist
     // an error is thrown.
     ////////////////////////////////////////////////////////////////////////////////
-    template<class T> T& getSetting(const std::string& key);
+    template<class T> T& get(const std::string& key);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Set a new value associated with a key. If the key already exist then the
     // previous value will be overwritten.
     ////////////////////////////////////////////////////////////////////////////////
-    template<class T> void setSetting(const std::string& key, const T& value);
+    template<class T> void set(const std::string& key, const T& value);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Get the type of the value associated with a key
     ////////////////////////////////////////////////////////////////////////////////
-    std::string getValueType(const std::string& key);
+    std::string getType(const std::string& key);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Remove a value from the game settings. If the key doesn't exist an error
     // is thrown.
     ////////////////////////////////////////////////////////////////////////////////
-    void removeSettingValue(const std::string& key);
+    void remove(const std::string& key);
 
 protected:
 

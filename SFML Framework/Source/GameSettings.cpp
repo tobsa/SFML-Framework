@@ -13,13 +13,13 @@ namespace sfx
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-std::string GameSettings::getValueType(const std::string& key)
+std::string GameSettings::getType(const std::string& key)
 {
     return m_properties.findWithErrorCheck(key, "Error (GameSettings::getType()): " + key + " doesn't exist")->second->getType();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void GameSettings::removeSettingValue(const std::string& key)
+void GameSettings::remove(const std::string& key)
 {
     m_properties.remove(key);
 }

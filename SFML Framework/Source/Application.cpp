@@ -20,14 +20,12 @@ namespace sfx
 Application::Application(sf::VideoMode videoMode, const std::string& name, sf::Uint32 style, unsigned int antialiasing) :
     m_renderWindow (videoMode, name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U))
 {
-    initRandomGenerator();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 Application::Application(unsigned int width, unsigned int height, const std::string& name, sf::Uint32 style, unsigned int antialiasing) :
     m_renderWindow (sf::VideoMode(width, height), name, style, sf::ContextSettings(0U, 0U, antialiasing, 2U, 0U))
 {
-    initRandomGenerator();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -151,8 +149,6 @@ void Application::clear(const sf::Color& color)
     m_renderWindow.clear();
 }
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 void Application::draw(const sf::Drawable& drawable, const sf::RenderStates& states)
 {
@@ -240,13 +236,13 @@ sf::SoundBuffer& Application::getSoundBuffer(const std::string& filename)
 ////////////////////////////////////////////////////////////////////////////////
 std::string Application::getValueType(const std::string& key)
 {
-    return m_gameSettings.getValueType(key);
+    return m_gameSettings.getType(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Application::removeValue(const std::string& key)
 {
-    m_gameSettings.removeSettingValue(key);
+    m_gameSettings.remove(key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -271,60 +267,6 @@ Application::StatePtr Application::getState(const std::string& key)
 void Application::setState(const std::string& key)
 {
     return m_stateManager.setState(key);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::addEvent(const Event& event)
-{
-    m_eventManager.addEvent(event);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-std::size_t Application::getEventSize() const
-{
-    return m_eventManager.getEventsAmount();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-const Event& Application::getEvent(const std::string& name)
-{
-    return m_eventManager.getEvent(name);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-const Event& Application::getEvent(std::size_t index)
-{
-    return m_eventManager.getEvent(index);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-sfx::Vector<Event>& Application::getEvents()
-{
-    return m_eventManager.getEvents();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::removeEvent(const std::string& name)
-{
-    m_eventManager.removeEvent(name);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::removeEvent(std::size_t index)
-{
-    m_eventManager.removeEvent(index);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Application::removeLastEvent()
-{
-    m_eventManager.removeLastEvent();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-bool Application::findEvent(const std::string& name)
-{
-    return m_eventManager.findEvent(name);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -22,11 +22,6 @@ namespace sfx
     const float Pi = 3.14159265359f;
     const float PiOver180 = Pi / 180.f;
 
-	////////////////////////////////////////////////////////////////////////////////
-    // Need to initialise the random generator -> called in ctor of Application
-    ////////////////////////////////////////////////////////////////////////////////
-    void initRandomGenerator();
-
     ////////////////////////////////////////////////////////////////////////////////
     // Convert between radians and degrees
     ////////////////////////////////////////////////////////////////////////////////
@@ -49,15 +44,12 @@ namespace sfx
     // Get a random number
     ////////////////////////////////////////////////////////////////////////////////
     int getRandom(int begin, int end);
-    float getRandom(float begin, float end); // Not sure if this one work
+    float getRandom(float begin, float end);
     sf::Vector2f getRandom(float begin0, float end0, float begin1, float end1);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Convert between strings and numbers
     ////////////////////////////////////////////////////////////////////////////////
-    template<class T> T toNum(const std::string& str);
-    template<class T> std::string toStr(T number);
-
     template<class T> T convert(const std::string& str);
     template<class T> std::string convert(T number);
 

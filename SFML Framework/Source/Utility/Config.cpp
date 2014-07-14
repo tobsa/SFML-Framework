@@ -8,7 +8,7 @@
 // Header files
 ////////////////////////////////////////////////////////////////////////////////#
 #include "Config.hpp"
-#include "Scanner.hpp"
+#include "Parser.hpp"
 #include "FileReader.hpp"
 #include "FileWriter.hpp"
 #include "Utility.hpp"
@@ -20,8 +20,8 @@ namespace sfx
 Config::Config(const std::string& filename) :
     m_filename (filename)
 {
-    sfx::FileReader fileReader(filename, true);
-    sfx::Scanner scanner(fileReader.getFile());
+    FileReader fileReader(filename, true);
+    Parser scanner(fileReader.getFile());
 
     while(scanner.hasToken())
     {

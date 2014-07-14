@@ -64,10 +64,10 @@ public:
     ////////////////////////////////////////////////////////////////////////////////
     // Get iterator from the underlying vector
     ////////////////////////////////////////////////////////////////////////////////
-    iterator begin();
-    const_iterator begin() const;
-    iterator end();
-    const_iterator end() const;
+    typename iterator begin();
+    typename const_iterator begin() const;
+    typename iterator end();
+    typename const_iterator end() const;
 
     ////////////////////////////////////////////////////////////////////////////////
     // Check if there's elements in the vector

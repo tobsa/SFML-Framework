@@ -25,5 +25,3 @@ template<class T> void Application::setValue(const std::string& key, const T& va
 }
 
 } // namespace sfx
-
-} // namespace sfx
